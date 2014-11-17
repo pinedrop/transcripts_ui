@@ -1,6 +1,6 @@
 <?php
 
-function theme_transcripts_transcript_controls($vars) {
+function theme_transcripts_ui_transcript_controls($vars) {
 	$out = "<table>";
 	$out .= "<tr>";
 	$out .= "<td>" .drupal_render($vars['element']['mode_selector']). "</td>";
@@ -9,8 +9,8 @@ function theme_transcripts_transcript_controls($vars) {
 	$out .= "</table>";
 	return $out;
 }
-function theme_transcripts_video_controls($vars) {
-	$markup = variable_get('transcripts_markup', 'default');
+function theme_transcripts_ui_video_controls($vars) {
+	$markup = variable_get('transcripts_ui_markup', 'default');
 	if ($markup == 'bootstrap') {
                 $out = "<div class='btn-toolbar'>";
 		$out .= "<div class='btn-group'>";
@@ -33,13 +33,13 @@ function theme_transcripts_video_controls($vars) {
 	}
         return $out;
 }
-function theme_transcripts_video_tag($vars) {
-	$out = "<div class='transcripts-video-tag' data-trid='{$vars['trid']}'>";
+function theme_transcripts_ui_video_tag($vars) {
+	$out = "<div class='transcripts-ui-video-tag' data-trid='{$vars['trid']}'>";
 	if (!$vars['video_tag']) { //use video_url
 		$tag = $vars['tag_type'];
 		
 		$out .= "<div class='transcripts'>";
-		$out .= "<div class='transcripts-html5-media'>";
+		$out .= "<div class='transcripts-ui-html5-media'>";
 		$out .= "<$tag controls>";
 		foreach ($vars['video_url'] as $vurl) {
 			$out .= "<source src='$vurl' />";
@@ -55,8 +55,8 @@ function theme_transcripts_video_tag($vars) {
 	$out .= "</div>";
 	return $out;
 }
-function theme_transcripts_play_transcript($vars) {
-        $markup = variable_get('transcripts_markup', 'default');
+function theme_transcripts_ui_play_transcript($vars) {
+        $markup = variable_get('transcripts_ui_markup', 'default');
         if ($markup == 'bootstrap') {
                 $out = "<button type='button' class='btn btn-default play-transcript without-transcript'>";
                 $out .= t('Toggle transcript');
@@ -69,8 +69,8 @@ function theme_transcripts_play_transcript($vars) {
 	}
 	return $out;
 }
-function theme_transcripts_previous_tcu($vars) {
-        $markup = variable_get('transcripts_markup', 'default');
+function theme_transcripts_ui_previous_tcu($vars) {
+        $markup = variable_get('transcripts_ui_markup', 'default');
         if ($markup == 'bootstrap') {
 		$out = "<button type='button' class='btn btn-default previous' title='" . t('Play previous line') . "'>";
 		$out .= "<span class='glyphicon glyphicon-arrow-left'><span> ";
@@ -82,8 +82,8 @@ function theme_transcripts_previous_tcu($vars) {
 	}
 	return $out;
 }
-function theme_transcripts_same_tcu($vars) {
-        $markup = variable_get('transcripts_markup', 'default');
+function theme_transcripts_ui_same_tcu($vars) {
+        $markup = variable_get('transcripts_ui_markup', 'default');
         if ($markup == 'bootstrap') {
 		$out = "<button type='button' class='btn btn-default sameagain' title='" . t('Play same line') . "'>";
                 $out .= "<span class='glyphicon glyphicon-repeat'><span> ";
@@ -95,8 +95,8 @@ function theme_transcripts_same_tcu($vars) {
 	}
 	return $out;
 }
-function theme_transcripts_next_tcu($vars) {
-        $markup = variable_get('transcripts_markup', 'default');
+function theme_transcripts_ui_next_tcu($vars) {
+        $markup = variable_get('transcripts_ui_markup', 'default');
         if ($markup == 'bootstrap') {
 		$out = "<button type='button' class='btn btn-default next' title='" . t('Play next line') . "'>";
                 $out .= "<span class='glyphicon glyphicon-arrow-right'><span> ";
@@ -108,14 +108,14 @@ function theme_transcripts_next_tcu($vars) {
 	}
 	return $out;
 }
-function theme_transcripts_hit_summary($vars) {
-	$out = "<div class='transcripts-hit-controls'>";
-	$out .= "<a href='#' class='transcripts-clear-hits'><span class='ui-icon ui-icon-closethick'>Clear hits</span></a>";
+function theme_transcripts_ui_hit_summary($vars) {
+	$out = "<div class='transcripts-ui-hit-controls'>";
+	$out .= "<a href='#' class='transcripts-ui-clear-hits'><span class='ui-icon ui-icon-closethick'>Clear hits</span></a>";
         $out .= "</div>";
-        $out .= "<div class='transcripts-hit-info'>Found " .$vars['num_found']. " sentences</div>";
+        $out .= "<div class='transcripts-ui-hit-info'>Found " .$vars['num_found']. " sentences</div>";
 	return $out;
 }
-function theme_transcripts_tcu_info($vars) {
+function theme_transcripts_ui_tcu_info($vars) {
 	$out = $vars['show_speakers'] ? "<div class='info'>" : "<div class='info' style='display: none'>";
 	$out .= "<div class='speakername'>{$vars['speaker_name']}</div>";
 	$out .= "<div class='playwrapper'>";
@@ -129,7 +129,7 @@ function theme_transcripts_tcu_info($vars) {
 	return $out;
 }
 
-function theme_transcripts_tcu_tier($vars) {
+function theme_transcripts_ui_tcu_tier($vars) {
 	$vars['classes'][] = 'tier';
 	$vars['classes'][] = 'active';
 	$classes = implode(' ', $vars['classes']);
