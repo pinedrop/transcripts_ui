@@ -1,0 +1,30 @@
+#hits {
+  width: 100%;
+}
+.transcripts-hit-list {
+	list-style: none;
+}
+.transcripts-hit-list .tier {
+        display: none;
+}
+.transcripts-hit-list .tier.active {
+        display: block;
+}
+.transcripts-hit-wrapper {
+        clear:both;
+}
+.transcripts-hit-wrapper .transcripts-hit-controls {
+        float: left;
+        width: 70px;
+        padding-bottom: 5px;
+}
+.transcripts-hit-wrapper .transcripts-hit-ref {
+        margin-left: 75px;
+        margin-bottom: 5px;
+}
+.playing .transcripts-hit-ref {
+        background-color: #6cf;
+}
+span.transcripts-hit {
+        background: yellow;
+}
