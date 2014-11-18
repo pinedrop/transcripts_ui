@@ -12,19 +12,20 @@ class TranscriptUI {
         var $ui;
 
         //constructor
-        function __construct($trid) {
+        function __construct($trid, $options) {
                 $this->shorttrid = $trid;
                 $this->trid = 'trid-'.$trid;
-		$this->set_tiers(transcripts_ui_tiers());
+		$this->options = $options;
+		$this->tiers = transcripts_ui_tiers();
         }
 
         //query
-        function process_response($response) {
+        function processResponse($response) {
 		$numDocs = count($response->response->docs);
                 if ($numDocs > 0) {
 			$tiers = $this->tiers;
 			$trid = $this->trid;
-			$search_options = $options;
+			$options = $this->options;
 
 		        $docs = $response->response->docs;
 		        $highlight = isset($response->highlighting) ? TRUE : FALSE;
@@ -87,7 +88,7 @@ class TranscriptUI {
                                 		'link' => array(
                                         		'#prefix' => "<div class='transcripts-ui-hit-controls'>",
                                         		'content' => array(
-                                                		'#theme' => 'transcripts_goto_tcu',
+                                                		'#theme' => 'transcripts_ui_goto_tcu',
                                                 		'#linkurl' => '#tcu/' . $sentence->entity_id,
                                                 		'#time' => $sentence->fts_start,
                                         		),
@@ -120,7 +121,7 @@ class TranscriptUI {
                         		),
                         		'#suffix' => "</li>",
                 		);
-                		if (isset($search_options['hits_only']) && $search_options['hits_only']) {
+                		if (isset($options['hits_only']) && $options['hits_only']) {
                        			$hit_list = array(
                                 		'#prefix' => "<ul id='transcripts-ui-hit-list-{$trid}' class='list-group transcripts-hit-list'>",
                                 		'hits' => $hits,
@@ -140,7 +141,7 @@ class TranscriptUI {
                                 			),*/
                                 			'body' => array(
                                         			'#prefix' => "<div class='panel-body'>",
-                                        			'search' => drupal_get_form('transcripts_ui_search_form', $trid, $search_options),
+                                        			'search' => drupal_get_form('transcripts_ui_search_form', $trid, $options),
                                         			'#suffix' => "</div>",
                                 			),
                                 			'list' => array(
@@ -173,9 +174,9 @@ class TranscriptUI {
                 			),
                 			'#suffix' => "</div>",
                 			'#attached' => array(
-                        			'css' => array(drupal_get_path('module', 'transcripts_ui') .'/css/transcripts_controller.css'),
+                        			'css' => array(drupal_get_path('module', 'transcripts_ui') .'/css/transcripts_ui.css'),
                         			'js' => array(
-                                			drupal_get_path('module', 'transcripts_ui') .'/js/transcripts_controller.js',
+                                			drupal_get_path('module', 'transcripts_ui') .'/js/transcripts_ui.js',
                                 			drupal_get_path('module', 'transcripts_ui') .'/js/jquery.scrollTo.js',
                         			),
                 			),
@@ -200,7 +201,7 @@ class TranscriptUI {
 					'transcript_controls' => array(
                                 		'#prefix' => "<div class='transcript-ui-controls' data-trid='{$this->trid}'>",
       						'#theme' => 'transcripts_ui_transcript_controls',
-                                		'mode_selector' => drupal_get_form('transcripts_ui_mode_selector', $this->trid, $this->modes),
+                                		//'mode_selector' => drupal_get_form('transcripts_ui_mode_selector', $this->trid, $this->modes),
 						'tier_selector' => drupal_get_form('transcripts_ui_tier_selector', $this->trid, $this->tiers),
 						'#suffix' => "</div>",
 					),

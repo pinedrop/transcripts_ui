@@ -1,5 +1,5 @@
 <div>
-	<div id='<?php print $trid; ?>' class='transcript-player' data-defaultMode='<?php print $default_mode; ?>' data-hello='<?php print $hello; ?>'>
+	<div id='<?php print $trid; ?>' class='transcript-player'>
 		<?php print render($transcript_controls); ?>
 		<table>
 			<tr>

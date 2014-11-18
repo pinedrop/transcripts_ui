@@ -1,30 +1,30 @@
 #hits {
   width: 100%;
 }
-.transcripts-hit-list {
+.transcripts-ui-hit-list {
 	list-style: none;
 }
-.transcripts-hit-list .tier {
+.transcripts-ui-hit-list .tier {
         display: none;
 }
-.transcripts-hit-list .tier.active {
+.transcripts-ui-hit-list .tier.active {
         display: block;
 }
-.transcripts-hit-wrapper {
+.transcripts-ui-hit-wrapper {
         clear:both;
 }
-.transcripts-hit-wrapper .transcripts-hit-controls {
+.transcripts-ui-hit-wrapper .transcripts-ui-hit-controls {
         float: left;
         width: 70px;
         padding-bottom: 5px;
 }
-.transcripts-hit-wrapper .transcripts-hit-ref {
+.transcripts-ui-hit-wrapper .transcripts-ui-hit-ref {
         margin-left: 75px;
         margin-bottom: 5px;
 }
-.playing .transcripts-hit-ref {
+.playing .transcripts-ui-hit-ref {
         background-color: #6cf;
 }
-span.transcripts-hit {
+span.transcripts-ui-hit {
         background: yellow;
 }

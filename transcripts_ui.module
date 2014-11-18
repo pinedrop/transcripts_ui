@@ -1,8 +1,9 @@
 <?php
 
 function transcripts_ui_tiers() {
-	$val = trim(variable_get('transcripts_ui_tiers', ''));
-	return $val == '' ? array() : array_map('trim', explode(",", $val));
+return array('ts_content_bod' => 'Tibetan', 'ts_content_wylie' => 'Wylie', 'ts_content_eng' => 'English', 'ts_content_zho' => 'Chinese');
+//	$val = trim(variable_get('transcripts_ui_tiers', ''));
+//	return $val == '' ? array() : array_map('trim', explode(",", $val));
 }
 
 function transcripts_ui_init() {
@@ -16,7 +17,7 @@ function transcripts_ui_permission() {
                 'title' => t('View transcripts'),
         );
         $permissions['administer transcripts ui'] = array(
-                'title' => t('Administer transcripts ui'),
+                'title' => t('Administer ui'),
         );
         return $permissions;
 }
@@ -115,12 +116,17 @@ function transcripts_ui_theme() {
 				'classes' => '',
 			),
 		),
+                'transcripts_ui_goto_tcu' => array(
+                        'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
+                        'file' => 'transcripts_ui.theme.inc',
+                        'render element' => 'element',
+                ),
 	);
 }
 
-function transcripts_ui_ui($trid, $response) {
-	$ui = new TranscriptUI($trid);
-	$ui->process_response($response);
+function transcripts_ui_ui($trid, $response, $options) {
+	$ui = new TranscriptUI($trid, $options);
+	$ui->processResponse($response);
 	return $ui;
 }
 

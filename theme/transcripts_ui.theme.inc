@@ -37,7 +37,6 @@ function theme_transcripts_ui_video_tag($vars) {
 	$out = "<div class='transcripts-ui-video-tag' data-trid='{$vars['trid']}'>";
 	if (!$vars['video_tag']) { //use video_url
 		$tag = $vars['tag_type'];
-		
 		$out .= "<div class='transcripts'>";
 		$out .= "<div class='transcripts-ui-html5-media'>";
 		$out .= "<$tag controls>";
@@ -128,7 +127,6 @@ function theme_transcripts_ui_tcu_info($vars) {
 	$out .= "</div>"; //info
 	return $out;
 }
-
 function theme_transcripts_ui_tcu_tier($vars) {
 	$vars['classes'][] = 'tier';
 	$vars['classes'][] = 'active';
@@ -136,3 +134,23 @@ function theme_transcripts_ui_tcu_tier($vars) {
 	$out = "<div data-tier='{$vars['tier_name']}' class='$classes'>{$vars['tier_text']}</div>";
 	return $out;
 }
+function theme_transcripts_ui_goto_tcu($vars) {
+        $mins = floor ($vars['element']['#time'] / 60);
+        $secs = $vars['element']['#time'] % 60;
+        $time = sprintf ("%d:%02d", $mins, $secs);
+
+        $markup = variable_get('transcripts_ui_markup', 'default');
+        if ($markup == 'bootstrap') {
+                $out = "<a href='" . $vars['element']['#linkurl'] . "' class='btn btn-default btn-sm'>";
+                $out .= "<span class='glyphicon glyphicon-play'></span> ";
+                $out .= $time;
+                $out .= "</a>";
+        }
+        else {
+                $out = "<a href='" . $vars['element']['#linkurl'] . "'>";
+                $out .= "<span class='ui-icon ui-icon-play ui-state-default'>Play</span>";
+                $out .= "</a>";
+        }
+        return $out;
+}
+
