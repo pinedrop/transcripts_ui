@@ -20,7 +20,7 @@ class TranscriptUI {
         }
 
         //query
-        function processResponse($response) {
+        function processXMLResponse($response) {
 		$numDocs = count($response->response->docs);
                 if ($numDocs > 0) {
 			$tiers = $this->tiers;
@@ -182,9 +182,6 @@ class TranscriptUI {
                 			),
        	 			);
 
-                        	$this->transcript = $transcript;
-                        	$this->hits = $hits;
-
 				$this->ui = array(
 					'video_controls' => array(
 						'#prefix' => "<div class='video-controls' data-trid='{$this->trid}'>",
@@ -206,7 +203,7 @@ class TranscriptUI {
 						'#suffix' => "</div>",
 					),
 					'transcript' => $transcript,
-					'hits' => $hits,
+					'hits' => $hit_list,
 				);
                 	}
 			$this->num_docs = $numDocs;

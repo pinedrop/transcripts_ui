@@ -1,9 +1,8 @@
 <?php
 
+
 function transcripts_ui_tiers() {
-return array('ts_content_bod' => 'Tibetan', 'ts_content_wylie' => 'Wylie', 'ts_content_eng' => 'English', 'ts_content_zho' => 'Chinese');
-//	$val = trim(variable_get('transcripts_ui_tiers', ''));
-//	return $val == '' ? array() : array_map('trim', explode(",", $val));
+	return variable_get('transcripts_ui_tiers', array());
 }
 
 function transcripts_ui_init() {
@@ -124,9 +123,8 @@ function transcripts_ui_theme() {
 	);
 }
 
-function transcripts_ui_ui($trid, $response, $options) {
+function transcripts_ui_ui($trid, $options) {
 	$ui = new TranscriptUI($trid, $options);
-	$ui->processResponse($response);
 	return $ui;
 }
 
@@ -166,7 +164,7 @@ function transcripts_ui_tier_selector($form, &$form_state, $trid, $tiers) {
 	return $form;
 }
 
-function transcripts_ui_search_form($form, &$form_state, $trid, $search_options) {
+function transcripts_ui_search_form($form, &$form_state, $trid, $options) {
   // Loads the core Search CSS file, use the core search module's classes.
   drupal_add_css(drupal_get_path('module', 'search') . '/search.css');
 
@@ -179,8 +177,8 @@ function transcripts_ui_search_form($form, &$form_state, $trid, $search_options)
     '#type' => 'container',
   );
   $key = '';
-  if (strlen($search_options['term']) > 0) {
-    $key = substr($search_options['term'], 1, -1);
+  if (strlen($options['term']) > 0) {
+    $key = substr($options['term'], 1, -1);
   }
   $form['basic']['wrapper'] = array(
 	'#prefix' => "<div class='input-group'>",
@@ -239,6 +237,10 @@ function transcripts_ui_ajax_hits($form, &$form_state) {
 		'hits_only' => TRUE,
 	);
 	$ui = transcripts_ui_ui($trid, $options);
+        foreach (module_implements('transcripts_ui_ajax_search') as $module) {
+        	$function = $module . '_transcripts_ui_ajax_search';
+        	$function($ui);
+        }
 	return drupal_render($ui->ui['hits']);
 }
 

@@ -24,7 +24,20 @@ function transcripts_ui_admin() {
                 '#type' => 'fieldset',
                 '#collapsed' => FALSE,
         );
-
+	$default_tiers = array(
+		'ts_content_epo' => 'Esperanto',
+		'ts_content_qya' => 'Quenya',
+		'ts_content_sjn' => 'Sindarin',
+	);
+        $form['transcripts_ui_tier_settings']['transcripts_ui_tiers'] = array(
+                '#title' => t('Tiers'),
+                '#type' => 'textarea',
+                '#rows' => 10,
+                '#default_value' => list_allowed_values_string(variable_get('transcripts_ui_tiers', $default_tiers)),
+                '#description' => t('Enter a list of tiers, one per line, each in the form TIER_ID|TIER_NAME.'),
+                '#required' => TRUE,
+        );
+/*
         $desc = 'Enter a comma-separated list of Toolbox tier mappings, '
                 . 'each in the form TOOLBOX_TIER|TRANSCRIPTS_TIER. '
                 . 'You can ignore this field if you are not importing transcripts from Toolbox.';
@@ -37,6 +50,7 @@ function transcripts_ui_admin() {
                 '#description' => t($desc),
                 '#required' => TRUE,
         );
+*/
         $form['transcripts_ui_tier_settings']['transcripts_ui_empty_tiers'] = array(
                 '#title' => t('Include empty tiers'),
                 '#type' => 'checkbox',
@@ -50,7 +64,14 @@ function transcripts_ui_admin() {
 	        '#description' => t('Do you want speaker names to be included in the transcript display? Hidden speaker names cannot be edited.'),
         );
 
-	return system_settings_form($form);
+	$form = system_settings_form($form);
+	array_unshift($form['#submit'], 'transcripts_ui_admin_submit');
+	return $form;
+}
+
+function transcripts_ui_admin_submit($form, &$form_state) {
+	$tiers = list_extract_allowed_values($form_state['values']['transcripts_ui_tiers'], 'list_text', FALSE);
+	$form_state['values']['transcripts_ui_tiers'] = $tiers;
 }
 
 function improved_list_allowed_values_string($values, $delim = "\n") {
