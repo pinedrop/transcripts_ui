@@ -3,7 +3,6 @@
 		attach: function(context, settings) {
 			$('.video-controls', context).once('transcripts').each(function() {
 				var trid = $(this).attr('data-trid');
-				var tridfix = '#' + trid + '-';
 				var $player = $('#' + trid);
 				
 				var $controls = $(this);

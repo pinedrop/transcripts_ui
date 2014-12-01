@@ -3,7 +3,6 @@
                 attach: function(context, settings) {
                         $('.tier-selector', context).once('transcripts').each(function() {
                                 var trid = $(this).attr('data-trid');
-                                var tridfix = '#' + trid + '-';
                                 var $player = $('#' + trid);
 				
 				var $tierSelector = $(this);

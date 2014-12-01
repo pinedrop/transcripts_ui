@@ -123,7 +123,7 @@ class TranscriptUI {
                 		);
                 		if (isset($options['hits_only']) && $options['hits_only']) {
                        			$hit_list = array(
-                                		'#prefix' => "<ul id='transcripts-ui-hit-list-{$trid}' class='list-group transcripts-hit-list'>",
+                                		'#prefix' => "<ul id='transcripts-ui-hit-list-{$trid}' class='list-group transcripts-ui-hit-list'>",
                                 		'hits' => $hits,
                                 		'#suffix' => "</ul>",
                         		);
@@ -145,7 +145,7 @@ class TranscriptUI {
                                         			'#suffix' => "</div>",
                                 			),
                                 			'list' => array(
-                                        			'#prefix' => "<ul id='transcripts-ui-hit-list-{$trid}' class='list-group transcripts-hit-list'>",
+                                        			'#prefix' => "<ul id='transcripts-ui-hit-list-{$trid}' class='list-group transcripts-ui-hit-list'>",
                                         			'hits' => $hits,
                                         			'#suffix' => "</ul>",
                                 			),

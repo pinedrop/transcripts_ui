@@ -3,7 +3,6 @@
                 attach: function(context, settings) {
                         $('.mode-selector', context).once('transcripts').each(function() {
                                 var trid = $(this).attr('data-trid');
-                                var tridfix = '#' + trid + '-';
                                 var $player = $('#' + trid);
 
 				var $modeSelect = $('.mode-select', this);

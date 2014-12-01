@@ -3,7 +3,6 @@
                 attach: function(context, settings) {
                         $('.transcripts-hit-panel', context).once('transcripts').each(function() {
                                 var trid = $(this).attr('data-trid');
-                                var tridfix = '#' + trid + '-';
                                 var $player = $('#' + trid);
 
                                 $player.find('.transcripts-play-hit').click(function() {
