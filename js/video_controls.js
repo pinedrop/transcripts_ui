@@ -1,9 +1,8 @@
 (function($) {
 	Drupal.behaviors.videoControls = {
 		attach: function(context, settings) {
-			$('.video-controls', context).once('transcripts').each(function() {
-				var trid = $(this).attr('data-trid');
-				var $player = $('#' + trid);
+			$('[data-transcripts-role=video-controls]', context).once('transcripts').each(function() {
+				var trid = $(this).attr('data-transcripts-id');
 				
 				var $controls = $(this);
 				if ($controls.is(':empty')) {
@@ -21,7 +20,7 @@
 
 				$controls.find('.play-transcript').click(function() {
 					$(this).toggleClass('without-transcript');
-					$player.find('.transcript').toggle();
+					$('[data-transcripts-role=transcript][data-transcripts-id=' + trid + ']').toggle();
 				});		
 			});
 		}

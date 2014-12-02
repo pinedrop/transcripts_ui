@@ -20,7 +20,7 @@ class TranscriptUI {
         }
 
         //query
-        function processXMLResponse($response) {
+        function processResponse($response) {
 		$numDocs = count($response->response->docs);
                 if ($numDocs > 0) {
 			$tiers = $this->tiers;
@@ -132,7 +132,7 @@ class TranscriptUI {
                 			//$bootstrap = (variable_get('transcripts_markup', 'default') == 'bootstrap') ? TRUE : FALSE;
                 			//if (count($hits) > 0) {
                         			$hit_list = array(
-                                			'#prefix' => "<div class='panel panel-default transcripts-ui-hit-panel' data-trid='{$trid}'>",
+                                			'#prefix' => "<div class='panel panel-default' data-transcripts-role='hit-panel' data-transcripts-id='{$trid}'>",
                                 			/*'header' => array(
                                         			'#prefix' => "<div class='panel-heading transcripts-ui-hit-header'>",
                                         			//'#markup' => theme('transcripts_hit_summary', array('num_found' => count($hits))),
@@ -163,10 +163,7 @@ class TranscriptUI {
                 			}*/
         			};
         			$transcript = array(
-                			//'#prefix' => "<div class='transcript scroller' data-trid='{$trid}'>",
-                			//'tcu_list' => $tcus,
-                			//'#suffix' => "</div>",
-                			'#prefix' => "<div class='transcript scroller'>",
+                			'#prefix' => "<div class='scroller' data-transcripts-role='transcript' data-transcripts-id='{$this->trid}'>",
                 			'contents' => array(
                         			'#prefix' => "<ul class='list-group'>",
                         			'tcu_list' => $tcus,
@@ -176,15 +173,15 @@ class TranscriptUI {
                 			'#attached' => array(
                         			'css' => array(drupal_get_path('module', 'transcripts_ui') .'/css/transcripts_ui.css'),
                         			'js' => array(
+                                                        drupal_get_path('module', 'transcripts_ui') .'/js/jquery.scrollTo.min.js',
                                 			drupal_get_path('module', 'transcripts_ui') .'/js/transcripts_ui.js',
-                                			drupal_get_path('module', 'transcripts_ui') .'/js/jquery.scrollTo.js',
                         			),
                 			),
        	 			);
 
 				$this->ui = array(
 					'video_controls' => array(
-						'#prefix' => "<div class='video-controls' data-trid='{$this->trid}'>",
+						'#prefix' => "<div data-transcripts-role='video-controls' data-transcripts-id='{$this->trid}'>",
 						'#theme' => 'transcripts_ui_video_controls',
 						'#play' => theme('transcripts_ui_play_transcript'),
 						'#prev' => theme('transcripts_ui_previous_tcu'),
@@ -196,7 +193,7 @@ class TranscriptUI {
 						),
 					),
 					'transcript_controls' => array(
-                                		'#prefix' => "<div class='transcript-ui-controls' data-trid='{$this->trid}'>",
+                                		'#prefix' => "<div data-transcripts-role='transcript-controls' data-transcripts-id='{$this->trid}'>",
       						'#theme' => 'transcripts_ui_transcript_controls',
                                 		//'mode_selector' => drupal_get_form('transcripts_ui_mode_selector', $this->trid, $this->modes),
 						'tier_selector' => drupal_get_form('transcripts_ui_tier_selector', $this->trid, $this->tiers),

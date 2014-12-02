@@ -1,8 +1,8 @@
 (function($) {
         Drupal.behaviors.playerControls = {
                 attach: function(context, settings) {
-                        $('.mode-selector', context).once('transcripts').each(function() {
-                                var trid = $(this).attr('data-trid');
+                        $('[data-transcripts-role=mode-selector]', context).once('transcripts').each(function() {
+                                var trid = $(this).attr('data-transcripts-id');
                                 var $player = $('#' + trid);
 
 				var $modeSelect = $('.mode-select', this);

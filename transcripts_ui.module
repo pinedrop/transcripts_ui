@@ -124,8 +124,8 @@ function transcripts_ui_mode_selector($form, &$form_state, $trid, $modes) {
 		'#attributes' => array('class' => array('mode-select')),
 	);
 	$form['#attributes'] = array(
-		'class' => array('mode-selector'),
-		'data-trid' => $trid,
+		'data-transcripts-role' => 'mode-selector',
+		'data-transcripts-id' => $trid,
 	);
 	$form['#attached']['js'] = array(drupal_get_path('module', 'transcripts_ui') .'/js/mode_selector.js');
 	
@@ -142,8 +142,8 @@ function transcripts_ui_tier_selector($form, &$form_state, $trid, $tiers) {
 		'#options' => $tiers,
 	);
 	$form['#attributes'] = array(
-		'class' => array('tier-selector'),
-		'data-trid' => $trid,
+		'data-transcripts-role' => 'tier-selector',
+		'data-transcripts-id' => $trid,
 	);
 	$form['#attached']['js'] = array(drupal_get_path('module', 'transcripts_ui') .'/js/tier_selector.js');
 	

@@ -15,10 +15,10 @@ var resetSweet = [];
 (function($) {
 		Drupal.behaviors.transcriptUI = {
 			attach: function(context, settings) {
-				$('.transcript-player', context).once('player').each(function() {
-					var $player = $(this);
-					var trid = $player.attr('id');
-					
+				$('[data-transcripts-role=transcript]', context).once('transcripts').each(function() {
+					var trid = $(this).attr('data-transcripts-id');
+					var $transcript = $('[data-transcripts-role=transcript][data-transcripts-id=' + trid + ']');
+	
 					sweetSpot[trid] = 0;
 					resetSweet[trid] = true;
 					playSentence[trid] = 0; //timeout for playing single sentence
@@ -27,9 +27,9 @@ var resetSweet = [];
 					lastNow[trid] = 0;
 					playListeners[trid] = [];
 					
-					recomputeSentenceStack($player);
+					recomputeSentenceStack($transcript);
 					
-					$('*[data-begin]', $player).each(function() {
+					$('*[data-begin]', $('*[data-transcripts-id=' + trid + ']')).each(function() {
 						var $s = $(this);
 						$('.infocontrols button', this).button({
 							icons: {
@@ -41,16 +41,9 @@ var resetSweet = [];
 						});
 					});
 					
-					if ($player.find('.transcript').hasClass('scroller')) {
-						var fn = window[$player.attr('data-hello')];
-						if(typeof fn === 'function') {
-							fn($player);
-						}
-					}
-				
-					enableClickAndPlay($player);
+					enableClickAndPlay($transcript);
 					setPlayMode(trid, 'playstop');
-					attachListeners($player);
+					attachListeners(trid);
 				
 					window.addEventListener("hashchange", function() {
 						playOne(trid, $(window.location.hash.replace('tcu/', '')));
@@ -61,9 +54,9 @@ var resetSweet = [];
 		}
 })(jQuery);
 
-function recomputeSentenceStack($player) {
-	var trid = $player.attr('id');
-	starts[trid] = $player.find('*[data-begin]').not('.deleted').map(function(element, index) {
+function recomputeSentenceStack($transcript) {
+	var trid = $transcript.attr('data-transcripts-id');
+	starts[trid] = $transcript.find('*[data-begin]').not('.deleted').map(function(element, index) {
 		var o = {};
 		o.$item = jQuery(this);
 		o.begin = jQuery(this).attr('data-begin');
@@ -75,7 +68,7 @@ function recomputeSentenceStack($player) {
 	for (var i=0; i<starts[trid].length; i++) {
 		starts[trid][i].$item.attr('data-starts-index', i);
 	}
-	ends[trid] = $player.find('*[data-end]').not('.deleted').map(function(element, index) {
+	ends[trid] = $transcript.find('*[data-end]').not('.deleted').map(function(element, index) {
 		var o = {};
 		o.$item = jQuery(this);
 		o.begin = jQuery(this).attr('data-begin');
@@ -86,24 +79,23 @@ function recomputeSentenceStack($player) {
 	});
 }
 
-function enableClickAndPlay($player) {
-	var trid = $player.attr('id');
-	$player.delegate('.transcript.scroller *[data-begin]', 'mouseover', function() {
-  	jQuery(this).css('cursor', 'pointer');
-  });
-	$player.delegate('.transcript.scroller *[data-begin]', 'click', function() {
+function enableClickAndPlay($transcript) {
+	$transcript.delegate('*[data-begin]', 'mouseover', function() {
+  		jQuery(this).css('cursor', 'pointer');
+	});
+	$transcript.delegate('*[data-begin]', 'click', function() {
 	        window.location.hash = 'tcu/' + jQuery(this).attr('id');
-  });
+  	});
 }
 
-function disableClickAndPlay($player) {
-	$player.undelegate('.transcript.scroller *[data-begin]');
+function disableClickAndPlay($transcript) {
+	$transcript.undelegate('*[data-begin]');
 }
 
-function attachListeners($player) {
-	var trid = $player.attr('id');
-	if ($player.find('video,audio').size() > 0) { // && video != null) { //maybe not right
-		var vid = $player.find('video,audio').attr('data-trid', trid)[0];
+function attachListeners(trid) {
+	if (jQuery('[data-transcripts-role=video][data-transcripts-id=' + trid + ']').size() > 0) {
+		var vid = jQuery('[data-transcripts-role=video][data-transcripts-id=' + trid + ']').find('video,audio')[0];
+		vid.setAttribute('data-transcripts-id', trid);
 		vid.addEventListener('play', playPause, false);
 		vid.addEventListener('pause', playPause, false);
 		vid.addEventListener('timeupdate', timeUpdated, false);
@@ -121,8 +113,7 @@ function attachListeners($player) {
 function timeUpdated(e) {
 	var vid = e.target;
   var now = vid.currentTime;
-  var trid = vid.getAttribute('data-trid');
-  var $player = jQuery('#' + trid);
+  var trid = vid.getAttribute('data-transcripts-id');
 
   //if playmode=playstop, then don't keep scrolling when you stop
   if (!vid.paused && one[trid] != null && now > one[trid].attr('data-end')) {
@@ -134,7 +125,7 @@ function timeUpdated(e) {
   //clean highlights and scroll
   if (!vid.paused || Math.abs(lastNow[trid] - now) > .2) {
   //if (lastNow[trid] != now) {
-		$player.find('.playing').each(function() {
+		jQuery('[data-transcripts-role=transcript][data-transcripts-id=' + trid + ']').find('.playing').each(function() {
 			if (now < jQuery(this).attr('data-begin') || now > jQuery(this).attr('data-end')) {
 				endPlay(trid, jQuery(this));
 			}
@@ -158,7 +149,7 @@ function playPause(e) {
 	var vid = e.target;
 	if (!vid.paused) { //if playing
 		var now = vid.currentTime;
-		var trid = vid.getAttribute('data-trid');
+		var trid = vid.getAttribute('data-transcripts-id');
 		if (one[trid] != null && (now < parseFloat(one[trid].attr('data-begin'))-.1 || now > parseFloat(one[trid].attr('data-end'))+.1)) {
 			one[trid] = null;
 		}
@@ -167,7 +158,6 @@ function playPause(e) {
 
 // mode control
 function setPlayMode(trid, mode) {
-	var $player = jQuery('#' + trid);
 	playMode[trid] = mode;
 	one[trid] = null; //especially when switching to playthru
 }
@@ -180,13 +170,12 @@ function getPlayMode(trid) {
 
 function playOne(trid, $item) {
 	var reset = typeof resetSweet[trid] !== 'undefined' ? resetSweet[trid] : true;
-	var vid = jQuery('#' + trid).find('video,audio')[0];
+	var vid = jQuery('[data-transcripts-role=video][data-transcripts-id=' + trid + ']').find('video,audio')[0];
       if ($item.attr('data-end') - $item.attr('data-begin') > 0) {
         if (playMode[trid] == 'playstop') {
             one[trid] = $item;
         }
-        var $player = jQuery('#' + trid);
-        if ($player.find('.transcript.scroller').size() == 1) {
+        if (jQuery('[data-transcripts-role=transcript][data-transcripts-id=' + trid + ']').size() == 1) {
             endAll(trid);
             if (reset) {
                 sweetSpot[trid] = $item.position().top;
@@ -211,33 +200,33 @@ function removePlayListener(trid, func) {
 
 function startPlay(trid, $id) {
   $id.addClass('playing'); //sentence
-  var $player = jQuery('#' + trid);
-  $player.find('*[data-refid=' + $id.attr('id') + ']').addClass('playing'); //hit result
+  jQuery('[data-transcripts-role=hit-panel][data-transcripts-id=' + trid + ']').find('*[data-refid=' + $id.attr('id') + ']').addClass('playing'); //hit result
   for (var i=0; i<playListeners[trid].length; i++) {
   	var func = playListeners[trid][i];
   	func(trid, $id, 'startPlay');
   }
-  var $scroller = $player.find('.transcript.scroller');
+  var $scroller = jQuery('.transcript-content');
+  //var $scroller = jQuery('[data-transcripts-role=transcript][data-transcripts-id=' + trid + ']');
   if ($scroller.size() == 1) {
   	var idTop = $id.position().top;
-  	
+
   	//sentence out of view above
   	if (idTop < 0 && sweetSpot[trid] < 0) {
   		sweetSpot[trid] = 0;
-  		$player.find('.transcript').scrollTo($id);
+  		$scroller.scrollTo($id);
   	}
   	
   	//sentence above scroll sweet spot
   	else if (idTop < 0 || idTop < sweetSpot[trid]) {
-  		$player.find('.transcript').scrollTo('-=' + (sweetSpot[trid]-idTop), {axis: 'y'});
+  		$scroller.scrollTo('-=' + (sweetSpot[trid]-idTop), {axis: 'y'});
   	}
   	//sentence below scroll sweet spot
   	else {
-  		$player.find('.transcript').scrollTo('+=' + (idTop-sweetSpot[trid]), {axis: 'y'});
-  		
+  		$scroller.scrollTo('+=' + (idTop-sweetSpot[trid]), {axis: 'y'});
+
   		//sentence out of view below
   		if ($id.position().top > $scroller.height()-$id.height()) {
-  			$player.find('.transcript').scrollTo($id);
+  			$scroller.scrollTo($id);
   		}
   	}
   }
@@ -245,11 +234,10 @@ function startPlay(trid, $id) {
 
 function endPlay(trid, $id) {
   $id.removeClass('playing'); //sentence
-  var $player = jQuery('#' + trid);
-  $player.find('*[data-refid=' + $id.attr('id') + ']').removeClass('playing'); //hit result
+  jQuery('[data-transcripts-role=hit-panel][data-transcripts-id=' + trid + ']').find('*[data-refid=' + $id.attr('id') + ']').removeClass('playing'); //hit result
   
   //change sweet spot if user scrolls transcript while playing
-  if ($player.find('.transcript.scroller').size() == 1) {
+  if (jQuery('[data-transcripts-role=transcript][data-transcripts-id=' + trid + ']').size() == 1) {
   	sweetSpot[trid] = $id.position().top;
   }
   
@@ -260,27 +248,23 @@ function endPlay(trid, $id) {
 }
 
 function endAll(trid) {
-	var $player = jQuery('#' + trid);
-	$player.find('.playing').each(function() {
+	jQuery('[data-transcripts-role=transcript][data-transcripts-id=' + trid + ']').find('.playing').each(function() {
 		endPlay(trid, jQuery(this));
-	});	
+	});
 }
 
 function previous(trid) {
-  var $player = jQuery('#' + trid);
   var n = playIndex[trid] > 0 ? playIndex[trid]-1 : 0;
   resetSweet[trid] = false; //will be set back to true after line is played
   window.location.hash = 'tcu/' + jQuery(starts[trid][n].$item).attr('id');
 }
         
 function sameAgain(trid) {
-  var $player = jQuery('#' + trid);
   /* can't set window.location.hash because it won't change */
   playOne(trid, jQuery(starts[trid][playIndex[trid]].$item));
 }
 
 function next(trid) {
-  var $player = jQuery('#' + trid);
   var n = playIndex[trid] == starts[trid].length-1 ? playIndex[trid] : playIndex[trid]+1;
   resetSweet[trid] = false; //will be set back to true after line is played
   window.location.hash = 'tcu/' + jQuery(starts[trid][n].$item).attr('id');
