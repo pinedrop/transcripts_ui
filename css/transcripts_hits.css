@@ -1,6 +1,3 @@
-#hits {
-  width: 100%;
-}
 .transcripts-ui-hit-list {
 	list-style: none;
 }
@@ -24,7 +21,4 @@
 }
 .playing .transcripts-ui-hit-ref {
         background-color: #6cf;
-}
-span.transcripts-ui-hit {
-        background: yellow;
 }

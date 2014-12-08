@@ -205,7 +205,7 @@ function startPlay(trid, $id) {
   	var func = playListeners[trid][i];
   	func(trid, $id, 'startPlay');
   }
-  var $scroller = jQuery('.transcript-content');
+  var $scroller = jQuery('body');
   //var $scroller = jQuery('[data-transcripts-role=transcript][data-transcripts-id=' + trid + ']');
   if ($scroller.size() == 1) {
   	var idTop = $id.position().top;
@@ -258,7 +258,7 @@ function previous(trid) {
   resetSweet[trid] = false; //will be set back to true after line is played
   window.location.hash = 'tcu/' + jQuery(starts[trid][n].$item).attr('id');
 }
-        
+ 
 function sameAgain(trid) {
   /* can't set window.location.hash because it won't change */
   playOne(trid, jQuery(starts[trid][playIndex[trid]].$item));

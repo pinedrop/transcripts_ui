@@ -1,6 +1,5 @@
 <?php
 
-
 function transcripts_ui_tiers() {
 	return variable_get('transcripts_ui_tiers', array());
 }
@@ -109,9 +108,42 @@ function transcripts_ui_theme() {
 	);
 }
 
-function transcripts_ui_ui($trid, $options) {
-	$ui = new TranscriptUI($trid, $options);
+function transcripts_ui_ui($module, $trid, $options) {
+	$ui = new TranscriptUI($module, $trid, $options);
 	return $ui;
+}
+
+function transcripts_ui_render($ui) { 
+	$vars = array(
+		'trid' => $ui->trid,
+		'transcript' => $ui->render['transcript'],
+		'hits' => $ui->render['hits'],
+	);
+	return array_merge($vars, transcripts_ui_render_controls($ui));
+}
+
+function transcripts_ui_render_controls($ui) {
+	return array(
+		'video_controls' => array(
+			'#prefix' => "<div data-transcripts-role='video-controls' data-transcripts-id='{$ui->trid}'>",
+			'#theme' => 'transcripts_ui_video_controls',
+			'#play' => theme('transcripts_ui_play_transcript'),
+			'#prev' => theme('transcripts_ui_previous_tcu'),
+			'#same' => theme('transcripts_ui_same_tcu'),
+			'#next' => theme('transcripts_ui_next_tcu'),
+			'#suffix' => "</div>",
+			'#attached' => array(
+				'js' => array(drupal_get_path('module', 'transcripts_ui') .'/js/video_controls.js'),
+			),
+		),
+                'transcript_controls' => array(
+                        '#prefix' => "<div data-transcripts-role='transcript-controls' data-transcripts-id='{$ui->trid}'>",
+                        '#theme' => 'transcripts_ui_transcript_controls',
+                        //'mode_selector' => drupal_get_form('transcripts_ui_mode_selector', $ui->trid, $this->modes),
+                        'tier_selector' => drupal_get_form('transcripts_ui_tier_selector', $ui->trid, $ui->tiers),
+                        '#suffix' => "</div>",
+                ),
+	);
 }
 
 function transcripts_ui_mode_selector($form, &$form_state, $trid, $modes) {
@@ -150,7 +182,7 @@ function transcripts_ui_tier_selector($form, &$form_state, $trid, $tiers) {
 	return $form;
 }
 
-function transcripts_ui_search_form($form, &$form_state, $trid, $options) {
+function transcripts_ui_search_form($form, &$form_state, $ui) {
   // Loads the core Search CSS file, use the core search module's classes.
   drupal_add_css(drupal_get_path('module', 'search') . '/search.css');
 
@@ -163,8 +195,8 @@ function transcripts_ui_search_form($form, &$form_state, $trid, $options) {
     '#type' => 'container',
   );
   $key = '';
-  if (strlen($options['term']) > 0) {
-    $key = substr($options['term'], 1, -1);
+  if (strlen($ui->options['term']) > 0) {
+    $key = substr($ui->options['term'], 1, -1);
   }
   $form['basic']['wrapper'] = array(
 	'#prefix' => "<div class='input-group'>",
@@ -183,7 +215,7 @@ function transcripts_ui_search_form($form, &$form_state, $trid, $options) {
 		'#inner' => "<span class='glyphicon glyphicon-search'></span>",
        		'#ajax' => array(
        		        'callback' => 'transcripts_ui_ajax_hits',
-               		'wrapper' => 'transcripts-ui-hit-list-'.$trid,
+               		'wrapper' => 'transcripts-ui-hit-list-'.$ui->trid,
 			'progress' => array('type' => 'none'),
 			'event' => 'click',
        		),
@@ -194,7 +226,11 @@ function transcripts_ui_search_form($form, &$form_state, $trid, $options) {
   );
   $form['trid'] = array(
 	'#type' => 'hidden',
-	'#value' => substr($trid, 5), //chop of trid- prefix
+	'#value' => substr($ui->trid, 5), //chop of trid- prefix
+  );
+  $form['module'] = array(
+	'#type' => 'hidden',
+	'#value' => $ui->module, 
   );
 
   $form['basic']['get'] = array(
@@ -218,16 +254,13 @@ function transcripts_ui_search_form($form, &$form_state, $trid, $options) {
 
 function transcripts_ui_ajax_hits($form, &$form_state) {
 	$trid = $form_state['values']['trid'];
+	$module = $form_state['values']['module'];
 	$options = array(
 		'term' => $form_state['values']['keys'],
 		'hits_only' => TRUE,
 	);
-	$ui = transcripts_ui_ui($trid, $options);
-        foreach (module_implements('transcripts_ui_ajax_search') as $module) {
-        	$function = $module . '_transcripts_ui_ajax_search';
-        	$function($ui);
-        }
-	return drupal_render($ui->ui['hits']);
+	$ui = transcripts_ui_ui($module, $trid, $options);
+	return drupal_render($ui->render['hits']);
 }
 
 function replace_inner($markup, $element) {

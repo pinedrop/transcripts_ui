@@ -73,34 +73,3 @@ function transcripts_ui_admin_submit($form, &$form_state) {
 	$tiers = list_extract_allowed_values($form_state['values']['transcripts_ui_tiers'], 'list_text', FALSE);
 	$form_state['values']['transcripts_ui_tiers'] = $tiers;
 }
-
-function improved_list_allowed_values_string($values, $delim = "\n") {
-	$lines = array();
-	foreach ($values as $key => $value) {
-		$lines[] = "$key|$value";
-	}
-	return implode($delim, $lines);
-}
-
-function improved_list_extract_allowed_values($string) {
-	$values = array();
-
-	$list = explode("\n", $string);
-	$list = array_map('trim', $list);
-	$list = array_filter($list, 'strlen');
-
-	foreach ($list as $position => $text) {
-		$value = $key = FALSE;
-
-		// Check for an explicit key.
-		$matches = array();
-		if (preg_match('/(.*)\|(.*)/', $text, $matches)) {
-			$key = $matches[1];
-			$value = $matches[2];
-			$explicit_keys = TRUE;
-		}
-		$values[$key] = $value;
-	}
-	
-	return $values;
-}

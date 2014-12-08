@@ -17,7 +17,6 @@
 				$controls.find('.next').click(function() {
 					next(trid);
 				});
-
 				$controls.find('.play-transcript').click(function() {
 					$(this).toggleClass('without-transcript');
 					$('[data-transcripts-role=transcript][data-transcripts-id=' + trid + ']').toggle();

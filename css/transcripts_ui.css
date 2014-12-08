@@ -4,6 +4,12 @@
 [data-transcripts-role=video-controls] li {
 	display: inline;
 }
+/*
+[data-transcripts-role=transcript] {
+        height:500px;
+	overflow:auto;
+}
+*/
 .scroller .info {
 	float: left;
 	width: 150px;

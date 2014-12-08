@@ -1,44 +1,47 @@
 <?php
 
 class TranscriptUI {
+	var $module; //calling module
         var $trid; //transcript id
         var $shorttrid; //short id
         var $options; //display options
         var $tiers; //data tiers
-
-	var $num_docs = 0; //number of result documents
-
-	//render array
-        var $ui;
+	var $tcuCount = 0; //number of result documents
+        var $render; //array of rendered components
 
         //constructor
-        function __construct($trid, $options) {
+        function __construct($module, $trid, $options) {
                 $this->shorttrid = $trid;
                 $this->trid = 'trid-'.$trid;
 		$this->options = $options;
 		$this->tiers = transcripts_ui_tiers();
+		$this->module = $module;
+
+		if (in_array($module, module_implements('transcripts_ui_transcript'))) {
+			list($tcus, $highlights) = module_invoke($module, 'transcripts_ui_transcript', $this);
+			$this->createUI($tcus, $highlights);	
+		}
         }
 
         //query
-        function processResponse($response) {
-		$numDocs = count($response->response->docs);
-                if ($numDocs > 0) {
+        function createUI($timecodeunits, $highlights) {
+		$this->tcuCount = count($timecodeunits);
+                if ($this->tcuCount > 0) {
 			$tiers = $this->tiers;
 			$trid = $this->trid;
 			$options = $this->options;
 
-		        $docs = $response->response->docs;
-		        $highlight = isset($response->highlighting) ? TRUE : FALSE;
+		        $highlight = $highlights !== NULL ? TRUE : FALSE;
 		        $hits = array();
 		        $show_speakers = variable_get('transcripts_ui_speaker_names', TRUE);
 
 		        $tcus = array();
 
-		        foreach ($docs as $sentence) {
-    		        	$sid = $sentence->entity_id;
-        	        	$speaker = isset($sentence->ss_speaker) ? $sentence->ss_speaker : '';
-                		$begin = isset($sentence->fts_start) ? $sentence->fts_start : 0;
-                		$end = isset($sentence->fts_end) ? $sentence->fts_end : 0;
+		        foreach ($timecodeunits as $sentence) {
+    		        	$sid = $sentence->tcuid;
+        	        	$speaker = isset($sentence->speaker) ? $sentence->speaker : '';
+                		$begin = isset($sentence->start) ? $sentence->start : 0;
+                		$end = isset($sentence->end) ? $sentence->end : 0;
 
                 		$tier_list = array();
 
@@ -47,9 +50,9 @@ class TranscriptUI {
                         		if (isset($sentence->$tier)) {
                                 		if ($highlight) {
                                         		$id = $sentence->id;
-                                        		if (isset($response->highlighting->$id->$tier)) {
+                                        		if (isset($highlights->$id->$tier)) {
                                                 		$is_hit = TRUE;
-                                                		$replace = $response->highlighting->$id->$tier;
+                                                		$replace = $highlights->$id->$tier;
                                                 		$tier_list[] = array(
                                                         		'#theme' => 'transcripts_ui_tcu_tier',
                                                    			'#tier_name' => $tier,
@@ -89,8 +92,8 @@ class TranscriptUI {
                                         		'#prefix' => "<div class='transcripts-ui-hit-controls'>",
                                         		'content' => array(
                                                 		'#theme' => 'transcripts_ui_goto_tcu',
-                                                		'#linkurl' => '#tcu/' . $sentence->entity_id,
-                                                		'#time' => $sentence->fts_start,
+                                                		'#linkurl' => '#tcu/' . $sentence->tcuid,
+                                                		'#time' => $sentence->start,
                                         		),
                                         		'#suffix' => "</div>",
                                  		),
@@ -141,7 +144,7 @@ class TranscriptUI {
                                 			),*/
                                 			'body' => array(
                                         			'#prefix' => "<div class='panel-body'>",
-                                        			'search' => drupal_get_form('transcripts_ui_search_form', $trid, $options),
+                                        			'search' => drupal_get_form('transcripts_ui_search_form', $this),
                                         			'#suffix' => "</div>",
                                 			),
                                 			'list' => array(
@@ -178,31 +181,8 @@ class TranscriptUI {
                         			),
                 			),
        	 			);
-
-				$this->ui = array(
-					'video_controls' => array(
-						'#prefix' => "<div data-transcripts-role='video-controls' data-transcripts-id='{$this->trid}'>",
-						'#theme' => 'transcripts_ui_video_controls',
-						'#play' => theme('transcripts_ui_play_transcript'),
-						'#prev' => theme('transcripts_ui_previous_tcu'),
-						'#same' => theme('transcripts_ui_same_tcu'),
-						'#next' => theme('transcripts_ui_next_tcu'),
-						'#suffix' => "</div>",
-						'#attached' => array(
-							'js' => array(drupal_get_path('module', 'transcripts_ui') .'/js/video_controls.js'),
-						),
-					),
-					'transcript_controls' => array(
-                                		'#prefix' => "<div data-transcripts-role='transcript-controls' data-transcripts-id='{$this->trid}'>",
-      						'#theme' => 'transcripts_ui_transcript_controls',
-                                		//'mode_selector' => drupal_get_form('transcripts_ui_mode_selector', $this->trid, $this->modes),
-						'tier_selector' => drupal_get_form('transcripts_ui_tier_selector', $this->trid, $this->tiers),
-						'#suffix' => "</div>",
-					),
-					'transcript' => $transcript,
-					'hits' => $hit_list,
-				);
+				$this->render['transcript'] = $transcript;
+				$this->render['hits'] = $hit_list;
                 	}
-			$this->num_docs = $numDocs;
         }
 }
