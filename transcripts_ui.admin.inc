@@ -37,20 +37,6 @@ function transcripts_ui_admin() {
                 '#description' => t('Enter a list of tiers, one per line, each in the form TIER_ID|TIER_NAME.'),
                 '#required' => TRUE,
         );
-/*
-        $desc = 'Enter a comma-separated list of Toolbox tier mappings, '
-                . 'each in the form TOOLBOX_TIER|TRANSCRIPTS_TIER. '
-                . 'You can ignore this field if you are not importing transcripts from Toolbox.';
-
-        $form['transcripts_ui_tier_settings']['transcripts_ui_toolbox_mappings'] = array(
-                '#title' => t('Toolbox mappings'),
-                '#type' => 'textarea',
-                '#rows' => 3,
-                '#default_value' => variable_get('transcripts_ui_toolbox_mappings', 'tx|ts_content_quechua, mb|ts_content_morph, ge|ts_content_igt, ft|ts_content_eng'),
-                '#description' => t($desc),
-                '#required' => TRUE,
-        );
-*/
         $form['transcripts_ui_tier_settings']['transcripts_ui_empty_tiers'] = array(
                 '#title' => t('Include empty tiers'),
                 '#type' => 'checkbox',
