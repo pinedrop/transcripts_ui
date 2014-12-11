@@ -26,12 +26,15 @@ and some options to transcripts_ui_ui().
 Transcripts UI renders an HTML element for each of its components.
 Each component element has a data-transcripts-id attribute set to
 the trid. Each component also has a data-transcripts-role attribute
-set to one of the following roles:
+set to one of the following roles.
 
-* transcript
-* hit-panel
-* transcript-controls
-* video-controls
+* transcript: the element in which the transcript appears.
+* hit-panel: the element in which hits are shown, if a term search
+has occurred.
+* transcript-controls: controls that alter the appearance of the
+transcript, such as tier controls and display mode controls.
+* video-controls: controls for AV playback, including buttons for
+previous line, same line, next line, and so on.
 
 Your module is responsible for providing markup including an
 HTML 5 audio or video tag contained within an element that has the
@@ -45,6 +48,8 @@ making this linkage, transcripts will not be synced with your media.
 
 Your module is also responsible for retrieving transcripts for the
 UI; this is done by implementing hook_transcripts_ui_transcript().
+
+Your module is then free to position and style the rendered components.
 
 ## Related Modules 
 
