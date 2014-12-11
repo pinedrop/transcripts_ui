@@ -51,18 +51,28 @@ previous line, same line, next line, and so on.
 
 Your module is responsible for providing markup including an
 HTML 5 audio or video tag contained within an element that has the
-attribute:
+following data attributes, where TRID is a transcript id shared by
+other UI components. Without making this linkage, your transcript
+will not be synced with the media.
 
 * data-transcripts-id=TRID
 * data-transcripts-role=video
-
-where TRID is a transcript id shared by other UI components. Without 
-making this linkage, transcripts will not be synced with your media.
 
 Your module is also responsible for retrieving transcripts for the
 UI; this is done by implementing hook_transcripts_ui_transcript().
 
 Your module is then free to position and style the rendered components.
+
+## Transcript Internal Search
+
+Implementations of hook_transcripts_ui_transcript() may return highlights
+in addition to the full transcript, if a term search has occurred.
+A search box appears within the "hit-panel" component. Clicking on the
+search button sends an AJAX request to the hook implementation, which
+refreshes the hit-panel with new results.
+
+If your implementation doesn't support transcript-internal search, then
+do not include the hit-panel in your rendered output.
 
 ## Related Modules 
 
@@ -80,5 +90,3 @@ Pinedrop's work on Transcripts UI has been sponsored by:
 * The [Digital Scholarship Unit (DSU)](https://www.utsc.utoronto.ca/digitalscholarship/)
 at the UTSC Library.
 * [SHANTI](http://shanti.virginia.edu/) at the University of Virginia.
-
-
