@@ -3,8 +3,8 @@
 ## Introduction
 
 Transcripts UI provides a themeable interface for interacting with
-timecoded transcripts in Drupal. Transcripts UI assumes a very simple
-data model for transcripts, suitable for many uses. A transcript is
+timecoded transcripts in Drupal. The module assumes a very simple
+data model for transcripts, which may work for you. A transcript is
 divided into a number of Time Code Units (TCUs). Each TCU has an
 optional speaker, a start time, and an end time. In addition, each
 TCU has any number of "tiers". Tiers can be anything, but by
@@ -17,15 +17,16 @@ convention they are things like:
 The acronym "TCU" was inspired by its use within the
 [TalkBank](http://talkbank.org/) system.
 
-## Installation
+## Installation & Configuration
 
 Enable the transcript_ui module.
 
-## Configuration
+Configure it at admin/config/user-interface/transcripts.
+Opt for 'Default' markup, or 'Bootstrap' markup. Select the latter
+if you are using the [Bootstrap theme](https://www.drupal.org/project/bootstrap)
+with the [Bootstrap framework](http://getbootstrap.com/).
 
-Configure the module at admin/config/user-interface/transcripts.
-Select 'Default' or 'Bootstrap' markup, and define a list of tier
-identifiers and tier names.
+You must also define a list of tier identifiers and tier names.
 
 ## Creating a UI
 
@@ -65,7 +66,8 @@ Your module is then free to position and style the rendered components.
 
 ## Related Modules 
 
-transcripts_apachesolr is one module that makes use of transcripts_ui.
+[transcripts_apachesolr](https://github.com/pinedrop/transcripts_apachesolr)
+is one module that makes use of transcripts_ui.
 
 ## License
 
