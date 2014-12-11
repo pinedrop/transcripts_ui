@@ -63,7 +63,16 @@ UI; this is done by implementing hook_transcripts_ui_transcript().
 
 Your module is then free to position and style the rendered components.
 
-## Transcript Internal Search
+## Themeing the Output
+
+Components and sub-components can be differently themed by 
+(a) overriding the theme functions, or (b) altering the render arrays.
+Render arrays can be altered in many ways, including adding or replacing
+css and js files. For more on the 
+[Scary Render Array](http://cocoate.com/ddbook/scary-render-array), see
+[Render Arrays in Drupal](https://www.drupal.org/node/930760). 
+
+## Transcript Search
 
 Implementations of hook_transcripts_ui_transcript() may return highlights
 in addition to the full transcript, if a term search has occurred.
