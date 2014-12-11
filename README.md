@@ -46,6 +46,20 @@ making this linkage, transcripts will not be synced with your media.
 Your module is also responsible for retrieving transcripts for the
 UI; this is done by implementing hook_transcripts_ui_transcript().
 
-## See also 
+## Related Modules 
 
 transcripts_apachesolr is one module that makes use of transcripts_ui.
+
+## License
+
+[GPL, version 2](http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+
+## Acknowledgement
+
+Pinedrop's work on Transcripts UI has been sponsored by:
+
+* The [Digital Scholarship Unit (DSU)](https://www.utsc.utoronto.ca/digitalscholarship/)
+at the UTSC Library.
+* [SHANTI](http://shanti.virginia.edu/) at the University of Virginia.
+
+
