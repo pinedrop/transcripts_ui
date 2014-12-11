@@ -11,9 +11,6 @@ function transcripts_ui_init() {
 
 function transcripts_ui_permission() {
         $permissions = array();
-        $permissions['view transcripts'] = array(
-                'title' => t('View transcripts'),
-        );
         $permissions['administer transcripts ui'] = array(
                 'title' => t('Administer ui'),
         );

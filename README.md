@@ -3,7 +3,19 @@
 ## Introduction
 
 Transcripts UI provides a themeable interface for interacting with
-timecoded transcripts in Drupal. 
+timecoded transcripts in Drupal. Transcripts UI assumes a very simple
+data model for transcripts, suitable for many uses. A transcript is
+divided into a number of Time Code Units (TCUs). Each TCU has an
+optional speaker, a start time, and an end time. In addition, each
+TCU has any number of "tiers". Tiers can be anything, but by
+convention they are things like:
+
+* a transcription of what the speaker said
+* a translation of what the speaker said
+* a morpheme-by-morpheme gloss of what the speaker said
+
+The acronym "TCU" was inspired by its use within the
+[TalkBank](http://talkbank.org/) system.
 
 ## Installation
 
