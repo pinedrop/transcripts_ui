@@ -63,10 +63,10 @@ UI; this is done by implementing hook_transcripts_ui_transcript().
 
 Your module is then free to position and style the rendered components.
 
-## Themeing the Output
+## Themeing Output
 
 Components and sub-components can be differently themed by 
-(a) overriding the theme functions, or (b) altering the render arrays.
+(a) overriding theme functions, or (b) altering render arrays.
 Render arrays can be altered in many ways, including adding or replacing
 css and js files. For more on the 
 [Scary Render Array](http://cocoate.com/ddbook/scary-render-array), see

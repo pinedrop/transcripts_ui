@@ -76,13 +76,6 @@ class TranscriptUI {
                                        		 	);
                                 		}
                         		}
-                        		else if (variable_get('transcripts_ui_empty_tiers', TRUE)) {
-                                		$tier_list[] = array(
-                                        		'#theme' => 'transcripts_ui_tcu_tier',
-                                        		'#tier_name' => $tier,
-                                        		'#classes' => array('np'),
-                                		);
-                        		}
                 		}
 
                 		if ($is_hit) {
