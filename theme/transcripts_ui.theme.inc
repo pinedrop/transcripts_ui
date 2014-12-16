@@ -36,12 +36,12 @@ function theme_transcripts_ui_video_controls($vars) {
 function theme_transcripts_ui_play_transcript($vars) {
         $markup = variable_get('transcripts_ui_markup', 'default');
         if ($markup == 'bootstrap') {
-                $out = "<button type='button' class='btn btn-default play-transcript without-transcript'>";
+                $out = "<button type='button' class='btn btn-default play-transcript'>";
                 $out .= t('Toggle transcript');
                 $out .= "</button>";
 	}
 	else {
-		$out = "<button class='play-transcript without-transcript'>";
+		$out = "<button class='play-transcript'>";
 		$out .= t('Toggle transcript');
 		$out .= "</button>";
 	}

@@ -18,7 +18,7 @@
 					next(trid);
 				});
 				$controls.find('.play-transcript').click(function() {
-					$(this).toggleClass('without-transcript');
+					$(this).toggleClass('hidden-transcript');
 					$('[data-transcripts-role=transcript][data-transcripts-id=' + trid + ']').toggle();
 				});		
 			});
