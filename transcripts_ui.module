@@ -136,27 +136,27 @@ function transcripts_ui_render_controls($ui) {
                 'transcript_controls' => array(
                         '#prefix' => "<div data-transcripts-role='transcript-controls' data-transcripts-id='{$ui->trid}'>",
                         '#theme' => 'transcripts_ui_transcript_controls',
-                        //'mode_selector' => drupal_get_form('transcripts_ui_mode_selector', $ui->trid, $this->modes),
+                        //'viewer_selector' => drupal_get_form('transcripts_ui_viewer_selector', $ui->trid, $ui->viewers),
                         'tier_selector' => drupal_get_form('transcripts_ui_tier_selector', $ui->trid, $ui->tiers),
                         '#suffix' => "</div>",
                 ),
 	);
 }
 
-function transcripts_ui_mode_selector($form, &$form_state, $trid, $modes) {
+function transcripts_ui_viewer_selector($form, &$form_state, $trid, $viewer) {
 	$form = array();
 	
-	$form['mode_selector'] = array(
+	$form['viewer_selector'] = array(
 		'#type' => 'select',
 		'#title' => t('Views'),
-		'#options' => $modes,
-		'#attributes' => array('class' => array('mode-select')),
+		'#options' => $viewer,
+		'#attributes' => array('class' => array('viewer-select')),
 	);
 	$form['#attributes'] = array(
-		'data-transcripts-role' => 'mode-selector',
+		'data-transcripts-role' => 'viewer-selector',
 		'data-transcripts-id' => $trid,
 	);
-	$form['#attached']['js'] = array(drupal_get_path('module', 'transcripts_ui') .'/js/mode_selector.js');
+	$form['#attached']['js'] = array(drupal_get_path('module', 'transcripts_ui') .'/js/viewer_selector.js');
 	
 	return $form;
 }

@@ -3,7 +3,7 @@
 function theme_transcripts_ui_transcript_controls($vars) {
 	$out = "<table>";
 	$out .= "<tr>";
-	$out .= "<td>" .drupal_render($vars['element']['mode_selector']). "</td>";
+	$out .= "<td>" .drupal_render($vars['element']['viewer_selector']). "</td>";
 	$out .= "<td>" .drupal_render($vars['element']['tier_selector']). "</td>";
 	$out .= "</tr>";
 	$out .= "</table>";
