@@ -78,14 +78,11 @@ function transcripts_ui_theme() {
                         'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
                         'file' => 'transcripts_ui.theme.inc',
 		),	
-		'transcripts_ui_tcu_info' => array(
+		'transcripts_ui_speaker_name' => array(
                         'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
                         'file' => 'transcripts_ui.theme.inc',
 			'variables' => array(
-				'show_speakers' => FALSE,
 				'speaker_name' => '',
-				'start_time' => 0,
-				'end_time' => 0,
 			),
 		),
 		'transcripts_ui_tcu_tier' => array(

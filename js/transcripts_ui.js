@@ -41,7 +41,7 @@ var resetSweet = [];
 						});
 					});
 					
-					enableClickAndPlay($transcript);
+					//enableClickAndPlay($transcript);
 					setPlayMode(trid, 'playstop');
 					attachListeners(trid);
 				

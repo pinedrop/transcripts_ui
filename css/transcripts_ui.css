@@ -10,13 +10,23 @@
 	overflow:auto;
 }
 */
-.scroller .info {
-	float: left;
-	width: 150px;
+
+.tcu-info {
+	float:left;
+	width:200px;
 }
-.scroller .speaker-tiers {
-	margin-left: 160px;
+.play-button {
+	float:left;
+	margin-right:-100px;
 }
+.speaker-name {
+	float:right;
+	width:100px;
+}
+.speaker-tiers {
+	margin-left:200px;	
+}
+
 .scroller .tier {
 	display: none;
 }
@@ -28,38 +38,4 @@
 }
 .scroller ul {
 	list-style: none;
-}
-
-/* for some reason labels are two pixels taller and wider than buttons */
-.playwrapper {
-	display:none;
-}
-.infocontrols {
-	float:left;
-	margin-left:10px;
-	width:25px;
-}
-.infocontrols button.ui-button {
-	margin-right: 0;
-	width: 18px;
-	height: 18px;
-	vertical-align: middle;
-}
-.infocontrols label.ui-button {
-	margin-right: 0;
-	width: 16px;
-	height: 16px;
-	vertical-align: middle;
-}
-.info .timecodes {
-	margin-left:40px;
-	font:inherit;
-	/* height:inherit; */
-}
-.info .t1, .info .t2 {
-	border:none;
-	font:inherit;
-	text-align:right;
-	width:68px;
-	padding-right:16px; /* so clicking right will open spinner */
 }

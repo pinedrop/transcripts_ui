@@ -93,17 +93,8 @@ function theme_transcripts_ui_hit_summary($vars) {
         $out .= "<div class='transcripts-ui-hit-info'>Found " .$vars['num_found']. " sentences</div>";
 	return $out;
 }
-function theme_transcripts_ui_tcu_info($vars) {
-	$out = $vars['show_speakers'] ? "<div class='info'>" : "<div class='info' style='display: none'>";
-	$out .= "<div class='speakername'>{$vars['speaker_name']}</div>";
-	$out .= "<div class='playwrapper'>";
-	$out .= "<div class='infocontrols'><button></button></div>";
-	$out .= "<div class='timecodes'>";
-	$out .= "<div class='t1'>{$vars['start_time']}</div><div class='clearfix'></div>";
-	$out .= "<div class='t2'>{$vars['end_time']}</div><div class='clearfix'></div>";
-	$out .= "</div>"; //timecodes
-	$out .= "</div>"; //playwrapper
-	$out .= "</div>"; //info
+function theme_transcripts_ui_speaker_name($vars) {
+	$out = "<div class='speaker-name'>{$vars['speaker_name']}</div>";
 	return $out;
 }
 function theme_transcripts_ui_tcu_tier($vars) {

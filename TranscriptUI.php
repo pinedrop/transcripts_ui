@@ -101,20 +101,28 @@ class TranscriptUI {
 
                 		$tcus[] = array(
                         		//div had class clearfix
-                        		'#prefix' => "<li id='{$sid}' class='list-group-item transcripts-ui-tcu' data-participant='{$speaker}' data-begin='{$begin}' data-end='{$end}'>",
-                        		'tcu_info' => array(
-                                		'#theme' => 'transcripts_ui_tcu_info',
-                                		'#show_speakers' => $show_speakers,
-                                		'#sid' => $sid,
-                                		'#speaker_name' => $speaker,
-                                		'#start_time' => $begin,
-                                		'#end_time' => $end,
-                        		),
-                        		'tcu_tiers' => array(
-                                		'#prefix' => "<div class='tiers speaker-tiers'>",
-                                		'tier_list' => $tier_list,
-                                		'#suffix' => "</div>",
-                        		),
+                        		'#prefix' => "<li id='{$sid}' class='clearfix list-group-item transcripts-ui-tcu' data-participant='{$speaker}' data-begin='{$begin}' data-end='{$end}'>",
+					'tcu_info' => array(
+						'#prefix' => "<div class='clearfix tcu-info'>",
+						'link' => array(
+							'#prefix' => "<div class='play-button'>",
+							'#theme' => 'transcripts_ui_goto_tcu',
+							'#linkurl' => '#tcu/' . $sentence->tcuid,
+							'#time' => $sentence->start,
+							'#suffix' => "</div>",
+						),
+                                        	'speaker_name' => array(
+                                        	        '#theme' => 'transcripts_ui_speaker_name',
+                                        	        '#sid' => $sid,
+                                        	        '#speaker_name' => $speaker,
+                                        	),
+						'#suffix' => "</div>",
+					),
+                                        'tcu_tiers' => array(
+                                                '#prefix' => "<div class='tiers speaker-tiers'>",
+                                                'tier_list' => $tier_list,
+                                                '#suffix' => "</div>",
+                                        ),
                         		'#suffix' => "</li>",
                 		);
                 		if (isset($options['hits_only']) && $options['hits_only']) {
