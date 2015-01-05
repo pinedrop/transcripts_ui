@@ -33,7 +33,7 @@ class TranscriptUI {
 
 		        $highlight = $highlights !== NULL ? TRUE : FALSE;
 		        $hits = array();
-		        $show_speakers = variable_get('transcripts_ui_speaker_names', TRUE);
+		        //$show_speakers = variable_get('transcripts_ui_speaker_names', TRUE);
 
 		        $tcus = array();
 

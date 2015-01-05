@@ -37,12 +37,6 @@ function transcripts_ui_admin() {
                 '#description' => t('Enter a list of tiers, one per line, each in the form TIER_ID|TIER_NAME.'),
                 '#required' => TRUE,
         );
-        $form['transcripts_ui_tier_settings']['transcripts_ui_speaker_names'] = array(
-        	'#title' => t('Include speaker names'),
-	        '#type' => 'checkbox',
-	        '#default_value' => variable_get('transcripts_ui_speaker_names', TRUE),
-	        '#description' => t('Do you want speaker names to be included in the transcript display? Hidden speaker names cannot be edited.'),
-        );
 
 	$form = system_settings_form($form);
 	array_unshift($form['#submit'], 'transcripts_ui_admin_submit');
