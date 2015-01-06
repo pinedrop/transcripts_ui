@@ -125,6 +125,8 @@ class TranscriptUI {
                                         ),
                         		'#suffix' => "</li>",
                 		);
+			}
+
                 		if (isset($options['hits_only']) && $options['hits_only']) {
                        			$hit_list = array(
                                 		'#prefix' => "<ul id='transcripts-ui-hit-list-{$trid}' class='list-group transcripts-ui-hit-list'>",
@@ -184,6 +186,5 @@ class TranscriptUI {
        	 			);
 				$this->render['transcript'] = $transcript;
 				$this->render['hits'] = $hit_list;
-                	}
         }
 }
