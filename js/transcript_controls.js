@@ -1,7 +1,7 @@
 (function($) {
-	Drupal.behaviors.videoControls = {
+	Drupal.behaviors.transcriptControls = {
 		attach: function(context, settings) {
-			$('[data-transcripts-role=video-controls]', context).once('transcripts').each(function() {
+			$('[data-transcripts-role=transcript-controls]', context).once('transcripts').each(function() {
 				var trid = $(this).attr('data-transcripts-id');
 				
 				var $controls = $(this);

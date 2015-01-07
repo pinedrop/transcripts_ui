@@ -1,10 +1,6 @@
 <?php
 
 function theme_transcripts_ui_transcript_controls($vars) {
-	$out = drupal_render($vars['element']['tier_selector']);
-	return $out;
-}
-function theme_transcripts_ui_video_controls($vars) {
 	$markup = variable_get('transcripts_ui_markup', 'default');
 	if ($markup == 'bootstrap') {
                 $out = "<div class='btn-toolbar'>";
@@ -16,6 +12,7 @@ function theme_transcripts_ui_video_controls($vars) {
 		$out .= $vars['element']['#same'];
 		$out .= $vars['element']['#next'];
                 $out .= "</div>";
+		$out .= drupal_render($vars['element']['tier_selector']);
 		$out .= "</div>";
 	}
 	else {
@@ -24,6 +21,7 @@ function theme_transcripts_ui_video_controls($vars) {
         	$out .= "<li>" .$vars['element']['#prev']. "</li>";
         	$out .= "<li>" .$vars['element']['#same']. "</li>";
         	$out .= "<li>" .$vars['element']['#next']. "</li>";
+		$out .= drupal_render($vars['element']['tier_selector']);
 		$out .= "</ul>";
 	}
         return $out;

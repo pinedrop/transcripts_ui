@@ -49,11 +49,6 @@ function transcripts_ui_theme() {
                         'file' => 'transcripts_ui.theme.inc',
 			'render element' => 'element',
                 ),
-                'transcripts_ui_video_controls' => array(
-                        'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
-                        'file' => 'transcripts_ui.theme.inc',
-			'render element' => 'element',
-                ),
 		'transcripts_ui_play_transcript' => array(
                         'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
 			'file' => 'transcripts_ui.theme.inc',
@@ -118,24 +113,19 @@ function transcripts_ui_render($ui) {
 
 function transcripts_ui_render_controls($ui) {
 	return array(
-		'video_controls' => array(
-			'#prefix' => "<div data-transcripts-role='video-controls' data-transcripts-id='{$ui->trid}'>",
-			'#theme' => 'transcripts_ui_video_controls',
-			'#play' => theme('transcripts_ui_play_transcript'),
-			'#prev' => theme('transcripts_ui_previous_tcu'),
-			'#same' => theme('transcripts_ui_same_tcu'),
-			'#next' => theme('transcripts_ui_next_tcu'),
-			'#suffix' => "</div>",
-			'#attached' => array(
-				'js' => array(drupal_get_path('module', 'transcripts_ui') .'/js/video_controls.js'),
-			),
-		),
                 'transcript_controls' => array(
                         '#prefix' => "<div data-transcripts-role='transcript-controls' data-transcripts-id='{$ui->trid}'>",
                         '#theme' => 'transcripts_ui_transcript_controls',
+                        '#play' => theme('transcripts_ui_play_transcript'),
+                        '#prev' => theme('transcripts_ui_previous_tcu'),
+                        '#same' => theme('transcripts_ui_same_tcu'),
+                        '#next' => theme('transcripts_ui_next_tcu'),
                         //'viewer_selector' => drupal_get_form('transcripts_ui_viewer_selector', $ui->trid, $ui->viewers),
-                        'tier_selector' => drupal_get_form('transcripts_ui_tier_selector', $ui->trid, $ui->tiers),
+			'tier_selector' => drupal_get_form('transcripts_ui_tier_selector', $ui->trid, $ui->tiers),
                         '#suffix' => "</div>",
+                        '#attached' => array(
+                                'js' => array(drupal_get_path('module', 'transcripts_ui') .'/js/transcript_controls.js'),
+                        ),
                 ),
 	);
 }
