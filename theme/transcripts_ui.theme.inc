@@ -8,6 +8,9 @@ function theme_transcripts_ui_video_controls($vars) {
 	$markup = variable_get('transcripts_ui_markup', 'default');
 	if ($markup == 'bootstrap') {
                 $out = "<div class='btn-toolbar'>";
+		$out .= "<div class='btn-group'>";
+		$out .= $vars['element']['#play'];
+		$out .= "</div>";
                 $out .= "<div class='btn-group'>";
 		$out .= $vars['element']['#prev'];
 		$out .= $vars['element']['#same'];
@@ -17,6 +20,7 @@ function theme_transcripts_ui_video_controls($vars) {
 	}
 	else {
         	$out = "<ul>";
+		$out .= "<li>" .$vars['element']['#play']. "</li>";
         	$out .= "<li>" .$vars['element']['#prev']. "</li>";
         	$out .= "<li>" .$vars['element']['#same']. "</li>";
         	$out .= "<li>" .$vars['element']['#next']. "</li>";
