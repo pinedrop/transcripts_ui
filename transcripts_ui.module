@@ -166,10 +166,10 @@ function transcripts_ui_tier_selector($form, &$form_state, $trid, $tiers) {
 		'#title' => t('Tiers'),
 		'#options' => $tiers,
 	);
-	$form['#attributes'] = array(
+	/*$form['#attributes'] = array(
 		'data-transcripts-role' => 'tier-selector',
 		'data-transcripts-id' => $trid,
-	);
+	);*/
 	$form['#attached']['js'] = array(drupal_get_path('module', 'transcripts_ui') .'/js/tier_selector.js');
 	
 	return $form;
