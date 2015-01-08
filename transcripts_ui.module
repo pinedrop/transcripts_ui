@@ -49,6 +49,11 @@ function transcripts_ui_theme() {
                         'file' => 'transcripts_ui.theme.inc',
 			'render element' => 'element',
                 ),
+		'transcripts_ui_tier_selector' => array(
+                        'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
+                        'file' => 'transcripts_ui.theme.inc',
+                        'render element' => 'element',
+		),
 		'transcripts_ui_play_transcript' => array(
                         'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
 			'file' => 'transcripts_ui.theme.inc',
@@ -121,12 +126,16 @@ function transcripts_ui_render_controls($ui) {
                         '#same' => theme('transcripts_ui_same_tcu'),
                         '#next' => theme('transcripts_ui_next_tcu'),
                         //'viewer_selector' => drupal_get_form('transcripts_ui_viewer_selector', $ui->trid, $ui->viewers),
-			'tier_selector' => drupal_get_form('transcripts_ui_tier_selector', $ui->trid, $ui->tiers),
                         '#suffix' => "</div>",
                         '#attached' => array(
                                 'js' => array(drupal_get_path('module', 'transcripts_ui') .'/js/transcript_controls.js'),
                         ),
                 ),
+		'tier_selector' => array(
+			'#prefix' => "<div data-transcripts-role='tier-selector' data-transcripts-id='{$ui->trid}'>",
+			'tier_selector' => drupal_get_form('transcripts_ui_tier_selector', $ui->trid, $ui->tiers),
+			'#suffix' => "</div>",
+		),
 	);
 }
 
