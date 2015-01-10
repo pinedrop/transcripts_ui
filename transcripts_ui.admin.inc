@@ -3,22 +3,6 @@
 function transcripts_ui_admin() {
 	$form = array();
 
-	$form['transcripts_ui_style_settings'] = array(
-		'#title' => t('Style settings'),
-		'#type' => 'fieldset',
-		'#collapsed' => FALSE,
-	);
-	$form['transcripts_ui_style_settings']['transcripts_ui_markup'] = array(
-                '#title' => t('Markup style'),
-                '#type' => 'select',
-                '#options' => array(
-			'default' => t('Default'),
-			'bootstrap' => t('Bootstrap'),
-		),
-                '#default_value' => variable_get('transcripts_ui_markup', 'default'),
-		'#description' => t('Select the markup style to use.'),
-	);
-
         $form['transcripts_ui_tier_settings'] = array(
                 '#title' => t('Transcript tiers'),
                 '#type' => 'fieldset',

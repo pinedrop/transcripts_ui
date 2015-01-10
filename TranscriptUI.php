@@ -135,7 +135,6 @@ class TranscriptUI {
                         		);
                 		}
                 		else {
-                			//$bootstrap = (variable_get('transcripts_markup', 'default') == 'bootstrap') ? TRUE : FALSE;
                 			//if (count($hits) > 0) {
                         			$hit_list = array(
                                 			'#prefix' => "<div class='panel panel-default' data-transcripts-role='hit-panel' data-transcripts-id='{$trid}'>",

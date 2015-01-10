@@ -1,58 +1,39 @@
 <?php
 
-function theme_transcripts_ui_transcript_controls($vars) {
-	$markup = variable_get('transcripts_ui_markup', 'default');
-	if ($markup == 'bootstrap') {
-                $out = "<div class='btn-toolbar'>";
-		$out .= "<div class='btn-group'>";
-		$out .= $vars['element']['#play'];
-		$out .= "</div>";
-                $out .= "<div class='btn-group'>";
-		$out .= $vars['element']['#prev'];
-		$out .= $vars['element']['#same'];
-		$out .= $vars['element']['#next'];
-                $out .= "</div>";
-		$out .= "</div>";
-	}
-	else {
-        	$out = "<ul>";
-		$out .= "<li>" .$vars['element']['#play']. "</li>";
-        	$out .= "<li>" .$vars['element']['#prev']. "</li>";
-        	$out .= "<li>" .$vars['element']['#same']. "</li>";
-        	$out .= "<li>" .$vars['element']['#next']. "</li>";
-		$out .= "</ul>";
-	}
+function theme_transcripts_ui_transcript_controls($vars) {	
+	$out  = drupal_render($vars['element']['content']);
+        $out .= "<div class='btn-group'>";
+        $out .= "<button type='button' class='btn btn-default search' title='Search transcript'><span class='glyphicon glyphicon-search'></span> Search</button>";
+        $out .= "</div>";
         return $out;
 }
 function theme_transcripts_ui_transcript_options($vars) {
-        $out = drupal_render($vars['element']['transcript_options']['tier_selector']);
-        return $out;
+	$out  = "<div class='transcript-options'>";
+	$out .= "<label>";
+	$out .= t('Transcript options');
+	$out .= "<select multiple class='tier-selector' data-header='Transcript options' title='Choose transcript options'>";
+	$out .= "<optgroup label='Transcript tiers'>";
+	foreach ($vars['element']['data_tiers'] as $key => $val) {
+		$out .= "<option value='{$key}'>{$val}</option>";
+	}
+	$out .= "</optgroup>";
+	$out .= "<optgroup label='Speaker name'>";
+	foreach ($vars['element']['speaker_modes'] as $key => $val) {
+		$out .= "<option value='s-{$key}'>{$val}</option>";
+	}
+       	$out .= "</optgroup>";
+	$out .= "</select>";
+       	$out .= "</label>";
+	$out .= "</div>";
+	return $out;
 }
 function theme_transcripts_ui_transcript_navigation($vars) {
-        $markup = variable_get('transcripts_ui_markup', 'default');
-        if ($markup == 'bootstrap') {
-                $out = "<button type='button' class='btn btn-default play-transcript'>";
-                $out .= t('Toggle transcript');
-                $out .= "</button>";
-                $out .= "<button type='button' class='btn btn-default previous' title='" . t('Play previous line') . "'>";
-                $out .= "<span class='glyphicon glyphicon-arrow-left'><span> ";
-                $out .= t('Previous');
-                $out .= "</button>";
-                $out .= "<button type='button' class='btn btn-default sameagain' title='" . t('Play same line') . "'>";
-                $out .= "<span class='glyphicon glyphicon-repeat'><span> ";
-                $out .= t('Same');
-                $out .= "</button>";
-                $out .= "<button type='button' class='btn btn-default next' title='" . t('Play next line') . "'>";
-                $out .= "<span class='glyphicon glyphicon-arrow-right'><span> ";
-                $out .= t('Next');
-                $out .= "</button>";
-        }
-        else {
-                $out = "<button class='play-transcript'>" . t('Toggle transcript') . "</button>";
-                $out .= "<button class='previous' title='" . t('Play previous line') . "'>" . t('Previous') . "</button>";
-                $out .= "<button class='sameagain' title='" . t('Play same line') . "'>" . t('Same') . "</button>";
-                $out .= "<button class='next' title='" . t('Play next line') . "'>" . t('Next') . "</button>";
-        }
+	$out  = "<div class='btn-group' role='group'>";
+	$out = "<button type='button' class='btn btn-default play-transcript'>" . t('Toggle transcript') . "</button>";
+        $out .= "<button type='button' class='btn btn-default previous' title='Previous line'><span class='glyphicon glyphicon-arrow-left'></span> Previous</button>";
+        $out .= "<button type='button' class='btn btn-default sameagain' title='Same line'><span class='glyphicon glyphicon-repeat'></span> Same</button>";
+        $out .= "<button type='button' class='btn btn-default next' title='Next line'><span class='glyphicon glyphicon-arrow-right'></span> Next</button>";
+	$out .= "</div>";
         return $out;
 }
 function theme_transcripts_ui_hit_summary($vars) {
@@ -77,18 +58,9 @@ function theme_transcripts_ui_goto_tcu($vars) {
         $mins = floor ($vars['element']['#time'] / 60);
         $secs = $vars['element']['#time'] % 60;
         $time = sprintf ("%d:%02d", $mins, $secs);
-
-        $markup = variable_get('transcripts_ui_markup', 'default');
-        if ($markup == 'bootstrap') {
-                $out = "<a href='" . $vars['element']['#linkurl'] . "' class='btn btn-default btn-sm'>";
-                $out .= "<span class='glyphicon glyphicon-play'></span> ";
-                $out .= $time;
-                $out .= "</a>";
-        }
-        else {
-                $out = "<a href='" . $vars['element']['#linkurl'] . "'>";
-                $out .= "<span class='ui-icon ui-icon-play ui-state-default'>Play</span>";
-                $out .= "</a>";
-        }
+	$out = "<a href='" . $vars['element']['#linkurl'] . "' class='btn btn-default'>";
+        $out .= "<span class='glyphicon glyphicon-play'></span> ";
+        $out .= $time;
+        $out .= "</a>";
         return $out;
 }

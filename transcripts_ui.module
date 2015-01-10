@@ -168,8 +168,6 @@ function transcripts_ui_search_form($form, &$form_state, $ui) {
   // Loads the core Search CSS file, use the core search module's classes.
   drupal_add_css(drupal_get_path('module', 'search') . '/search.css');
 
-  $bootstrap = variable_get('transcripts_ui_markup', 'default') == 'bootstrap' ? TRUE : FALSE;
-
   $form = array();
   $form['#id'] = 'transcripts-ui-search-form';
   $form['#attributes']['class'] = array('transcripts-ui-search-form', 'clearfix');
