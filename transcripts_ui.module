@@ -49,11 +49,16 @@ function transcripts_ui_theme() {
                         'file' => 'transcripts_ui.theme.inc',
 			'render element' => 'element',
                 ),
-		'transcripts_ui_tier_selector' => array(
+                'transcripts_ui_transcript_options' => array(
                         'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
                         'file' => 'transcripts_ui.theme.inc',
                         'render element' => 'element',
-		),
+                ),
+                'transcripts_ui_transcript_navigation' => array(
+                        'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
+                        'file' => 'transcripts_ui.theme.inc',
+                        'render element' => 'element',
+                ),
 		'transcripts_ui_play_transcript' => array(
                         'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
 			'file' => 'transcripts_ui.theme.inc',
@@ -121,23 +126,25 @@ function transcripts_ui_render_controls($ui) {
                 'transcript_controls' => array(
                         '#prefix' => "<div data-transcripts-role='transcript-controls' data-transcripts-id='{$ui->trid}'>",
                         '#theme' => 'transcripts_ui_transcript_controls',
-                        '#play' => theme('transcripts_ui_play_transcript'),
-                        '#prev' => theme('transcripts_ui_previous_tcu'),
-                        '#same' => theme('transcripts_ui_same_tcu'),
-                        '#next' => theme('transcripts_ui_next_tcu'),
-                        //'viewer_selector' => drupal_get_form('transcripts_ui_viewer_selector', $ui->trid, $ui->viewers),
-                        '#suffix' => "</div>",
-                        '#attached' => array(
-                                'js' => array(drupal_get_path('module', 'transcripts_ui') .'/js/transcript_controls.js'),
-                        ),
-                ),
-		'tier_selector' => array(
-			'#prefix' => "<div data-transcripts-role='tier-selector' data-transcripts-id='{$ui->trid}'>",
-			'tier_selector' => drupal_get_form('transcripts_ui_tier_selector', $ui->trid, $ui->tiers),
+			'content' => array(
+				'transcript_options' => array(
+					'#theme' => 'transcripts_ui_transcript_options',
+					'trid' => $ui->trid,
+					'data_tiers' => $ui->tiers,
+					'speaker_modes' => $ui->tiers,
+					'#attached' => array('js' => array(drupal_get_path('module', 'transcripts_ui') .'/js/transcript_options.js')),				
+				),
+				'transcript_navigation' => array(
+					'#theme' => 'transcripts_ui_transcript_navigation',
+					'#attached' => array('js' => array(drupal_get_path('module', 'transcripts_ui') .'/js/transcript_navigation.js')),
+				),
+			),
 			'#suffix' => "</div>",
-		),
+                ),
 	);
 }
+
+//'viewer_selector' => drupal_get_form('transcripts_ui_viewer_selector', $ui->trid, $ui->viewers),
 
 function transcripts_ui_viewer_selector($form, &$form_state, $trid, $viewer) {
 	$form = array();
@@ -153,24 +160,6 @@ function transcripts_ui_viewer_selector($form, &$form_state, $trid, $viewer) {
 		'data-transcripts-id' => $trid,
 	);
 	$form['#attached']['js'] = array(drupal_get_path('module', 'transcripts_ui') .'/js/viewer_selector.js');
-	
-	return $form;
-}
-
-function transcripts_ui_tier_selector($form, &$form_state, $trid, $tiers) {
-	$form = array();
-	
-	$form['tier_selector'] = array(
-		'#type' => 'select',
-		'#multiple' => true,
-		'#title' => t('Tiers'),
-		'#options' => $tiers,
-	);
-	/*$form['#attributes'] = array(
-		'data-transcripts-role' => 'tier-selector',
-		'data-transcripts-id' => $trid,
-	);*/
-	$form['#attached']['js'] = array(drupal_get_path('module', 'transcripts_ui') .'/js/tier_selector.js');
 	
 	return $form;
 }

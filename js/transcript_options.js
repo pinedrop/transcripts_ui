@@ -1,10 +1,10 @@
 (function($) {
-        Drupal.behaviors.tierSelector = {
+        Drupal.behaviors.transcriptOptions = {
                 attach: function(context, settings) {
-                        $('[data-transcripts-role=tier-selector]', context).once('transcripts').each(function() {
+                        $('[data-transcripts-role=transcript-controls]', context).once('options').each(function() {
                                 var trid = $(this).attr('data-transcripts-id');
 				
-				var $tierSelector = $(this);
+				var $tierSelector = $('.tier-selector', this);
                                 $tierSelector.find('option').attr('selected', true);
                                 $tierSelector.change(function(e)
                                         {
@@ -17,11 +17,11 @@
                                 );
 
                                 //hide buttons for tiers that have no data
-                                $('option', $tierSelector).each(function() {
+                                /*$('option', $tierSelector).each(function() {
                                         if ($('*[data-transcripts-id=' + trid + ']').find('*[data-tier=' + $(this).val() + ']').size() == 0) {
 						$(this).remove();                                                
                                         }
-                                });
+                                });*/
 			});
 		}
 	};

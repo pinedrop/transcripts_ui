@@ -24,62 +24,36 @@ function theme_transcripts_ui_transcript_controls($vars) {
 	}
         return $out;
 }
-function theme_transcripts_ui_tier_selector($vars) {
-	$out = drupal_render($vars['element']['tier_selector']);
-	return $out;
+function theme_transcripts_ui_transcript_options($vars) {
+        $out = drupal_render($vars['element']['transcript_options']['tier_selector']);
+        return $out;
 }
-function theme_transcripts_ui_play_transcript($vars) {
+function theme_transcripts_ui_transcript_navigation($vars) {
         $markup = variable_get('transcripts_ui_markup', 'default');
         if ($markup == 'bootstrap') {
                 $out = "<button type='button' class='btn btn-default play-transcript'>";
                 $out .= t('Toggle transcript');
                 $out .= "</button>";
-	}
-	else {
-		$out = "<button class='play-transcript'>";
-		$out .= t('Toggle transcript');
-		$out .= "</button>";
-	}
-	return $out;
-}
-function theme_transcripts_ui_previous_tcu($vars) {
-        $markup = variable_get('transcripts_ui_markup', 'default');
-        if ($markup == 'bootstrap') {
-		$out = "<button type='button' class='btn btn-default previous' title='" . t('Play previous line') . "'>";
-		$out .= "<span class='glyphicon glyphicon-arrow-left'><span> ";
-		$out .= t('Previous');
-		$out .= "</button>";
-	}
-	else {
-		$out = "<button class='previous' title='" . t('Play previous line') . "'>" . t('Previous') . "</button>";
-	}
-	return $out;
-}
-function theme_transcripts_ui_same_tcu($vars) {
-        $markup = variable_get('transcripts_ui_markup', 'default');
-        if ($markup == 'bootstrap') {
-		$out = "<button type='button' class='btn btn-default sameagain' title='" . t('Play same line') . "'>";
-                $out .= "<span class='glyphicon glyphicon-repeat'><span> ";
-                $out .= t('Same'); 
+                $out .= "<button type='button' class='btn btn-default previous' title='" . t('Play previous line') . "'>";
+                $out .= "<span class='glyphicon glyphicon-arrow-left'><span> ";
+                $out .= t('Previous');
                 $out .= "</button>";
-	}
-	else {
-		$out = "<button class='sameagain' title='" . t('Play same line') . "'>" . t('Same') . "</button>";
-	}
-	return $out;
-}
-function theme_transcripts_ui_next_tcu($vars) {
-        $markup = variable_get('transcripts_ui_markup', 'default');
-        if ($markup == 'bootstrap') {
-		$out = "<button type='button' class='btn btn-default next' title='" . t('Play next line') . "'>";
+                $out .= "<button type='button' class='btn btn-default sameagain' title='" . t('Play same line') . "'>";
+                $out .= "<span class='glyphicon glyphicon-repeat'><span> ";
+                $out .= t('Same');
+                $out .= "</button>";
+                $out .= "<button type='button' class='btn btn-default next' title='" . t('Play next line') . "'>";
                 $out .= "<span class='glyphicon glyphicon-arrow-right'><span> ";
                 $out .= t('Next');
                 $out .= "</button>";
-	}
-	else {
-		$out = "<button class='next' title='" . t('Play next line') . "'>" . t('Next') . "</button>";
-	}
-	return $out;
+        }
+        else {
+                $out = "<button class='play-transcript'>" . t('Toggle transcript') . "</button>";
+                $out .= "<button class='previous' title='" . t('Play previous line') . "'>" . t('Previous') . "</button>";
+                $out .= "<button class='sameagain' title='" . t('Play same line') . "'>" . t('Same') . "</button>";
+                $out .= "<button class='next' title='" . t('Play next line') . "'>" . t('Next') . "</button>";
+        }
+        return $out;
 }
 function theme_transcripts_ui_hit_summary($vars) {
 	$out = "<div class='transcripts-ui-hit-controls'>";
@@ -118,4 +92,3 @@ function theme_transcripts_ui_goto_tcu($vars) {
         }
         return $out;
 }
-
