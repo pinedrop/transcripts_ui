@@ -18,9 +18,8 @@ function theme_transcripts_ui_transcript_options($vars) {
 	}
 	$out .= "</optgroup>";
 	$out .= "<optgroup label='Speaker name'>";
-	foreach ($vars['element']['speaker_modes'] as $key => $val) {
-		$out .= "<option value='s-{$key}'>{$val}</option>";
-	}
+	$out .= "<option value='sp-bod'>Tibetan</option>";
+	$out .= "<option value='sp-wylie'>Wylie</option>";
        	$out .= "</optgroup>";
 	$out .= "</select>";
        	$out .= "</label>";
