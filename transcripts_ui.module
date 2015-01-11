@@ -132,11 +132,20 @@ function transcripts_ui_render_controls($ui) {
 					'trid' => $ui->trid,
 					'data_tiers' => $ui->tiers,
 					'speaker_modes' => $ui->tiers,
-					'#attached' => array('js' => array(drupal_get_path('module', 'transcripts_ui') .'/js/tier_selector.js')),				
+					'#attached' => array(
+						'js' => array(
+							drupal_get_path('module', 'transcripts_ui') .'/js/transcripts_tier_selector.js',
+							drupal_get_path('module', 'transcripts_ui') .'/js/transcripts_speaker_selector.js',
+						),
+					),				
 				),
 				'transcript_navigation' => array(
 					'#theme' => 'transcripts_ui_transcript_navigation',
-					'#attached' => array('js' => array(drupal_get_path('module', 'transcripts_ui') .'/js/transcript_navigation.js')),
+					'#attached' => array(
+						'js' => array(
+							drupal_get_path('module', 'transcripts_ui') .'/js/transcripts_navigation.js',
+						),
+					),
 				),
 			),
 			'#suffix' => "</div>",
