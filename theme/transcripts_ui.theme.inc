@@ -12,13 +12,13 @@ function theme_transcripts_ui_transcript_options($vars) {
 	$out .= "<label>";
 	$out .= t('Transcript options');
 	$out .= "<select multiple class='tier-selector' data-header='Transcript options' title='Choose transcript options'>";
-	$out .= "<optgroup label='Transcript tiers'>";
+	$out .= "<optgroup data-type='tier-options' label='Transcript tiers'>";
 	foreach ($vars['element']['data_tiers'] as $key => $val) {
 		$out .= "<option value='{$key}'>{$val}</option>";
 	}
 	$out .= "</optgroup>";
-	$out .= "<optgroup label='Speaker name'>";
-	$out .= "<option value='sp-bod'>Tibetan</option>";
+	$out .= "<optgroup data-type='speaker-options' label='Speaker name'>";
+	$out .= "<option selected value='sp-bod'>Tibetan</option>";
 	$out .= "<option value='sp-wylie'>Wylie</option>";
        	$out .= "</optgroup>";
 	$out .= "</select>";
