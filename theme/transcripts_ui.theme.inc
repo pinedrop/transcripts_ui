@@ -9,21 +9,16 @@ function theme_transcripts_ui_transcript_controls($vars) {
 }
 function theme_transcripts_ui_transcript_options($vars) {
 	$out  = "<div class='transcript-options'>";
+
 	$out .= "<label>";
-	$out .= t('Transcript options');
+	$out .= t('Languages');
 	$out .= "<select multiple class='tier-selector' data-header='Transcript options' title='Choose transcript options'>";
-	$out .= "<optgroup data-type='tier-options' label='Transcript tiers'>";
 	foreach ($vars['element']['data_tiers'] as $key => $val) {
 		$out .= "<option value='{$key}'>{$val}</option>";
 	}
-	$out .= "</optgroup>";
-	$out .= "<optgroup data-type='speaker-options' label='Speaker name'>";
-	$out .= "<option selected value='sp-bod'>Tibetan</option>";
-	$out .= "<option value='sp-wylie'>Wylie</option>";
-       	$out .= "</optgroup>";
-	$out .= "</select>";
        	$out .= "</label>";
 	$out .= "</div>";
+
 	return $out;
 }
 function theme_transcripts_ui_transcript_navigation($vars) {
