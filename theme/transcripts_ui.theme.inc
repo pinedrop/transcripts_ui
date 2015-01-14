@@ -2,15 +2,10 @@
 
 function theme_transcripts_ui_transcript_controls($vars) {	
 	$out  = drupal_render($vars['element']['content']);
-        $out .= "<div class='btn-group'>";
-        $out .= "<button type='button' class='btn btn-default search' title='Search transcript'><span class='glyphicon glyphicon-search'></span> Search</button>";
-        $out .= "</div>";
         return $out;
 }
 function theme_transcripts_ui_transcript_options($vars) {
-	$out  = "<div class='transcript-options'>";
-
-	$out .= "<label>";
+	$out = "<label>";
 	$out .= t('Languages');
 	$out .= "<select multiple class='tier-selector' data-header='Tiers to display' title='Choose tiers to display'>";
 	foreach ($vars['element']['data_tiers'] as $key => $val) {
@@ -18,18 +13,21 @@ function theme_transcripts_ui_transcript_options($vars) {
 	}
 	$out .= "</select>";
        	$out .= "</label>";
-	$out .= "</div>";
 
 	return $out;
 }
 function theme_transcripts_ui_transcript_navigation($vars) {
 	$out  = "<div class='btn-group' role='group'>";
-	$out = "<button type='button' class='btn btn-default play-transcript'>" . t('Toggle transcript') . "</button>";
-        $out .= "<button type='button' class='btn btn-default previous' title='Previous line'><span class='glyphicon glyphicon-arrow-left'></span> Previous</button>";
-        $out .= "<button type='button' class='btn btn-default sameagain' title='Same line'><span class='glyphicon glyphicon-repeat'></span> Same</button>";
-        $out .= "<button type='button' class='btn btn-default next' title='Next line'><span class='glyphicon glyphicon-arrow-right'></span> Next</button>";
+	$out .= "<button type='button' class='btn btn-default play-transcript'>" . t('Toggle') . "</button>";
+        $out .= "<button type='button' class='btn btn-default previous' title='Previous line'><span class='glyphicon glyphicon-arrow-left'></span> " . t('Prev') . "</button>";
+        $out .= "<button type='button' class='btn btn-default sameagain' title='Same line'><span class='glyphicon glyphicon-repeat'></span>" . t('Same') . "</button>";
+        $out .= "<button type='button' class='btn btn-default next' title='Next line'><span class='glyphicon glyphicon-arrow-right'></span>" . t('Next') . "</button>";
 	$out .= "</div>";
         return $out;
+}
+function theme_transcripts_ui_search_form($vars) {
+	$out = drupal_render($vars['element']['search_form']);
+	return $out;
 }
 function theme_transcripts_ui_hit_summary($vars) {
 	$out = "<div class='transcripts-ui-hit-controls'>";

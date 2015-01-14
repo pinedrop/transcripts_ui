@@ -59,6 +59,11 @@ function transcripts_ui_theme() {
                         'file' => 'transcripts_ui.theme.inc',
                         'render element' => 'element',
                 ),
+		'transcripts_ui_search_form' => array(
+			'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
+			'file' => 'transcripts_ui.theme.inc',
+			'render element' => 'element',
+		),
 		'transcripts_ui_play_transcript' => array(
                         'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
 			'file' => 'transcripts_ui.theme.inc',
@@ -116,7 +121,7 @@ function transcripts_ui_render($ui) {
 	$vars = array(
 		'trid' => $ui->trid,
 		'transcript' => $ui->render['transcript'],
-		'hits' => $ui->render['hits'],
+		//'hits' => $ui->render['hits'],
 	);
 	return array_merge($vars, transcripts_ui_render_controls($ui));
 }
@@ -147,6 +152,10 @@ function transcripts_ui_render_controls($ui) {
 						),
 					),
 				),
+				'transcript_search' => array(
+					'#theme' => 'transcripts_ui_search_form',
+					'search_form' => drupal_get_form('transcripts_ui_search_form', $ui),
+				),
 			),
 			'#suffix' => "</div>",
                 ),
@@ -174,71 +183,56 @@ function transcripts_ui_viewer_selector($form, &$form_state, $trid, $viewer) {
 }
 
 function transcripts_ui_search_form($form, &$form_state, $ui) {
-  // Loads the core Search CSS file, use the core search module's classes.
-  drupal_add_css(drupal_get_path('module', 'search') . '/search.css');
+	// Loads the core Search CSS file, use the core search module's classes.
+	//drupal_add_css(drupal_get_path('module', 'search') . '/search.css');
 
-  $form = array();
-  $form['#id'] = 'transcripts-ui-search-form';
-  $form['#attributes']['class'] = array('transcripts-ui-search-form', 'clearfix');
-  $form['basic'] = array(
-    '#type' => 'container',
-  );
-  $key = '';
-  if (strlen($ui->options['term']) > 0) {
-    $key = substr($ui->options['term'], 1, -1);
-  }
-  $form['basic']['wrapper'] = array(
-	'#prefix' => "<div class='input-group'>",
-	'keys' => array(
-		'#theme_wrappers' => array(),
-		'#type' => 'textfield',
-    		'#default_value' => $key,
-    		'#size' => 20,
-    		'#maxlength' => 255,
-		'#attributes' => array('placeholder' => t('Search this transcript')),
-  	),
-	'submit' => array(
-		'#prefix' => "<span class='input-group-btn'>",
-		'#type' => 'submit',
-		'#value' => t('Search'),
-		'#inner' => "<span class='glyphicon glyphicon-search'></span>",
-       		'#ajax' => array(
-       		        'callback' => 'transcripts_ui_ajax_hits',
-               		'wrapper' => 'transcripts-ui-hit-list-'.$ui->trid,
-			'progress' => array('type' => 'none'),
-			'event' => 'click',
-       		),
-		'#post_render' => array('replace_inner'),
-		'#suffix' => "</span>",
-	),
-	'#suffix' => "</div>",
-  );
-  $form['trid'] = array(
-	'#type' => 'hidden',
-	'#value' => substr($ui->trid, 5), //chop of trid- prefix
-  );
-  $form['module'] = array(
-	'#type' => 'hidden',
-	'#value' => $ui->module, 
-  );
+	$form = array();
+	$form['#id'] = 'transcripts-ui-search-form';
+	$form['#attributes']['class'] = array('transcripts-ui-search-form', 'clearfix');
+	$form['basic'] = array(
+		'#type' => 'container',
+	);
+	$key = '';
+	if (strlen($ui->options['term']) > 0) {
+		$key = substr($ui->options['term'], 1, -1);
+	}
+	$form['basic']['wrapper'] = array(
+		'#prefix' => "<div class='input-group'>",
+		'keys' => array(
+			'#theme_wrappers' => array(),
+			'#type' => 'textfield',
+    			'#default_value' => $key,
+    			//'#size' => 20,
+    			//'#maxlength' => 255,
+			'#attributes' => array('placeholder' => t('Search this transcript')),
+  		),
+		'submit' => array(
+			'#prefix' => "<span class='input-group-btn'>",
+			'#type' => 'submit',
+			'#value' => t('Search'),
+			'#inner' => "<span class='glyphicon glyphicon-search'></span>",
+       			'#ajax' => array(
+       		        	'callback' => 'transcripts_ui_ajax_hits',
+				'wrapper' => 'transcripts-ui-transcript-'.$ui->trid,
+               			//'wrapper' => 'transcripts-ui-hit-list-'.$ui->trid,
+				'progress' => array('type' => 'none'),
+				'event' => 'click',
+       			),
+			'#post_render' => array('replace_inner'),
+			'#suffix' => "</span>",
+		),
+		'#suffix' => "</div>",
+  	);
+	$form['trid'] = array(
+		'#type' => 'hidden',
+		'#value' => substr($ui->trid, 5), //chop of trid- prefix
+	);
+	$form['module'] = array(
+		'#type' => 'hidden',
+		'#value' => $ui->module, 
+	);
 
-  $form['basic']['get'] = array(
-    '#type' => 'hidden',
-    '#default_value' => json_encode(array_diff_key($_GET, array('q' => 1, 'page' => 1, 'solrsort' => 1, 'retain-filters' => 1))),
-  );
-
-
-  $fq = NULL;
-
-  if ($fq || isset($form_state['input']['retain-filters'])) {
-    $form['basic']['retain-filters'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Retain current filters'),
-      '#default_value' => (int) !empty($_GET['retain-filters']),
-    );
-  }
-
-  return $form;
+	return $form;
 }
 
 function transcripts_ui_ajax_hits($form, &$form_state) {
@@ -246,10 +240,10 @@ function transcripts_ui_ajax_hits($form, &$form_state) {
 	$module = $form_state['values']['module'];
 	$options = array(
 		'term' => $form_state['values']['keys'],
-		'hits_only' => TRUE,
+		//'hits_only' => TRUE,
 	);
 	$ui = transcripts_ui_ui($module, $trid, $options);
-	return drupal_render($ui->render['hits']);
+	return drupal_render($ui->render['transcript']);
 }
 
 function replace_inner($markup, $element) {

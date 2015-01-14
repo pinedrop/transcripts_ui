@@ -169,6 +169,7 @@ function getPlayMode(trid) {
 // play methods
 
 function playOne(trid, $item) {
+console.log('playing item');
 	var reset = typeof resetSweet[trid] !== 'undefined' ? resetSweet[trid] : true;
 	var vid = jQuery('[data-transcripts-role=video][data-transcripts-id=' + trid + ']').find('video,audio')[0];
       if ($item.attr('data-end') - $item.attr('data-begin') > 0) {
