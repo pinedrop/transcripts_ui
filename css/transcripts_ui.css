@@ -19,6 +19,9 @@
 	float:left;
 	margin-right:-100px;
 }
+.same-speaker {
+	display:none;
+}
 .speaker-name {
 	float:right;
 	width:100px;
