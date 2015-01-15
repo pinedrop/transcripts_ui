@@ -93,6 +93,7 @@ function transcripts_ui_theme() {
                         'file' => 'transcripts_ui.theme.inc',
 			'variables' => array(
 				'speaker_name' => '',
+				'speaker_turn' => '',
 			),
 		),
 		'transcripts_ui_tcu_tier' => array(

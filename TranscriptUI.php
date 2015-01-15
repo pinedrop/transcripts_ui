@@ -34,6 +34,7 @@ class TranscriptUI {
 		        $highlight = $highlights !== NULL ? TRUE : FALSE;
 			$hitCount = 0;
 
+			$lastSpeaker = "";
 		        $tcus = array();
 
 		        foreach ($timecodeunits as $sentence) {
@@ -92,6 +93,7 @@ class TranscriptUI {
                                         	        '#theme' => 'transcripts_ui_speaker_name',
                                         	        '#sid' => $sid,
                                         	        '#speaker_name' => $speaker,
+							'#speaker_turn' => $speaker == $lastSpeaker ? 'same-speaker' : 'new-speaker',
                                         	),
 						'#suffix' => "</div>",
 					),
@@ -102,6 +104,8 @@ class TranscriptUI {
                                         ),
                         		'#suffix' => "</li>",
                 		);
+
+				$lastSpeaker = $speaker;
 			}
 
 			if ($options['term']) {

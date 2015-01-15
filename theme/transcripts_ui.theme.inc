@@ -37,7 +37,7 @@ function theme_transcripts_ui_hit_summary($vars) {
 	return $out;
 }
 function theme_transcripts_ui_speaker_name($vars) {
-	$out = "<div class='speaker-name'>{$vars['speaker_name']}</div>";
+	$out = "<div class='speaker-name {$vars['speaker_turn']}'>{$vars['speaker_name']}</div>";
 	return $out;
 }
 function theme_transcripts_ui_tcu_tier($vars) {
