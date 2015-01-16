@@ -25,7 +25,7 @@ function theme_transcripts_ui_transcript_navigation($vars) {
 	$out .= "</div>";
         return $out;
 }
-function theme_transcripts_ui_search_form($vars) {
+function theme_transcripts_ui_transcript_search($vars) {
 	$out = drupal_render($vars['element']['search_form']);
 	return $out;
 }

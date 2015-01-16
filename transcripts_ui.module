@@ -59,7 +59,7 @@ function transcripts_ui_theme() {
                         'file' => 'transcripts_ui.theme.inc',
                         'render element' => 'element',
                 ),
-		'transcripts_ui_search_form' => array(
+		'transcripts_ui_transcript_search' => array(
 			'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
 			'file' => 'transcripts_ui.theme.inc',
 			'render element' => 'element',
@@ -154,7 +154,7 @@ function transcripts_ui_render_controls($ui) {
 					),
 				),
 				'transcript_search' => array(
-					'#theme' => 'transcripts_ui_search_form',
+					'#theme' => 'transcripts_ui_transcript_search',
 					'search_form' => drupal_get_form('transcripts_ui_search_form', $ui),
 				),
 			),
