@@ -54,6 +54,9 @@ function theme_transcripts_ui_goto_tcu($vars) {
 	$out = "<a href='" . $vars['element']['#linkurl'] . "' class='btn btn-default'>";
         $out .= "<span class='glyphicon glyphicon-play'></span> ";
         $out .= $time;
+	if (isset($vars['element']['#text'])) {
+		$out .= " " . $vars['element']['#text'];
+	}
         $out .= "</a>";
         return $out;
 }
