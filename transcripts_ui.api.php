@@ -47,3 +47,9 @@ function hook_transcripts_ui_transcript($ui)
 
     return array($tcus, $highlights);
 }
+
+function hook_transcripts_ui_js_alter(&$scripts)
+{
+    $scripts['ui'] = drupal_get_path('module', 'my_module') . '/js/my_ui.js';
+    $scripts['scroller'] = drupal_get_path('module', 'my_module') . '/js/my_scroller.js';
+}

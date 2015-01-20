@@ -129,7 +129,6 @@ function transcripts_ui_render($ui)
     $vars = array(
         'trid' => $ui->trid,
         'transcript' => $ui->render['transcript'],
-        //'hits' => $ui->render['hits'],
     );
     return array_merge($vars, transcripts_ui_render_controls($ui));
 }

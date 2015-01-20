@@ -120,6 +120,12 @@ class TranscriptUI
                 $search_nav = array();
             }
 
+            $js = array(
+                'ui' => drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_ui.js',
+                'scroller' => drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_scroller.js',
+            );
+            drupal_alter('transcripts_ui_js', $js);
+
             $transcript = array(
                 '#prefix' => "<div id='transcripts-ui-transcript-{$this->trid}' class='scroller' data-transcripts-role='transcript' data-transcripts-id='{$this->trid}'>",
                 'search_nav' => $search_nav,
@@ -133,12 +139,12 @@ class TranscriptUI
                     'css' => array(drupal_get_path('module', 'transcripts_ui') . '/css/transcripts_ui.css'),
                     'js' => array(
                         drupal_get_path('module', 'transcripts_ui') . '/js/jquery.scrollTo.min.js',
-                        drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_ui.js',
+                        $js['ui'],
+                        $js['scroller'],
                     ),
                 ),
             );
             $this->render['transcript'] = $transcript;
-            //$this->render['hits'] = $hit_list;
         }
     }
 }
