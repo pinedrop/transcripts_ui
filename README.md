@@ -42,12 +42,10 @@ the trid. Each component also has a data-transcripts-role attribute
 set to one of the following roles.
 
 * transcript: the element in which the transcript appears.
-* hit-panel: the element in which hits are shown, if a term search
-has occurred.
 * transcript-controls: controls that alter the appearance of the
-transcript, such as tier controls and display mode controls.
-* video-controls: controls for AV playback, including buttons for
-previous line, same line, next line, and so on.
+transcript, such as tier controls and display mode controls, as
+well as controls for AV playback, including buttons to play the
+previous, same, and next TCUs.
 
 Your module is responsible for providing markup including an
 HTML 5 audio or video tag contained within an element that has the
@@ -57,6 +55,13 @@ will not be synced with the media.
 
 * data-transcripts-id=TRID
 * data-transcripts-role=video
+
+The default way of linking a transcript to its video is illustrated
+by this [JavaScript file](https://github.com/pinedrop/transcripts_ui/blob/master/js/transcripts_ui.js).
+
+To override the default, implement [hook_transcripts_ui_js_alter](https://github.com/pinedrop/transcripts_ui/blob/master/transcripts_ui.api.php).
+For example, Shanti UVA's Mediabase implements the hook in order to
+grab a video tag from an iFrame introduced by the [Kaltura player](https://github.com/shanti-uva/drupal_mediabase/blob/newtheme/mb_kaltura/js/transcripts_ui.js).
 
 Your module is also responsible for retrieving transcripts for the
 UI; this is done by implementing hook_transcripts_ui_transcript().
@@ -76,14 +81,11 @@ css and js files. For more on the
 
 Implementations of hook_transcripts_ui_transcript() may return highlights
 in addition to the full transcript, if a term search has occurred.
-A search box appears within the "hit-panel" component. Clicking on the
+A search box appears within the "transcript-controls" component. Clicking on the
 search button sends an AJAX request to the hook implementation, which
-refreshes the hit-panel with new results.
+refreshes the transcript with new search results.
 
-If your implementation doesn't support transcript-internal search, then
-do not include the hit-panel in your rendered output.
-
-## Related Modules 
+## Related Modules
 
 [transcripts_apachesolr](https://github.com/pinedrop/transcripts_apachesolr)
 is one module that makes use of transcripts_ui.
