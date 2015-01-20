@@ -7,7 +7,7 @@
 /**
  * Retrieve transcript given some UI settings. If a term
  * has been searched for, then return highlights as well.
- *  
+ *
  * This hook is invoked if you create a TranscriptUI object
  * by calling transcripts_ui_ui() with your module name as
  * the first argument.
@@ -22,7 +22,7 @@
  *   $obj->end : end time in seconds
  *
  * In addition, there should be a property for each tier.
- * Assuming your tiers are Esperanto, Quenya, and Sindarin: 
+ * Assuming your tiers are Esperanto, Quenya, and Sindarin:
  *
  *   $obj->ts_content_epo
  *   $obj->ts_content_qya
@@ -38,11 +38,12 @@
  * @return array($tcus, $highlights)
  *
  */
-function hook_transcripts_ui_transcript($ui) {
-	$response = solr_query($ui);
+function hook_transcripts_ui_transcript($ui)
+{
+    $response = solr_query($ui);
 
-        $tcus = $response->response->docs;
-        $highlights = isset($response->highlighting) ? $response->highlighting : NULL;
+    $tcus = $response->response->docs;
+    $highlights = isset($response->highlighting) ? $response->highlighting : NULL;
 
-        return array($tcus, $highlights);
+    return array($tcus, $highlights);
 }

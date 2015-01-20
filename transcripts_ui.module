@@ -1,255 +1,267 @@
 <?php
 
-function transcripts_ui_tiers() {
-	return variable_get('transcripts_ui_tiers', array());
+function transcripts_ui_tiers()
+{
+    return variable_get('transcripts_ui_tiers', array());
 }
 
-function transcripts_ui_init() {
-	drupal_add_library('system', 'ui.button');
-	drupal_add_library('system', 'jquery.bbq');
+function transcripts_ui_init()
+{
+    drupal_add_library('system', 'ui.button');
+    drupal_add_library('system', 'jquery.bbq');
 }
 
-function transcripts_ui_permission() {
-        $permissions = array();
-        $permissions['administer transcripts ui'] = array(
-                'title' => t('Administer ui'),
-        );
-        return $permissions;
+function transcripts_ui_permission()
+{
+    $permissions = array();
+    $permissions['administer transcripts ui'] = array(
+        'title' => t('Administer ui'),
+    );
+    return $permissions;
 }
 
-function transcripts_ui_menu() {
-        $items = array();
+function transcripts_ui_menu()
+{
+    $items = array();
 
-	$items['admin/config/user-interface/transcripts'] = array(
-		'title' => 'Transcripts UI',
-		'description' => 'Administer Transcripts',
-    		'page callback' => 'drupal_get_form',
-		'page arguments' => array('transcripts_ui_admin'),
-                'access arguments' => array('administer transcripts ui'),
-		'file' => 'transcripts_ui.admin.inc',
-  	);
-        $items['admin/config/user-interface/transcripts/ui'] = array(
-                'title' => 'Transcripts UI',
-                'description' => t('Transcripts UI settings'),
-                'page callback' => 'drupal_get_form',
-                'page arguments' => array('transcripts_ui_admin'),
-                'access arguments' => array('administer transcripts ui'),
-                'file' => 'transcripts_ui.admin.inc',
-		'type' => MENU_DEFAULT_LOCAL_TASK,
-		'weight' => -20,
-        );
+    $items['admin/config/user-interface/transcripts'] = array(
+        'title' => 'Transcripts UI',
+        'description' => 'Administer Transcripts',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('transcripts_ui_admin'),
+        'access arguments' => array('administer transcripts ui'),
+        'file' => 'transcripts_ui.admin.inc',
+    );
+    $items['admin/config/user-interface/transcripts/ui'] = array(
+        'title' => 'Transcripts UI',
+        'description' => t('Transcripts UI settings'),
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('transcripts_ui_admin'),
+        'access arguments' => array('administer transcripts ui'),
+        'file' => 'transcripts_ui.admin.inc',
+        'type' => MENU_DEFAULT_LOCAL_TASK,
+        'weight' => -20,
+    );
 
-        return $items;
+    return $items;
 }
 
-function transcripts_ui_theme() {
-	return array(
-                'transcripts_ui_transcript_controls' => array(
-                        'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
-                        'file' => 'transcripts_ui.theme.inc',
-			'render element' => 'element',
-                ),
-                'transcripts_ui_transcript_options' => array(
-                        'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
-                        'file' => 'transcripts_ui.theme.inc',
-                        'render element' => 'element',
-                ),
-                'transcripts_ui_transcript_navigation' => array(
-                        'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
-                        'file' => 'transcripts_ui.theme.inc',
-                        'render element' => 'element',
-                ),
-		'transcripts_ui_transcript_search' => array(
-			'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
-			'file' => 'transcripts_ui.theme.inc',
-			'render element' => 'element',
-		),
-		'transcripts_ui_play_transcript' => array(
-                        'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
-			'file' => 'transcripts_ui.theme.inc',
-		),
-                'transcripts_ui_previous_tcu' => array(
-                        'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
-                        'file' => 'transcripts_ui.theme.inc',
-                ),
-                'transcripts_ui_same_tcu' => array(
-                        'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
-                        'file' => 'transcripts_ui.theme.inc',
-                ),
-		'transcripts_ui_next_tcu' => array(
-                        'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
-                        'file' => 'transcripts_ui.theme.inc',
-                ),
-                'transcripts_ui_playmode' => array(
-                        'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
-                        'file' => 'transcripts_ui.theme.inc',
-                ),
-		'transcripts_ui_hit_summary' => array(
-                        'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
-                        'file' => 'transcripts_ui.theme.inc',
-		),	
-		'transcripts_ui_speaker_name' => array(
-                        'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
-                        'file' => 'transcripts_ui.theme.inc',
-			'variables' => array(
-				'speaker_name' => '',
-				'speaker_turn' => '',
-			),
-		),
-		'transcripts_ui_tcu_tier' => array(
-                        'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
-                        'file' => 'transcripts_ui.theme.inc',		
-			'variables' => array(
-				'tier_name' => '',
-				'tier_text' => '',
-				'classes' => '',
-			),
-		),
-                'transcripts_ui_goto_tcu' => array(
-                        'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
-                        'file' => 'transcripts_ui.theme.inc',
-                        'render element' => 'element',
-                ),
-	);
+function transcripts_ui_theme()
+{
+    return array(
+        'transcripts_ui_transcript_controls' => array(
+            'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
+            'file' => 'transcripts_ui.theme.inc',
+            'render element' => 'element',
+        ),
+        'transcripts_ui_transcript_options' => array(
+            'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
+            'file' => 'transcripts_ui.theme.inc',
+            'render element' => 'element',
+        ),
+        'transcripts_ui_transcript_navigation' => array(
+            'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
+            'file' => 'transcripts_ui.theme.inc',
+            'render element' => 'element',
+        ),
+        'transcripts_ui_transcript_search' => array(
+            'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
+            'file' => 'transcripts_ui.theme.inc',
+            'render element' => 'element',
+        ),
+        'transcripts_ui_play_transcript' => array(
+            'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
+            'file' => 'transcripts_ui.theme.inc',
+        ),
+        'transcripts_ui_previous_tcu' => array(
+            'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
+            'file' => 'transcripts_ui.theme.inc',
+        ),
+        'transcripts_ui_same_tcu' => array(
+            'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
+            'file' => 'transcripts_ui.theme.inc',
+        ),
+        'transcripts_ui_next_tcu' => array(
+            'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
+            'file' => 'transcripts_ui.theme.inc',
+        ),
+        'transcripts_ui_playmode' => array(
+            'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
+            'file' => 'transcripts_ui.theme.inc',
+        ),
+        'transcripts_ui_hit_summary' => array(
+            'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
+            'file' => 'transcripts_ui.theme.inc',
+        ),
+        'transcripts_ui_speaker_name' => array(
+            'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
+            'file' => 'transcripts_ui.theme.inc',
+            'variables' => array(
+                'speaker_name' => '',
+                'speaker_turn' => '',
+            ),
+        ),
+        'transcripts_ui_tcu_tier' => array(
+            'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
+            'file' => 'transcripts_ui.theme.inc',
+            'variables' => array(
+                'tier_name' => '',
+                'tier_text' => '',
+                'classes' => '',
+            ),
+        ),
+        'transcripts_ui_goto_tcu' => array(
+            'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
+            'file' => 'transcripts_ui.theme.inc',
+            'render element' => 'element',
+        ),
+    );
 }
 
-function transcripts_ui_ui($module, $trid, $options) {
-	$ui = new TranscriptUI($module, $trid, $options);
-	return $ui;
+function transcripts_ui_ui($module, $trid, $options)
+{
+    $ui = new TranscriptUI($module, $trid, $options);
+    return $ui;
 }
 
-function transcripts_ui_render($ui) { 
-	$vars = array(
-		'trid' => $ui->trid,
-		'transcript' => $ui->render['transcript'],
-		//'hits' => $ui->render['hits'],
-	);
-	return array_merge($vars, transcripts_ui_render_controls($ui));
+function transcripts_ui_render($ui)
+{
+    $vars = array(
+        'trid' => $ui->trid,
+        'transcript' => $ui->render['transcript'],
+        //'hits' => $ui->render['hits'],
+    );
+    return array_merge($vars, transcripts_ui_render_controls($ui));
 }
 
-function transcripts_ui_render_controls($ui) {
-	return array(
-                'transcript_controls' => array(
-                        '#prefix' => "<div data-transcripts-role='transcript-controls' data-transcripts-id='{$ui->trid}'>",
-                        '#theme' => 'transcripts_ui_transcript_controls',
-			'content' => array(
-				'transcript_options' => array(
-					'#theme' => 'transcripts_ui_transcript_options',
-					'trid' => $ui->trid,
-					'data_tiers' => $ui->tiers,
-					'speaker_modes' => $ui->tiers,
-					'#attached' => array(
-						'js' => array(
-							drupal_get_path('module', 'transcripts_ui') .'/js/transcripts_tier_selector.js',
-							drupal_get_path('module', 'transcripts_ui') .'/js/transcripts_speaker_selector.js',
-						),
-					),				
-				),
-				'transcript_navigation' => array(
-					'#theme' => 'transcripts_ui_transcript_navigation',
-					'#attached' => array(
-						'js' => array(
-							drupal_get_path('module', 'transcripts_ui') .'/js/transcripts_navigation.js',
-						),
-					),
-				),
-				'transcript_search' => array(
-					'#theme' => 'transcripts_ui_transcript_search',
-					'search_form' => drupal_get_form('transcripts_ui_search_form', $ui),
-				),
-			),
-			'#suffix' => "</div>",
+function transcripts_ui_render_controls($ui)
+{
+    return array(
+        'transcript_controls' => array(
+            '#prefix' => "<div data-transcripts-role='transcript-controls' data-transcripts-id='{$ui->trid}'>",
+            '#theme' => 'transcripts_ui_transcript_controls',
+            'content' => array(
+                'transcript_options' => array(
+                    '#theme' => 'transcripts_ui_transcript_options',
+                    'trid' => $ui->trid,
+                    'data_tiers' => $ui->tiers,
+                    'speaker_modes' => $ui->tiers,
+                    '#attached' => array(
+                        'js' => array(
+                            drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_tier_selector.js',
+                            drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_speaker_selector.js',
+                        ),
+                    ),
                 ),
-	);
+                'transcript_navigation' => array(
+                    '#theme' => 'transcripts_ui_transcript_navigation',
+                    '#attached' => array(
+                        'js' => array(
+                            drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_navigation.js',
+                        ),
+                    ),
+                ),
+                'transcript_search' => array(
+                    '#theme' => 'transcripts_ui_transcript_search',
+                    'search_form' => drupal_get_form('transcripts_ui_search_form', $ui),
+                ),
+            ),
+            '#suffix' => "</div>",
+        ),
+    );
 }
 
 //'viewer_selector' => drupal_get_form('transcripts_ui_viewer_selector', $ui->trid, $ui->viewers),
 
-function transcripts_ui_viewer_selector($form, &$form_state, $trid, $viewer) {
-	$form = array();
-	
-	$form['viewer_selector'] = array(
-		'#type' => 'select',
-		'#title' => t('Views'),
-		'#options' => $viewer,
-		'#attributes' => array('class' => array('viewer-select')),
-	);
-	$form['#attributes'] = array(
-		'data-transcripts-role' => 'viewer-selector',
-		'data-transcripts-id' => $trid,
-	);
-	$form['#attached']['js'] = array(drupal_get_path('module', 'transcripts_ui') .'/js/viewer_selector.js');
-	
-	return $form;
+function transcripts_ui_viewer_selector($form, &$form_state, $trid, $viewer)
+{
+    $form = array();
+
+    $form['viewer_selector'] = array(
+        '#type' => 'select',
+        '#title' => t('Views'),
+        '#options' => $viewer,
+        '#attributes' => array('class' => array('viewer-select')),
+    );
+    $form['#attributes'] = array(
+        'data-transcripts-role' => 'viewer-selector',
+        'data-transcripts-id' => $trid,
+    );
+    $form['#attached']['js'] = array(drupal_get_path('module', 'transcripts_ui') . '/js/viewer_selector.js');
+
+    return $form;
 }
 
-function transcripts_ui_search_form($form, &$form_state, $ui) {
-	// Loads the core Search CSS file, use the core search module's classes.
-	//drupal_add_css(drupal_get_path('module', 'search') . '/search.css');
+function transcripts_ui_search_form($form, &$form_state, $ui)
+{
+    // Loads the core Search CSS file, use the core search module's classes.
+    //drupal_add_css(drupal_get_path('module', 'search') . '/search.css');
 
-	$form = array();
-	$form['#id'] = 'transcripts-ui-search-form';
-	$form['#attributes']['class'] = array('transcripts-ui-search-form', 'clearfix');
-	$form['basic'] = array(
-		'#type' => 'container',
-	);
-	$key = '';
-	if (strlen($ui->options['term']) > 0) {
-		$key = substr($ui->options['term'], 1, -1);
-	}
-	$form['basic']['wrapper'] = array(
-		'#prefix' => "<div class='input-group'>",
-		'keys' => array(
-			'#theme_wrappers' => array(),
-			'#type' => 'textfield',
-    			'#default_value' => $key,
-    			//'#size' => 20,
-    			//'#maxlength' => 255,
-			'#attributes' => array('placeholder' => t('Search this transcript')),
-  		),
-		'submit' => array(
-			'#prefix' => "<span class='input-group-btn'>",
-			'#type' => 'submit',
-			'#value' => t('Search'),
-			'#inner' => "<span class='glyphicon glyphicon-search'></span>",
-       			'#ajax' => array(
-       		        	'callback' => 'transcripts_ui_ajax_hits',
-				'wrapper' => 'transcripts-ui-transcript-'.$ui->trid,
-               			//'wrapper' => 'transcripts-ui-hit-list-'.$ui->trid,
-				'progress' => array('type' => 'none'),
-				'event' => 'click',
-       			),
-			'#post_render' => array('replace_inner'),
-			'#suffix' => "</span>",
-		),
-		'#suffix' => "</div>",
-  	);
-	$form['trid'] = array(
-		'#type' => 'hidden',
-		'#value' => substr($ui->trid, 5), //chop of trid- prefix
-	);
-	$form['module'] = array(
-		'#type' => 'hidden',
-		'#value' => $ui->module, 
-	);
+    $form = array();
+    $form['#id'] = 'transcripts-ui-search-form';
+    $form['#attributes']['class'] = array('transcripts-ui-search-form', 'clearfix');
+    $form['basic'] = array(
+        '#type' => 'container',
+    );
+    $key = '';
+    if (strlen($ui->options['term']) > 0) {
+        $key = substr($ui->options['term'], 1, -1);
+    }
+    $form['basic']['wrapper'] = array(
+        '#prefix' => "<div class='input-group'>",
+        'keys' => array(
+            '#theme_wrappers' => array(),
+            '#type' => 'textfield',
+            '#default_value' => $key,
+            //'#size' => 20,
+            //'#maxlength' => 255,
+            '#attributes' => array('placeholder' => t('Search this transcript')),
+        ),
+        'submit' => array(
+            '#prefix' => "<span class='input-group-btn'>",
+            '#type' => 'submit',
+            '#value' => t('Search'),
+            '#inner' => "<span class='glyphicon glyphicon-search'></span>",
+            '#ajax' => array(
+                'callback' => 'transcripts_ui_ajax_hits',
+                'wrapper' => 'transcripts-ui-transcript-' . $ui->trid,
+                //'wrapper' => 'transcripts-ui-hit-list-'.$ui->trid,
+                'progress' => array('type' => 'none'),
+                'event' => 'click',
+            ),
+            '#post_render' => array('replace_inner'),
+            '#suffix' => "</span>",
+        ),
+        '#suffix' => "</div>",
+    );
+    $form['trid'] = array(
+        '#type' => 'hidden',
+        '#value' => substr($ui->trid, 5), //chop of trid- prefix
+    );
+    $form['module'] = array(
+        '#type' => 'hidden',
+        '#value' => $ui->module,
+    );
 
-	return $form;
+    return $form;
 }
 
-function transcripts_ui_ajax_hits($form, &$form_state) {
-	$trid = $form_state['values']['trid'];
-	$module = $form_state['values']['module'];
-	$options = array(
-		'term' => $form_state['values']['keys'],
-		//'hits_only' => TRUE,
-	);
-	$ui = transcripts_ui_ui($module, $trid, $options);
-	return drupal_render($ui->render['transcript']);
+function transcripts_ui_ajax_hits($form, &$form_state)
+{
+    $trid = $form_state['values']['trid'];
+    $module = $form_state['values']['module'];
+    $options = array(
+        'term' => $form_state['values']['keys'],
+        //'hits_only' => TRUE,
+    );
+    $ui = transcripts_ui_ui($module, $trid, $options);
+    return drupal_render($ui->render['transcript']);
 }
 
-function replace_inner($markup, $element) {
-	$find = ">" .$element['#value']. "<";
-	$replace = ">" .$element['#inner']. "<"; 
-	$markup = str_replace($find, $replace, $markup);
-	return $markup;
+function replace_inner($markup, $element)
+{
+    $find = ">" . $element['#value'] . "<";
+    $replace = ">" . $element['#inner'] . "<";
+    $markup = str_replace($find, $replace, $markup);
+    return $markup;
 }
