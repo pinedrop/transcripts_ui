@@ -39,10 +39,7 @@
                 }),
 
                 setVideo: function (el) {
-                    console.log(el);
-
                     var that = this;
-
                     vid = el;
 
                     var playPause = function (e) {
