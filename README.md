@@ -21,12 +21,13 @@ The acronym "TCU" was inspired by its use within the
 
 Enable the transcript_ui module.
 
-Configure it at admin/config/user-interface/transcripts.
-Opt for 'Default' markup, or 'Bootstrap' markup. Select the latter
-if you are using the [Bootstrap theme](https://www.drupal.org/project/bootstrap)
-with the [Bootstrap framework](http://getbootstrap.com/).
+Go to admin/config/user-interface/transcripts, and define
+a list of tier identifiers and tier names.
 
-You must also define a list of tier identifiers and tier names.
+Transcripts UI generates 'Bootstrap' compatible markup, if you are
+using the [Bootstrap theme](https://www.drupal.org/project/bootstrap)
+with the [Bootstrap framework](http://getbootstrap.com/). Disregard
+the Bootstrap classes if you are using another theme.
 
 ## Creating a UI
 
