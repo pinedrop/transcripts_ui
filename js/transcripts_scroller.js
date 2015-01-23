@@ -9,7 +9,7 @@
 
             var obj = {
                 trid: transid,
-                vid: null,
+                player: null,
                 one: null,
                 sweetSpot: 0,
                 resetSweet: true,
@@ -38,65 +38,49 @@
                     return a.end - b.end;
                 }),
 
-                setVideo: function (el) {
+                setVideo: function(element) {
                     var that = this;
-                    vid = el;
+                    player = element;
 
-                    var playPause = function (e) {
-                        var v = e.target;
-                        if (!v.paused) { //if playing
-                            var now = v.currentTime;
-                            if (that.one != null && (now < parseFloat(that.one.attr('data-begin')) - .1 || now > parseFloat(that.one.attr('data-end')) + .1)) {
-                                that.one = null;
-                            }
+                    var playPause = function(e) {
+                        if (!player.paused) { //if playing
+                            that.checkNow(player.currentTime);
                         }
                     };
 
-                    var timeUpdated = function (e) {
-                        var v = e.target;
-                        var now = v.currentTime;
+                    var timeUpdated = function(e) {
+                        var now = player.currentTime;
 
                         //if playmode=playstop, then don't keep scrolling when you stop
-                        if (!v.paused && that.one != null && now > that.one.attr('data-end')) {
-                            v.pause();
-                            now = v.currentTime;
+                        if (!player.paused && that.one != null && now > that.one.attr('data-end')) {
+                            player.pause();
+                            now = player.currentTime;
                             that.lastNow = now;
                         }
 
                         //clean highlights and scroll
-                        if (!v.paused || Math.abs(that.lastNow - now) > .2) {
-                            //if (that.lastNow != now) {
-                            $('.playing', $transcript).each(function () {
-                                if (now < $(this).attr('data-begin') || now > $(this).attr('data-end')) {
-                                    that.endPlay($(this));
-                                }
-                            });
-                            if (now < that.lastNow) {
-                                that.startPointer = 0; //go back to start
-                                that.playIndex = 0;
-                            }
-                            while (now > that.starts[that.startPointer]['begin']) {
-                                if (now < that.starts[that.startPointer]['end']) {
-                                    that.playIndex = that.startPointer;
-                                    that.startPlay(that.starts[that.startPointer].$item);
-                                }
-                                that.startPointer++;
-                            }
-                            that.lastNow = now;
-                            //}
+                        if (!player.paused || Math.abs(that.lastNow - now) > .2) {
+                            that.checkScroll(now);
                         }
                     };
 
-                    vid.setAttribute('data-transcripts-id', that.trid);
-                    vid.addEventListener('play', playPause, false);
-                    vid.addEventListener('pause', playPause, false);
-                    vid.addEventListener('timeupdate', timeUpdated, false);
-                    vid.addEventListener('loadedmetadata', function () {
+                    player.setAttribute('data-transcripts-id', that.trid);
+                    player.addEventListener('play', playPause, false);
+                    player.addEventListener('pause', playPause, false);
+                    player.addEventListener('timeupdate', timeUpdated, false);
+                    player.addEventListener('loadedmetadata', function () {
                         var jump = $.param.fragment();
                         if (jump != '') {
                             that.playOne($('#' + jump.replace('tcu/', '')));
                         }
                     });
+                },
+
+                playFrom: function(seconds) {
+                    if (player != null) {
+                        player.currentTime = seconds;
+                        if (player.paused) player.play();
+                    }
                 },
 
                 playOne: function ($item) {
@@ -108,12 +92,37 @@
                             this.sweetSpot = $item.position().top;
                         }
                         this.playIndex = parseInt($item.attr('data-starts-index'));
-
-                        if (vid != null) {
-                            vid.currentTime = $item.attr('data-begin');
-                            if (vid.paused) vid.play();
-                        }
+                        this.playFrom($item.attr('data-begin'));
                     }
+                },
+
+                checkNow: function(now) {
+                    if (this.one != null && (now < parseFloat(this.one.attr('data-begin')) - .1 || now > parseFloat(this.one.attr('data-end')) + .1)) {
+                            this.one = null;
+                    }
+                },
+
+                checkScroll: function(now) {
+                    //if (this.lastNow != now) {
+                    var that = this;
+                    $('.playing', $transcript).each(function () {
+                        if (now < $(this).attr('data-begin') || now > $(this).attr('data-end')) {
+                            that.endPlay($(this));
+                        }
+                    });
+                    if (now < this.lastNow) {
+                        this.startPointer = 0; //go back to start
+                        this.playIndex = 0;
+                    }
+                    while (now > this.starts[this.startPointer]['begin']) {
+                        if (now < this.starts[this.startPointer]['end']) {
+                            this.playIndex = this.startPointer;
+                            this.startPlay(this.starts[this.startPointer].$item);
+                        }
+                        this.startPointer++;
+                    }
+                    this.lastNow = now;
+                    //}
                 },
 
                 startPlay: function ($id) {
