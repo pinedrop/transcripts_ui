@@ -6,7 +6,7 @@
                 .once('scrolling-transcript')
                 .each(function () {
                     ScrollingTranscript
-                        .getUI($(this), $(this))
+                        .getUI($(this))
                         .setVideo($('[data-transcripts-role=video][data-transcripts-id=' + $(this).attr('data-transcripts-id') + ']').find('video,audio')[0]);
                 });
         }

@@ -3,41 +3,11 @@
     ScrollingTranscript = (function () {
         var ui = [];
 
-        function createUI($transcript, $container) {
-
+        function createUI($transcript) {
             var transid = $transcript.attr('data-transcripts-id');
 
-            var obj = {
-                trid: transid,
-                container: $container,
+            var html5 = {
                 player: null,
-                one: null,
-                sweetSpot: 0,
-                resetSweet: true,
-                playSentence: 0,
-                playIndex: 0,
-                startPointer: 0,
-                lastNow: 0,
-
-                starts: $('*[data-begin]', $transcript).not('.deleted').map(function (element, index) {
-                    var o = {};
-                    o.$item = $(this);
-                    o.begin = $(this).attr('data-begin');
-                    o.end = $(this).attr('data-end');
-                    return o;
-                }).toArray().sort(function (a, b) {
-                    return a.begin - b.begin;
-                }),
-
-                ends: $('*[data-end]', $transcript).not('.deleted').map(function (element, index) {
-                    var o = {};
-                    o.$item = $(this);
-                    o.begin = $(this).attr('data-begin');
-                    o.end = $(this).attr('data-end');
-                    return o;
-                }).toArray().sort(function (a, b) {
-                    return a.end - b.end;
-                }),
 
                 setVideo: function (element) {
                     var that = this;
@@ -82,7 +52,38 @@
                         player.currentTime = seconds;
                         if (player.paused) player.play();
                     }
-                },
+                }
+            };
+
+            var scroller = {
+                trid: transid,
+                container: null,
+                one: null,
+                sweetSpot: 0,
+                resetSweet: true,
+                playIndex: 0,
+                startPointer: 0,
+                lastNow: 0,
+
+                starts: $('*[data-begin]', $transcript).not('.deleted').map(function (element, index) {
+                    var o = {};
+                    o.$item = $(this);
+                    o.begin = $(this).attr('data-begin');
+                    o.end = $(this).attr('data-end');
+                    return o;
+                }).toArray().sort(function (a, b) {
+                    return a.begin - b.begin;
+                }),
+
+                ends: $('*[data-end]', $transcript).not('.deleted').map(function (element, index) {
+                    var o = {};
+                    o.$item = $(this);
+                    o.begin = $(this).attr('data-begin');
+                    o.end = $(this).attr('data-end');
+                    return o;
+                }).toArray().sort(function (a, b) {
+                    return a.end - b.end;
+                }),
 
                 playOne: function ($item) {
                     var reset = typeof this.resetSweet !== 'undefined' ? this.resetSweet : true;
@@ -131,28 +132,33 @@
                     //}
                 },
 
+                setContainer: function($container) {
+                    this.container = $container;
+                },
+
                 startPlay: function ($id) {
                     $id.addClass('playing'); //sentence
                     $('[data-transcripts-role=hit-panel][data-transcripts-id=' + this.trid + ']').find('*[data-refid=' + $id.attr('id') + ']').addClass('playing'); //hit result
+
                     var idTop = $id.position().top;
 
                     //sentence out of view above
                     if (idTop < 0 && this.sweetSpot < 0) {
                         this.sweetSpot = 0;
-                        $scroller.scrollTo($id);
+                        this.container.scrollTo($id);
                     }
 
                     //sentence above scroll sweet spot
                     else if (idTop < 0 || idTop < this.sweetSpot) {
-                        $scroller.scrollTo('-=' + (this.sweetSpot - idTop), {axis: 'y'});
+                        this.container.scrollTo('-=' + (this.sweetSpot - idTop), {axis: 'y'});
                     }
                     //sentence below scroll sweet spot
                     else {
-                        $scroller.scrollTo('+=' + (idTop - this.sweetSpot), {axis: 'y'});
+                        this.container.scrollTo('+=' + (idTop - this.sweetSpot), {axis: 'y'});
 
                         //sentence out of view below
-                        if ($id.position().top > $scroller.height() - $id.height()) {
-                            $scroller.scrollTo($id);
+                        if ($id.position().top > this.container.height() - $id.height()) {
+                            this.container.scrollTo($id);
                         }
                     }
                 },
@@ -191,26 +197,28 @@
 
             };
 
-            for (var i = 0; i < obj.starts.length; i++) {
-                obj.starts[i].$item.attr('data-starts-index', i);
+            scroller.setContainer($transcript);
+            for (var i = 0; i < scroller.starts.length; i++) {
+                scroller.starts[i].$item.attr('data-starts-index', i);
             }
+            $.extend(scroller, html5);
 
             window.addEventListener("hashchange", function () {
-                obj.playOne($(window.location.hash.replace('tcu/', '')));
-                obj.resetSweet = true;
+                scroller.playOne($(window.location.hash.replace('tcu/', '')));
+                scroller.resetSweet = true;
             }, false);
 
-            return obj;
-
+            return scroller;
         }
 
         return {
-            getUI: function ($transcript, $container) {
+            getUI: function ($transcript) {
                 var trid = $transcript.attr('data-transcripts-id');
 
                 if (!ui[trid]) {
-                    ui[trid] = createUI($transcript, $container);
+                    ui[trid] = createUI($transcript);
                 }
+
                 return ui[trid];
             }
         };
