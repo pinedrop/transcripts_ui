@@ -3,12 +3,13 @@
     ScrollingTranscript = (function () {
         var ui = [];
 
-        function createUI($transcript) {
+        function createUI($transcript, $container) {
 
             var transid = $transcript.attr('data-transcripts-id');
 
             var obj = {
                 trid: transid,
+                container: $container,
                 player: null,
                 one: null,
                 sweetSpot: 0,
@@ -38,17 +39,17 @@
                     return a.end - b.end;
                 }),
 
-                setVideo: function(element) {
+                setVideo: function (element) {
                     var that = this;
                     player = element;
 
-                    var playPause = function(e) {
+                    var playPause = function (e) {
                         if (!player.paused) { //if playing
                             that.checkNow(player.currentTime);
                         }
                     };
 
-                    var timeUpdated = function(e) {
+                    var timeUpdated = function (e) {
                         var now = player.currentTime;
 
                         //if playmode=playstop, then don't keep scrolling when you stop
@@ -76,7 +77,7 @@
                     });
                 },
 
-                playFrom: function(seconds) {
+                playFrom: function (seconds) {
                     if (player != null) {
                         player.currentTime = seconds;
                         if (player.paused) player.play();
@@ -97,17 +98,17 @@
                     }
                 },
 
-                checkNow: function(now) {
+                checkNow: function (now) {
                     if (this.one != null && (now < parseFloat(this.one.attr('data-begin')) - .1 || now > parseFloat(this.one.attr('data-end')) + .1)) {
-                            console.log('Now = ' + now);
-                            console.log('Begin = ' + this.one.attr('data-begin'));
-                            console.log('End = ' + this.one.attr('data-end'));
-                            this.one = null;
-                            console.log('nulling one');
+                        console.log('Now = ' + now);
+                        console.log('Begin = ' + this.one.attr('data-begin'));
+                        console.log('End = ' + this.one.attr('data-end'));
+                        this.one = null;
+                        console.log('nulling one');
                     }
                 },
 
-                checkScroll: function(now) {
+                checkScroll: function (now) {
                     //if (this.lastNow != now) {
                     var that = this;
                     $('.playing', $transcript).each(function () {
@@ -133,28 +134,25 @@
                 startPlay: function ($id) {
                     $id.addClass('playing'); //sentence
                     $('[data-transcripts-role=hit-panel][data-transcripts-id=' + this.trid + ']').find('*[data-refid=' + $id.attr('id') + ']').addClass('playing'); //hit result
-                    var $scroller = $('.transcript-container');
-                    if ($scroller.size() == 1) {
-                        var idTop = $id.position().top;
+                    var idTop = $id.position().top;
 
-                        //sentence out of view above
-                        if (idTop < 0 && this.sweetSpot < 0) {
-                            this.sweetSpot = 0;
+                    //sentence out of view above
+                    if (idTop < 0 && this.sweetSpot < 0) {
+                        this.sweetSpot = 0;
+                        $scroller.scrollTo($id);
+                    }
+
+                    //sentence above scroll sweet spot
+                    else if (idTop < 0 || idTop < this.sweetSpot) {
+                        $scroller.scrollTo('-=' + (this.sweetSpot - idTop), {axis: 'y'});
+                    }
+                    //sentence below scroll sweet spot
+                    else {
+                        $scroller.scrollTo('+=' + (idTop - this.sweetSpot), {axis: 'y'});
+
+                        //sentence out of view below
+                        if ($id.position().top > $scroller.height() - $id.height()) {
                             $scroller.scrollTo($id);
-                        }
-
-                        //sentence above scroll sweet spot
-                        else if (idTop < 0 || idTop < this.sweetSpot) {
-                            $scroller.scrollTo('-=' + (this.sweetSpot - idTop), {axis: 'y'});
-                        }
-                        //sentence below scroll sweet spot
-                        else {
-                            $scroller.scrollTo('+=' + (idTop - this.sweetSpot), {axis: 'y'});
-
-                            //sentence out of view below
-                            if ($id.position().top > $scroller.height() - $id.height()) {
-                                $scroller.scrollTo($id);
-                            }
                         }
                     }
                 },
@@ -211,7 +209,7 @@
                 var trid = $transcript.attr('data-transcripts-id');
 
                 if (!ui[trid]) {
-                    ui[trid] = createUI($transcript);
+                    ui[trid] = createUI($transcript, $container);
                 }
                 return ui[trid];
             }
