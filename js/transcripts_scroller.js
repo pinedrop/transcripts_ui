@@ -86,6 +86,7 @@
                 playOne: function ($item) {
                     var reset = typeof this.resetSweet !== 'undefined' ? this.resetSweet : true;
                     if ($item.attr('data-end') - $item.attr('data-begin') > 0) {
+                        console.log('setting one');
                         this.one = $item;
                         this.endAll();
                         if (reset) {
@@ -98,7 +99,11 @@
 
                 checkNow: function(now) {
                     if (this.one != null && (now < parseFloat(this.one.attr('data-begin')) - .1 || now > parseFloat(this.one.attr('data-end')) + .1)) {
+                            console.log('Now = ' + now);
+                            console.log('Begin = ' + this.one.attr('data-begin'));
+                            console.log('End = ' + this.one.attr('data-end'));
                             this.one = null;
+                            console.log('nulling one');
                     }
                 },
 
@@ -128,7 +133,7 @@
                 startPlay: function ($id) {
                     $id.addClass('playing'); //sentence
                     $('[data-transcripts-role=hit-panel][data-transcripts-id=' + this.trid + ']').find('*[data-refid=' + $id.attr('id') + ']').addClass('playing'); //hit result
-                    var $scroller = $transcript;
+                    var $scroller = $('.transcript-container');
                     if ($scroller.size() == 1) {
                         var idTop = $id.position().top;
 
@@ -202,7 +207,7 @@
         }
 
         return {
-            getUI: function ($transcript) {
+            getUI: function ($transcript, $container) {
                 var trid = $transcript.attr('data-transcripts-id');
 
                 if (!ui[trid]) {

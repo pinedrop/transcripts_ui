@@ -1,44 +1,38 @@
-[data-transcripts-role=video-controls] {
-	display: inline;
-}
-[data-transcripts-role=video-controls] li {
-	display: inline;
-}
-/*
-[data-transcripts-role=transcript] {
-        height:500px;
-	overflow:auto;
-}
-*/
-
 .tcu-info {
-	float:left;
-	width:200px;
+    float: left;
+    width: 200px;
 }
+
 .play-button {
-	float:left;
-	margin-right:-100px;
+    float: left;
+    margin-right: -100px;
 }
+
 .same-speaker {
-	display:none;
+    display: none;
 }
+
 .speaker-name {
-	float:right;
-	width:100px;
+    float: right;
+    width: 100px;
 }
+
 .speaker-tiers {
-	margin-left:200px;	
+    margin-left: 200px;
 }
 
 .scroller .tier {
-	display: none;
+    display: none;
 }
+
 .scroller .tier.active {
-	display: block;
+    display: block;
 }
+
 .scroller .playing {
-	background-color: #6cf;
+    background-color: #6cf;
 }
+
 .scroller ul {
-	list-style: none;
+    list-style: none;
 }

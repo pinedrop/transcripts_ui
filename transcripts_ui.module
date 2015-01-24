@@ -89,10 +89,6 @@ function transcripts_ui_theme()
             'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
             'file' => 'transcripts_ui.theme.inc',
         ),
-        'transcripts_ui_hit_summary' => array(
-            'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
-            'file' => 'transcripts_ui.theme.inc',
-        ),
         'transcripts_ui_speaker_name' => array(
             'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
             'file' => 'transcripts_ui.theme.inc',
@@ -171,7 +167,6 @@ function transcripts_ui_render_controls($ui)
 }
 
 //'viewer_selector' => drupal_get_form('transcripts_ui_viewer_selector', $ui->trid, $ui->viewers),
-
 function transcripts_ui_viewer_selector($form, &$form_state, $trid, $viewer)
 {
     $form = array();
@@ -224,7 +219,6 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
             '#ajax' => array(
                 'callback' => 'transcripts_ui_ajax_hits',
                 'wrapper' => 'transcripts-ui-transcript-' . $ui->trid,
-                //'wrapper' => 'transcripts-ui-hit-list-'.$ui->trid,
                 'progress' => array('type' => 'none'),
                 'event' => 'click',
             ),

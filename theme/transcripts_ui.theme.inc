@@ -37,15 +37,6 @@ function theme_transcripts_ui_transcript_search($vars)
     return $out;
 }
 
-function theme_transcripts_ui_hit_summary($vars)
-{
-    $out = "<div class='transcripts-ui-hit-controls'>";
-    $out .= "<a href='#' class='transcripts-ui-clear-hits'><span class='ui-icon ui-icon-closethick'>Clear hits</span></a>";
-    $out .= "</div>";
-    $out .= "<div class='transcripts-ui-hit-info'>Found " . $vars['num_found'] . " sentences</div>";
-    return $out;
-}
-
 function theme_transcripts_ui_speaker_name($vars)
 {
     $out = "<div class='speaker-name {$vars['speaker_turn']}'>{$vars['speaker_name']}</div>";
