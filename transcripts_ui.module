@@ -106,7 +106,7 @@ function transcripts_ui_theme()
                 'classes' => '',
             ),
         ),
-        'transcripts_ui_goto_tcu' => array(
+        'transcripts_ui_play_tcu' => array(
             'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
             'file' => 'transcripts_ui.theme.inc',
             'render element' => 'element',

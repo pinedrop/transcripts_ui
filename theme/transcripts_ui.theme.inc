@@ -52,17 +52,16 @@ function theme_transcripts_ui_tcu_tier($vars)
     return $out;
 }
 
-function theme_transcripts_ui_goto_tcu($vars)
+function theme_transcripts_ui_play_tcu($vars)
 {
     $mins = floor($vars['element']['#time'] / 60);
     $secs = $vars['element']['#time'] % 60;
     $time = sprintf("%d:%02d", $mins, $secs);
-    $out = "<a href='" . $vars['element']['#linkurl'] . "' class='btn btn-default'>";
-    $out .= "<span class='glyphicon glyphicon-play'></span> ";
+    $out = "<button type='button' class='btn btn-default btn-icon play-tcu' title='Play line'><span class='glyphicon glyphicon-play'></span> ";
     $out .= $time;
     if (isset($vars['element']['#text'])) {
         $out .= " " . $vars['element']['#text'];
     }
-    $out .= "</a>";
+    $out .= "</button>";
     return $out;
 }

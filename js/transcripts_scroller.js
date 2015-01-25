@@ -96,6 +96,7 @@
                         }
                         this.playIndex = parseInt($item.attr('data-starts-index'));
                         this.playFrom($item.attr('data-begin'));
+                        window.location.hash = 'tcu/' + $item.attr('data-tcuid');
                     }
                 },
 
@@ -132,7 +133,7 @@
                     //}
                 },
 
-                setContainer: function($container) {
+                setContainer: function ($container) {
                     this.container = $container;
                 },
 
@@ -181,18 +182,17 @@
                 previous: function () {
                     var n = this.playIndex > 0 ? this.playIndex - 1 : 0;
                     this.resetSweet = false; //will be set back to true after line is played
-                    window.location.hash = 'tcu/' + $(this.starts[n].$item).attr('id');
+                    this.playOne($(this.starts[n].$item));
                 },
 
                 sameAgain: function () {
-                    /* can't set window.location.hash because it won't change */
                     this.playOne($(this.starts[this.playIndex].$item));
                 },
 
                 next: function () {
                     var n = this.playIndex == this.starts.length - 1 ? this.playIndex : this.playIndex + 1;
                     this.resetSweet = false; //will be set back to true after line is played
-                    window.location.hash = 'tcu/' + $(this.starts[n].$item).attr('id');
+                    this.playOne($(this.starts[n].$item));
                 }
 
             };
@@ -203,10 +203,11 @@
             }
             $.extend(scroller, html5);
 
-            window.addEventListener("hashchange", function () {
-                scroller.playOne($(window.location.hash.replace('tcu/', '')));
+            $('button.play-tcu', $transcript).click(function () {
+                var $tcu = $(this).parents('li[data-tcuid]');
                 scroller.resetSweet = true;
-            }, false);
+                scroller.playOne($tcu);
+            });
 
             return scroller;
         }
