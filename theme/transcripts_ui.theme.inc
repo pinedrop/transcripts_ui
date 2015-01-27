@@ -57,7 +57,9 @@ function theme_transcripts_ui_play_tcu($vars)
     $mins = floor($vars['element']['#time'] / 60);
     $secs = $vars['element']['#time'] % 60;
     $time = sprintf("%d:%02d", $mins, $secs);
-    $out = "<button type='button' class='btn btn-default btn-icon play-tcu' title='Play line'><span class='glyphicon glyphicon-play'></span> ";
+    $classes = 'btn btn-default btn-icon play-tcu';
+    $classes .= $vars['element']['#timecoded'] ? ' timed' : ' untimed';
+    $out = "<button type='button' class='" .$classes ."' title='Play line'><span class='glyphicon glyphicon-play'></span> ";
     $out .= $time;
     if (isset($vars['element']['#text'])) {
         $out .= " " . $vars['element']['#text'];

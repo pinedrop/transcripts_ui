@@ -88,6 +88,7 @@ class TranscriptUI
                             '#prefix' => "<div class='play-button'>",
                             '#theme' => 'transcripts_ui_play_tcu',
                             '#linkurl' => '#tcu/' . $sid,
+                            '#timecoded' => $sentence->end == 0 ? FALSE : TRUE,
                             '#time' => $sentence->start,
                             '#suffix' => "</div>",
                         ),
