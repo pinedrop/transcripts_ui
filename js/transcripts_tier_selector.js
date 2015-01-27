@@ -7,7 +7,6 @@
                 var $tierSelector = $('.tier-selector', this);
                 $tierSelector.find('option').attr('selected', true);
                 $tierSelector.change(function (e) {
-                        $scroller.clearHits();
                         $('*[data-transcripts-id=' + trid + ']').find('.tier').removeClass('active');
                         $('option:selected', this).each(function () {
                             $('*[data-transcripts-id=' + trid + ']').find('*[data-tier=' + $(this).val() + ']').addClass('active');
