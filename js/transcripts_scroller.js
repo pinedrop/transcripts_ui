@@ -25,7 +25,6 @@
                         //if playmode=playstop, then don't keep scrolling when you stop
                         if (!player.paused && that.one != null && now > that.one.attr('data-end')) {
                             player.pause();
-                            now = player.currentTime;
                             that.lastNow = now;
                         }
 
@@ -86,9 +85,9 @@
                 }),
 
                 playOne: function ($item) {
-                    var reset = typeof this.resetSweet !== 'undefined' ? this.resetSweet : true;
+                    var reset = this.resetSweet;
                     if ($item.attr('data-end') - $item.attr('data-begin') > 0) {
-                        console.log('setting one');
+                        console.log('play from ' + $item.attr('data-begin') + ' to ' + $item.attr('data-end'));
                         this.one = $item;
                         this.endAll();
                         if (reset) {
@@ -101,12 +100,9 @@
                 },
 
                 checkNow: function (now) {
-                    if (this.one != null && (now < parseFloat(this.one.attr('data-begin')) - .1 || now > parseFloat(this.one.attr('data-end')) + .1)) {
-                        console.log('Now = ' + now);
-                        console.log('Begin = ' + this.one.attr('data-begin'));
-                        console.log('End = ' + this.one.attr('data-end'));
+                    if (this.one != null && (now < parseFloat(this.one.attr('data-begin')) || now > parseFloat(this.one.attr('data-end')))) {
+                    //if (this.one != null && (now < parseFloat(this.one.attr('data-begin')) - .1 || now > parseFloat(this.one.attr('data-end')) + .1)) {
                         this.one = null;
-                        console.log('nulling one');
                     }
                 },
 
@@ -139,37 +135,32 @@
 
                 startPlay: function ($id) {
                     $id.addClass('playing'); //sentence
-                    $('[data-transcripts-role=hit-panel][data-transcripts-id=' + this.trid + ']').find('*[data-refid=' + $id.attr('id') + ']').addClass('playing'); //hit result
-
                     var idTop = $id.position().top;
 
                     //sentence out of view above
-                    if (idTop < 0 && this.sweetSpot < 0) {
+                    if (idTop <= 0 && this.sweetSpot <= 0) {
                         this.sweetSpot = 0;
-                        this.container.scrollTo($id);
+                        //this.container.scrollTo($id);
                     }
 
                     //sentence above scroll sweet spot
                     else if (idTop < 0 || idTop < this.sweetSpot) {
-                        this.container.scrollTo('-=' + (this.sweetSpot - idTop), {axis: 'y'});
+                        //this.container.scrollTo('-=' + (this.sweetSpot - idTop), {axis: 'y'});
                     }
                     //sentence below scroll sweet spot
                     else {
-                        this.container.scrollTo('+=' + (idTop - this.sweetSpot), {axis: 'y'});
+                        //this.container.scrollTo('+=' + (idTop - this.sweetSpot), {axis: 'y'});
 
                         //sentence out of view below
                         if ($id.position().top > this.container.height() - $id.height()) {
-                            this.container.scrollTo($id);
+                            //this.container.scrollTo($id);
                         }
                     }
                 },
 
                 endPlay: function ($id) {
                     $id.removeClass('playing'); //sentence
-                    $('[data-transcripts-role=hit-panel][data-transcripts-id=' + this.trid + ']').find('*[data-refid=' + $id.attr('id') + ']').removeClass('playing'); //hit result
-
-                    //change sweet spot if user scrolls transcript while playing
-                    this.sweetSpot = $id.position().top;
+                    this.sweetSpot = $id.position().top; //change sweet spot if user scrolls transcript while playing
                 },
 
                 endAll: function () {
@@ -205,6 +196,7 @@
 
             $('button.play-tcu', $transcript).click(function () {
                 var $tcu = $(this).parents('li[data-tcuid]');
+                scroller.sweetSpot = $tcu.position().top;
                 scroller.resetSweet = true;
                 scroller.playOne($tcu);
             });
