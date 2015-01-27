@@ -59,7 +59,7 @@ class TranscriptUI
                                     '#theme' => 'transcripts_ui_tcu_tier',
                                     '#tier_name' => $tier,
                                     '#tier_text' => $replace[0],
-                                    '#classes' => array($tier, 'hit', 'np'),
+                                    '#classes' => array($tier, 'hit'),
                                 );
                             } else {
                                 $tier_list[] = array(
@@ -73,7 +73,6 @@ class TranscriptUI
                                 '#theme' => 'transcripts_ui_tcu_tier',
                                 '#tier_name' => $tier,
                                 '#tier_text' => $sentence->$tier,
-                                '#classes' => array('np'),
                             );
                         }
                     }
@@ -101,7 +100,8 @@ class TranscriptUI
                         '#suffix' => "</div>",
                     ),
                     'tcu_tiers' => array(
-                        '#prefix' => "<div class='tiers speaker-tiers'>",
+                        '#prefix' => "<div id='tiers-{$sid}' class='tiers speaker-tiers'>",
+                        '#tcuid' => $sid,
                         'tier_list' => $tier_list,
                         '#suffix' => "</div>",
                     ),
