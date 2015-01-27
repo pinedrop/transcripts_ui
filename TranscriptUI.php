@@ -59,7 +59,7 @@ class TranscriptUI
                                     '#theme' => 'transcripts_ui_tcu_tier',
                                     '#tier_name' => $tier,
                                     '#tier_text' => $replace[0],
-                                    '#classes' => array($tier, 'hit'),
+                                    '#classes' => array('hit'),
                                 );
                             } else {
                                 $tier_list[] = array(
