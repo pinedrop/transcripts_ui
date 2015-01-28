@@ -194,38 +194,45 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
     $form = array();
     $form['#id'] = 'transcripts-ui-search-form';
     $form['#attributes']['class'] = array('transcripts-ui-search-form', 'clearfix');
-    $form['basic'] = array(
-        '#type' => 'container',
-    );
+
     $key = '';
     if (strlen($ui->options['term']) > 0) {
         $key = substr($ui->options['term'], 1, -1);
     }
-    $form['basic']['wrapper'] = array(
-        '#prefix' => "<div class='input-group'>",
-        'keys' => array(
+
+    $form['search'] = array(
+      '#type' => 'container',
+    );
+    $form['search']['keys'] = array(
             '#theme_wrappers' => array(),
             '#type' => 'textfield',
             '#default_value' => $key,
             //'#size' => 20,
             //'#maxlength' => 255,
             '#attributes' => array('placeholder' => t('Search this transcript')),
+        );
+    $form['search']['buttons'] = array(
+        '#prefix' => "<span class='input-group-btn'>",
+        '#suffix' => "</span>",
+    );
+    $form['search']['buttons']['go'] = array(
+        '#type' => 'button',
+        '#value' => t('Search'),
+        '#button_type' => 'submit ajax-trigger',
+        '#ajax' => array(
+            'callback' => 'transcripts_ui_ajax_hits',
+            'wrapper' => 'transcripts-ui-transcript-' . $ui->trid,
+            'progress' => array('type' => 'none'),
+            'event' => 'click',
         ),
-        'submit' => array(
-            '#prefix' => "<span class='input-group-btn'>",
-            '#type' => 'submit',
-            '#value' => t('Search'),
-            '#inner' => "<span class='glyphicon glyphicon-search'></span>",
-            '#ajax' => array(
-                'callback' => 'transcripts_ui_ajax_hits',
-                'wrapper' => 'transcripts-ui-transcript-' . $ui->trid,
-                'progress' => array('type' => 'none'),
-                'event' => 'click',
-            ),
-            '#post_render' => array('replace_inner'),
-            '#suffix' => "</span>",
-        ),
-        '#suffix' => "</div>",
+        '#post_render' => array('transcripts_ui_button_inner'),
+        '#inner' => "<span class='glyphicon glyphicon-search'></span>",
+    );
+    $form['search']['buttons']['reset'] = array(
+        '#type' => 'button',
+        '#value' => t('Reset'),
+        '#post_render' => array('transcripts_ui_button_inner'),
+        '#inner' => "<span class='glyphicon glyphicon-reset'></span>",
     );
     $form['trid'] = array(
         '#type' => 'hidden',
@@ -237,6 +244,14 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
     );
 
     return $form;
+}
+
+function transcripts_ui_button_inner($markup, $element)
+{
+    $find = "<span>" .$element['#value']. "</span>";
+    $replace = $element['#inner'];
+    $markup = str_replace($find, $replace, $markup);
+    return $markup;
 }
 
 function transcripts_ui_ajax_hits($form, &$form_state)
@@ -257,10 +272,3 @@ function transcripts_ui_ajax_hits($form, &$form_state)
     return array('#type' => 'ajax', '#commands' => $commands);
 }
 
-function replace_inner($markup, $element)
-{
-    $find = ">" . $element['#value'] . "<";
-    $replace = ">" . $element['#inner'] . "<";
-    $markup = str_replace($find, $replace, $markup);
-    return $markup;
-}
