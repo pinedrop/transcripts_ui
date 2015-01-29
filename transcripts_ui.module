@@ -258,6 +258,41 @@ function transcripts_ui_search_form($form, &$form_state, $ui, $count = 0)
                             .'<label class="radio-inline" ><input type="radio" id="transcript-search-options-' .$ui->trid. '-2" name="transcript-search-options" data-value="1">' .t('Show only search results'). '</label>'
                         .'</div>',
     );
+    $form['search']['navigate'] = array(
+        '#type' => 'container',
+        '#attributes' => array(
+            'class' => array('transcript-navigate-results'),
+        ),
+    );
+    $form['search']['navigate']['buttons'] = array(
+        '#prefix' => "<div>",
+        '#suffix' => "</div>",
+    );
+    $form['search']['navigate']['buttons']['next'] = array(
+        '#type' => 'button',
+        '#value' => t('Next'),
+        '#id' => 'transcript-nextresult-' .$ui->trid,
+        '#attributes' => array(
+            'type' => 'button',
+        ),
+        '#post_render' => array('transcripts_ui_button_inner'),
+        '#inner' => "<span class='glyphicon glyphicon-next'></span>",
+    );
+    $form['search']['navigate']['buttons']['previous'] = array(
+        '#type' => 'button',
+        '#value' => t('Previous'),
+        '#id' => 'transcript-previousresult-' .$ui->trid,
+        '#attributes' => array(
+            'type' => 'button',
+        ),
+        '#post_render' => array('transcripts_ui_button_inner'),
+        '#inner' => "<span class='glyphicon glyphicon-previous'></span>",
+    );
+    $form['search']['navigate']['count'] = array(
+        '#prefix' => '<div><span id="transcript-results-count-' .$ui->trid. '" class="transcript-results-count" data-results-count="0">',
+        '#suffix' => '</div>',
+        '#markup' => '0 of 0',
+    );
     $form['search']['trid'] = array(
         '#type' => 'hidden',
         '#value' => substr($ui->trid, 5), //chop off trid- prefix
