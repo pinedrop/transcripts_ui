@@ -15,15 +15,15 @@
             $scroller.clearHits();
         });
 
-        $('input:radio[name=options]', this).change(function() {
-            if ($(this).val() == 0) {
+        $('input:radio[name=transcript-search-options]', this).click(function() {
+            if ($(this).attr('data-value') == 0) {
                 $('li[data-tcuid]', $transcript).show();
             }
             else {
                 $('li[data-tcuid]:not(:has(.hit))').hide();
             }
         });
-        $('input:radio[name=options]', this).first().click();
+        $('input:radio[name=transcript-search-options]', this).first().click();
 
         // Overwrite beforeSubmit
         Drupal.ajax['searchbutton-transcript-' + trid].options.beforeSubmit = function (form_values, element, options) {
