@@ -201,7 +201,8 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
     }
 
     $form['search'] = array(
-      '#type' => 'container',
+        '#prefix' => "<fieldset><legend class='sr-only'>Transcript search</legend>",
+        '#suffix' => "</fieldset>",
     );
     $form['search']['keys'] = array(
             '#theme_wrappers' => array(),
