@@ -217,6 +217,7 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
     );
     $form['search']['buttons']['go'] = array(
         '#type' => 'button',
+        '#id' => 'search-transcript-button-' . $ui->trid,
         '#value' => t('Search'),
         '#button_type' => 'submit ajax-trigger',
         '#ajax' => array(
@@ -224,6 +225,9 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
             'wrapper' => 'transcripts-ui-transcript-' . $ui->trid,
             'progress' => array('type' => 'none'),
             'event' => 'click',
+        ),
+        '#attached' => array(
+            'js' => array(drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_search.js'),
         ),
         '#post_render' => array('transcripts_ui_button_inner'),
         '#inner' => "<span class='glyphicon glyphicon-search'></span>",
@@ -236,7 +240,7 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
     );
     $form['trid'] = array(
         '#type' => 'hidden',
-        '#value' => substr($ui->trid, 5), //chop of trid- prefix
+        '#value' => substr($ui->trid, 5), //chop off trid- prefix
     );
     $form['module'] = array(
         '#type' => 'hidden',
