@@ -231,6 +231,9 @@ function transcripts_ui_search_form($form, &$form_state, $ui, $count = 0)
         '#id' => 'searchbutton-transcript-' . $ui->trid,
         '#value' => t('Search'),
         '#button_type' => 'submit ajax-trigger',
+        '#attributes' => array(
+            'type' => 'submit',
+        ),
         '#ajax' => array(
             'callback' => 'transcripts_ui_ajax_hits',
             'wrapper' => 'transcripts-ui-transcript-' . $ui->trid,
@@ -243,6 +246,9 @@ function transcripts_ui_search_form($form, &$form_state, $ui, $count = 0)
     $form['search']['input']['buttons']['reset'] = array(
         '#type' => 'button',
         '#value' => t('Reset'),
+        '#attributes' => array(
+            'type' => 'reset',
+        ),
         '#post_render' => array('transcripts_ui_button_inner'),
         '#inner' => "<span class='glyphicon glyphicon-reset'></span>",
     );
