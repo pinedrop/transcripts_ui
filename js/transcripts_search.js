@@ -10,7 +10,7 @@
 
                 var $search = $('.transcripts-ui-search-form', this);
                 // Overwrite beforeSubmit
-                Drupal.ajax['search-transcript-button-' + trid].options.beforeSubmit = function (form_values, element, options) {
+                Drupal.ajax['searchbutton-transcript-' + trid].options.beforeSubmit = function (form_values, element, options) {
                     $scroller.clearHits();
                 }
             });

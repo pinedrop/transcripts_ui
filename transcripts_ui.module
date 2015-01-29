@@ -217,7 +217,7 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
     );
     $form['search']['buttons']['go'] = array(
         '#type' => 'button',
-        '#id' => 'search-transcript-button-' . $ui->trid,
+        '#id' => 'searchbutton-transcript-' . $ui->trid,
         '#value' => t('Search'),
         '#button_type' => 'submit ajax-trigger',
         '#ajax' => array(
