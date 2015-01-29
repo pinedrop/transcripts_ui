@@ -258,19 +258,11 @@ function transcripts_ui_search_form($form, &$form_state, $ui, $count = 0)
                             .'<label class="radio-inline" ><input type="radio" id="transcript-search-options-' .$ui->trid. '-2" name="transcript-search-options" data-value="1">' .t('Show only search results'). '</label>'
                         .'</div>',
     );
-    /*
-    $form['search']['input']['options'] = array(
-        '#type' => 'radios',
-        '#default_value' => 0,
-        '#options' => array(0 => t('Show entire transcript'), 1 => t('Show only search results')),
-        '#attributes' => array('class' => array('transcript-search-options')),
-    );
-    */
-    $form['trid'] = array(
+    $form['search']['trid'] = array(
         '#type' => 'hidden',
         '#value' => substr($ui->trid, 5), //chop off trid- prefix
     );
-    $form['module'] = array(
+    $form['search']['module'] = array(
         '#type' => 'hidden',
         '#value' => $ui->module,
     );
