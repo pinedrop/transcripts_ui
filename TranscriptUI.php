@@ -8,6 +8,7 @@ class TranscriptUI
     var $options; //display options
     var $tiers; //data tiers
     var $tcuCount = 0; //number of result documents
+    var $hitCount = 0; //number of hits if a search
     var $render; //array of rendered components
 
     //constructor
@@ -111,7 +112,7 @@ class TranscriptUI
                 $lastSpeaker = $speaker;
             }
 
-            if ($options['term']) {
+            /*if ($options['term']) {
                 $search_nav = array(
                     '#prefix' => "<div class='alert alert-info' role='alert'>",
                     '#markup' => "Found {$hitCount} instances of <strong>{$options['term']}</strong>.",
@@ -119,7 +120,9 @@ class TranscriptUI
                 );
             } else {
                 $search_nav = array();
-            }
+            }*/
+
+            $this->hitCount = $hitCount;
 
             $js = array(
                 'ui' => drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_ui.js',
@@ -127,9 +130,8 @@ class TranscriptUI
             );
             drupal_alter('transcripts_ui_js', $js);
 
-            $transcript = array(
+            $this->render['transcript'] = array(
                 '#prefix' => "<div id='transcripts-ui-transcript-{$this->trid}' class='scroller' data-transcripts-role='transcript' data-transcripts-id='{$this->trid}'>",
-                'search_nav' => $search_nav,
                 'contents' => array(
                     '#prefix' => "<ul class='list-group'>",
                     'tcu_list' => $tcus,
@@ -145,7 +147,14 @@ class TranscriptUI
                     ),
                 ),
             );
-            $this->render['transcript'] = $transcript;
+            if ($highlight) {
+                $this->render['transcript_search'] = array(
+                    'transcript_search' => array(
+                        '#theme' => 'transcripts_ui_transcript_search',
+                        'search_form' => drupal_get_form('transcripts_ui_search_form', $this),
+                    ),
+                );
+            }
         }
     }
 }
