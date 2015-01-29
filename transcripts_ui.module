@@ -258,11 +258,11 @@ function transcripts_ui_search_form($form, &$form_state, $ui, $count = 0)
         '#options' => array(0 => t('Show entire transcript'), 1 => t('Show only search results')),
         '#attributes' => array('class' => array('transcript-search-options')),
     );
-    $form['search']['trid'] = array(
+    $form['trid'] = array(
         '#type' => 'hidden',
         '#value' => substr($ui->trid, 5), //chop off trid- prefix
     );
-    $form['search']['module'] = array(
+    $form['module'] = array(
         '#type' => 'hidden',
         '#value' => $ui->module,
     );
