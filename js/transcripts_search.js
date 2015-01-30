@@ -25,6 +25,31 @@
         });
         $('input:radio[name=transcript-search-options]', this).first().click();
 
+        var hitCount = $('#transcript-results-count-' + trid).attr('data-results-count');
+        if (hitCount > 0) {;
+            var scrollHit = function(i) {
+                var $tcu = $('li[data-tcuid]:has(.hit):eq(' + (i-1) + ')');
+                $scroller.endAll();
+                $scroller.setOne($tcu);
+                $scroller.container.scrollTo($tcu);
+                $('#transcript-results-count-' + trid).html(i + ' of ' + hitCount);
+            };
+            var hitIndex = 1;
+            scrollHit(hitIndex);
+
+            $('#transcript-nextresult-' + trid).click(function() {
+                if (hitIndex < hitCount) {
+                    hitIndex++;
+                    scrollHit(hitIndex);
+                }
+            });
+            $('#transcript-previousresult-' + trid).click(function() {
+                if (hitIndex > 1) {
+                    hitIndex--;
+                    scrollHit(hitIndex);
+                }
+            });
+        }
         // Overwrite beforeSubmit
         Drupal.ajax['searchbutton-transcript-' + trid].options.beforeSubmit = function (form_values, element, options) {
             $scroller.clearHits();
