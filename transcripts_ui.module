@@ -228,7 +228,7 @@ function transcripts_ui_search_form($form, &$form_state, $ui, $count = 0)
     );
     $form['search']['input']['buttons']['go'] = array(
         '#type' => 'button',
-        '#id' => 'searchbutton-transcript-' . $ui->trid,
+        '#id' => 'transcript-search-button-' . $ui->trid,
         '#value' => t('Search'),
         '#button_type' => 'submit ajax-trigger',
         '#attributes' => array(
@@ -245,6 +245,7 @@ function transcripts_ui_search_form($form, &$form_state, $ui, $count = 0)
     );
     $form['search']['input']['buttons']['reset'] = array(
         '#type' => 'button',
+        '#id' => 'transcript-reset-button-' . $ui->trid,
         '#value' => t('Reset'),
         '#attributes' => array(
             'type' => 'reset',
@@ -270,8 +271,8 @@ function transcripts_ui_search_form($form, &$form_state, $ui, $count = 0)
     );
     $form['search']['navigate']['buttons']['next'] = array(
         '#type' => 'button',
-        '#value' => t('Next'),
         '#id' => 'transcript-nextresult-' .$ui->trid,
+        '#value' => t('Next'),
         '#attributes' => array(
             'type' => 'button',
         ),
@@ -280,8 +281,8 @@ function transcripts_ui_search_form($form, &$form_state, $ui, $count = 0)
     );
     $form['search']['navigate']['buttons']['previous'] = array(
         '#type' => 'button',
-        '#value' => t('Previous'),
         '#id' => 'transcript-previousresult-' .$ui->trid,
+        '#value' => t('Previous'),
         '#attributes' => array(
             'type' => 'button',
         ),
