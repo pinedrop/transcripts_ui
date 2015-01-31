@@ -199,9 +199,9 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
         'js' => array(drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_search.js'),
     );
 
-    $key = '';
+    $term = '';
     if (strlen($ui->options['term']) > 0) {
-        $key = substr($ui->options['term'], 1, -1);
+        $term = substr($ui->options['term'], 1, -1);
     }
 
     $form['search'] = array(
@@ -214,12 +214,10 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
             'class' => array('transcript-search-input'),
         ),
     );
-    $form['search']['input']['keys'] = array(
+    $form['search']['input']['term'] = array(
         '#theme_wrappers' => array(),
         '#type' => 'textfield',
-        '#default_value' => $key,
-        //'#size' => 20,
-        //'#maxlength' => 255,
+        '#default_value' => $term,
         '#attributes' => array('placeholder' => t('Search this transcript')),
     );
     $form['search']['input']['buttons'] = array(
@@ -319,7 +317,7 @@ function transcripts_ui_ajax_hits($form, &$form_state)
     $trid = $form_state['values']['trid'];
     $module = $form_state['values']['module'];
     $options = array(
-        'term' => $form_state['values']['keys'],
+        'term' => $form_state['values']['term'],
         'hits_only' => TRUE,
     );
     $ui = transcripts_ui_ui($module, $trid, $options);

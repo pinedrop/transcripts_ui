@@ -184,10 +184,6 @@
                     var n = this.playIndex == this.starts.length - 1 ? this.playIndex : this.playIndex + 1;
                     this.resetSweet = false; //will be set back to true after line is played
                     this.playOne($(this.starts[n].$item));
-                },
-
-                clearHits: function() {
-                    $('.hit', $transcript).removeClass('hit').find('mark').contents().unwrap();
                 }
 
             };

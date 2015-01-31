@@ -20,6 +20,10 @@
             $('#transcript-results-count-' + trid).html(i + ' of ' + hitCount);
         };
 
+        var clearHits = function() {
+            $('.hit', $transcript).removeClass('hit').find('mark').contents().unwrap();
+        };
+
         $('input:radio[name=transcript-search-options]', this).click(function() {
             if ($(this).attr('data-value') == 0) {
                 $('li[data-tcuid]', $transcript).show();
@@ -54,14 +58,19 @@
         }
 
         var $form = $(this);
-        $('#transcript-reset-button-' + trid).click(function () {
+        $('input[name=keys]', $form).val("");
+        $('#transcript-reset-button-' + trid).click(function (e) {
+            $('li[data-tcuid]', $transcript).show(); //show entire transcript
             $form.removeClass('has-searched');
-            $scroller.clearHits();
+            $scroller.endAll();
+            clearHits();
+            //e.preventDefault();
         });
 
         // Overwrite beforeSubmit
         Drupal.ajax['transcript-search-button-' + trid].options.beforeSubmit = function (form_values, element, options) {
-            $scroller.clearHits();
+            clearHits();
+            $scroller.endAll();
         };
 
         return this;
