@@ -186,7 +186,7 @@ function transcripts_ui_viewer_selector($form, &$form_state, $trid, $viewer)
     return $form;
 }
 
-function transcripts_ui_search_form($form, &$form_state, $ui, $count = 0)
+function transcripts_ui_search_form($form, &$form_state, $ui)
 {
     $form = array();
     $form['#id'] = 'transcripts-ui-search-form-' . $ui->trid;
@@ -255,8 +255,8 @@ function transcripts_ui_search_form($form, &$form_state, $ui, $count = 0)
     );
     $form['search']['input']['options'] = array(
         '#markup' =>    '<div class="transcript-search-options form-group">'
-                            .'<label class="radio-inline"><input type="radio" id="transcript-search-options-' .$ui->trid. '-0" name="transcript-search-options" checked="checked" data-value="0">' .t('Show entire transcript'). '</label>'
-                            .'<label class="radio-inline" ><input type="radio" id="transcript-search-options-' .$ui->trid. '-2" name="transcript-search-options" data-value="1">' .t('Show only search results'). '</label>'
+                            .'<label class="radio-inline"><input type="radio" id="transcript-search-options-' .$ui->trid. '-0" name="transcript-search-options" checked="checked" data-value="0">' .t('Show All'). '</label>'
+                            .'<label class="radio-inline" ><input type="radio" id="transcript-search-options-' .$ui->trid. '-2" name="transcript-search-options" data-value="1">' .t('Only Results'). '</label>'
                         .'</div>',
     );
     $form['search']['navigate'] = array(
