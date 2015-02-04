@@ -263,6 +263,12 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
             'class' => array('transcript-navigate-results'),
         ),
     );
+    $form['search']['navigate']['progress'] = array(
+        '#type' => 'container',
+        '#attributes' => array(
+            'class' => array('ajax-progress'),
+        ),
+    );
     $form['search']['navigate']['buttons'] = array(
         '#prefix' => "<div>",
         '#suffix' => "</div>",
