@@ -58,44 +58,57 @@
         }
 
         var $form = this;
-        $('input[name=keys]', $form).val("");
-        $('#transcript-reset-button-' + trid).click(function (e) {
+        var $reset = $('.searchreset', this);
+        var $mbsrch = $('input[name=term]', this); // the main search input
+
+        $mbsrch.data('holder', $mbsrch.attr('placeholder'));
+
+        // --- focusin - focusout
+        $mbsrch.focusin(function () {
+            $mbsrch.attr('placeholder', '');
+            if (!$reset.is(':visible')) {
+                $reset.show("fast");
+            }
+        });
+        $mbsrch.focusout(function () {
+            $mbsrch.attr('placeholder', $mbsrch.data('holder'));
+            $reset.hide();
+/*
+            var str = "Enter Search...";
+            var txt = $mbsrch.val();
+
+            if (txt == '') {
+                //if (str.indexOf(txt) > -1) {
+                $reset.hide();
+                return true;
+            } else {
+                $reset.show(100);
+                return false;
+            }
+*/
+        });
+
+        if ($mbsrch.val() != '') {
+            $reset.show("fast");
+        }
+
+        $('.searchreset', this).click(function (e) {
+            alert('clicked');
             $('li[data-tcuid]', $transcript).show(); //show entire transcript
             $form.removeClass('has-searched');
+            $mbsrch.val('');
             $scroller.endAll();
+            $(this).hide();
             clearHits();
-            //e.preventDefault();
+            e.preventDefault();
         });
 
         // Overwrite beforeSubmit
         Drupal.ajax['transcript-search-button-' + trid].options.beforeSubmit = function (form_values, element, options) {
             clearHits();
             $scroller.endAll();
+            $form.addClass('searching');
         };
-
-        var mbsrch = $('.form-text.form-control', this);  // the main search input
-        $(mbsrch).data("holder", $(mbsrch).attr("placeholder"));
-
-        // --- focusin - focusout
-        $(mbsrch).focusin(function () {
-            $(mbsrch).attr("placeholder", "");
-            $("button.searchreset").show("fast");
-        });
-        $(mbsrch).focusout(function () {
-            $(mbsrch).attr("placeholder", $(mbsrch).data("holder"));
-            $("button.searchreset").hide();
-
-            var str = "Enter Search...";
-            var txt = $(mbsrch).val();
-
-            if (str.indexOf(txt) > -1) {
-                $("button.searchreset").hide();
-                return true;
-            } else {
-                $("button.searchreset").show(100);
-                return false;
-            }
-        });
 
         return this;
     };
