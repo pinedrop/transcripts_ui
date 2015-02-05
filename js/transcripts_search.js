@@ -93,7 +93,6 @@
         }
 
         $('.searchreset', this).click(function (e) {
-            alert('clicked');
             $('li[data-tcuid]', $transcript).show(); //show entire transcript
             $form.removeClass('has-searched');
             $mbsrch.val('');
