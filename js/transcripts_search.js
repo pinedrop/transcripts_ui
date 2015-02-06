@@ -59,40 +59,47 @@
 
         var $form = this;
         var $reset = $('.searchreset', this);
-        var $mbsrch = $('input[name=term]', this); // the main search input
 
+        var $mbsrch = $('input[name=term]', this); // the main search input
         $mbsrch.data('holder', $mbsrch.attr('placeholder'));
+
+        var term;
+        if ($form.hasClass('has-searched')) {
+            term = $mbsrch.val();
+            $reset.show();
+        }
+        else {
+            term = '';
+            $mbsrch.val('');
+        }
 
         // --- focusin - focusout
         $mbsrch.focusin(function () {
             $mbsrch.attr('placeholder', '');
-            if (!$reset.is(':visible')) {
-                $reset.show("fast");
-            }
+            $reset.show("fast");
         });
+
         $mbsrch.focusout(function () {
             $mbsrch.attr('placeholder', $mbsrch.data('holder'));
             $reset.hide();
-/*
-            var str = "Enter Search...";
-            var txt = $mbsrch.val();
 
-            if (txt == '') {
-                //if (str.indexOf(txt) > -1) {
-                $reset.hide();
-                return true;
-            } else {
-                $reset.show(100);
+            if ($mbsrch.val() == '') {
+                if ($form.hasClass('has-searched')) { //empty so return to search term
+                    $mbsrch.val(term);
+                    $reset.show();
+                    return false;
+                }
+                else { //empty so keep cancel button hidden
+                    return true;
+                }
+            }
+            else { //non-empty search so show cancel button
+                $reset.show();
                 return false;
             }
-*/
         });
 
-        if ($mbsrch.val() != '') {
-            $reset.show("fast");
-        }
-
-        $('.searchreset', this).click(function (e) {
+        $reset.click(function (e) {
             $('li[data-tcuid]', $transcript).show(); //show entire transcript
             $form.removeClass('has-searched');
             $mbsrch.val('');
