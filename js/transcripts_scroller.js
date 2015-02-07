@@ -95,7 +95,6 @@
                         }
                         this.playIndex = parseInt($item.attr('data-starts-index'));
                         this.playFrom($item.attr('data-begin'));
-                        window.location.hash = 'tcu/' + $item.attr('data-tcuid');
                     }
                 },
 
@@ -107,7 +106,6 @@
                 },
 
                 checkScroll: function (now) {
-                    //if (this.lastNow != now) {
                     var that = this;
                     $('.playing', $transcript).each(function () {
                         if (now < $(this).attr('data-begin') || now > $(this).attr('data-end')) {
@@ -126,7 +124,6 @@
                         this.startPointer++;
                     }
                     this.lastNow = now;
-                    //}
                 },
 
                 setContainer: function ($container) {
@@ -140,20 +137,20 @@
                     //sentence out of view above
                     if (idTop <= 0 && this.sweetSpot <= 0) {
                         this.sweetSpot = 0;
-                        //this.container.scrollTo($id);
+                        this.container.scrollTo($id);
                     }
 
                     //sentence above scroll sweet spot
                     else if (idTop < 0 || idTop < this.sweetSpot) {
-                        //this.container.scrollTo('-=' + (this.sweetSpot - idTop), {axis: 'y'});
+                        this.container.scrollTo('-=' + (this.sweetSpot - idTop), {axis: 'y'});
                     }
                     //sentence below scroll sweet spot
                     else {
-                        //this.container.scrollTo('+=' + (idTop - this.sweetSpot), {axis: 'y'});
+                        this.container.scrollTo('+=' + (idTop - this.sweetSpot), {axis: 'y'});
 
                         //sentence out of view below
                         if ($id.position().top > this.container.height() - $id.height()) {
-                            //this.container.scrollTo($id);
+                            this.container.scrollTo($id);
                         }
                     }
                 },
