@@ -116,6 +116,9 @@
             $form.addClass('searching');
         };
 
+        this.submit(function(e) {
+           console.log('submitting');
+        });
         return this;
     };
 

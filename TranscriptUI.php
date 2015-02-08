@@ -111,19 +111,10 @@ class TranscriptUI
             $lastSpeaker = $speaker;
         }
 
-        /*if ($options['term']) {
-            $search_nav = array(
-                '#prefix' => "<div class='alert alert-info' role='alert'>",
-                '#markup' => "Found {$hitCount} instances of <strong>{$options['term']}</strong>.",
-                '#suffix' => "</div>",
-            );
-        } else {
-            $search_nav = array();
-        }*/
-
         $this->hitCount = $hitCount;
 
-        if (strlen($this->options['term']) > 0) {
+        //hits_only part is a bit of a hack to still return new search form for empty term searches
+        if (strlen($this->options['term']) > 0 || (isset($this->options['hits_only']) && $this->options['hits_only'])) {
             $this->render['transcript_search'] = array(
                 'transcript_search' => array(
                     '#theme' => 'transcripts_ui_transcript_search',
