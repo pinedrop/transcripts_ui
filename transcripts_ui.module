@@ -181,7 +181,7 @@ function transcripts_ui_viewer_selector($form, &$form_state, $trid, $viewer)
         'data-transcripts-role' => 'viewer-selector',
         'data-transcripts-id' => $trid,
     );
-    $form['#attached']['js'] = array(drupal_get_path('module', 'transcripts_ui') . '/js/viewer_selector.js');
+    $form['#attached']['js'] = array(drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_ui_viewer_selector.js');
 
     return $form;
 }
