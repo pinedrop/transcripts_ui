@@ -8,6 +8,8 @@
         attach: function (context, settings) {
             $('[data-transcripts-role=transcript-search]', context).addBack('[data-transcripts-role=transcript-search]').once('transcript-search').each(function () {
                 console.log('attaching behaviors to transcript search');
+                console.log('here is transcript search: ' + $(this));
+
                 var $form = $(this);
                 var trid = $form.attr('data-transcripts-id');
                 var $transcript = $('[data-transcripts-role=transcript][data-transcripts-id=' + trid + ']');
