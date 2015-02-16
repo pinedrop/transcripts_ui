@@ -12,7 +12,7 @@ function transcripts_ui_init()
 
     drupal_add_js('
         (function ($) {
-            $.fn.ajaxAttachBehaviors(function() {
+            $.fn.ajaxAttachBehaviors = function() {
                 Drupal.attachBehaviors(this);
             };
         })(jQuery);
