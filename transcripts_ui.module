@@ -12,7 +12,7 @@ function transcripts_ui_init()
 
     drupal_add_js('
         (function ($) {
-            $.fn.reattachBehaviors(function() {
+            $.fn.ajaxAttachBehaviors(function() {
                 Drupal.attachBehaviors(this);
             };
         })(jQuery);
@@ -344,7 +344,7 @@ function transcripts_ui_ajax_hits($form, &$form_state)
     $commands[] = ajax_command_replace('#transcripts-ui-search-form-' . $ui->trid, drupal_render($ui->render['transcript_search']));
     $commands[] = ajax_command_invoke('#transcripts-ui-search-form-' . $ui->trid, 'addClass', array('has-searched'));
     $commands[] = ajax_command_invoke('#transcript-results-count-' . $ui->trid, 'attr', array('data-results-count', $ui->hitCount));
-    $commands[] = ajax_command_invoke('#transcripts-ui-search-form-' . $ui->trid, 'reattachBehaviors');
+    $commands[] = ajax_command_invoke('#transcripts-ui-search-form-' . $ui->trid, 'ajaxAttachBehaviors');
     //$commands[] = ajax_command_invoke('#transcripts-ui-search-form-' . $ui->trid, 'transcriptSearchForm');
     return array('#type' => 'ajax', '#commands' => $commands);
 }
