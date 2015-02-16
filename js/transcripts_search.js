@@ -8,15 +8,13 @@
         attach: function (context, settings) {
             $('[data-transcripts-role=transcript-search]', context).addBack('[data-transcripts-role=transcript-search]').once('transcript-search').each(function () {
                 console.log('attaching behaviors to transcript search');
-                console.log('here is transcript search: ' + $(this));
+                console.log(this);
 
                 var $form = $(this);
                 var trid = $form.attr('data-transcripts-id');
                 var $transcript = $('[data-transcripts-role=transcript][data-transcripts-id=' + trid + ']');
                 var $scroller = ScrollingTranscript.getUI($transcript);
                 var hitCount = $('#transcript-results-count-' + trid).attr('data-results-count');
-
-                alert("Hit count = " + hitCount);
 
                 var hitIndex = 1;
                 var scrollHit = function (i) {
