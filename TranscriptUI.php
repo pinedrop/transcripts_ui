@@ -126,7 +126,7 @@ class TranscriptUI
                             ),
                         )
                     ),*/
-                    'search_form' => drupal_get_form('transcripts_ui_search_form', $this),
+                    'search_form' => transcripts_ui_get_form('transcripts_ui_search_form', $this),
                 ),
             );
         }
