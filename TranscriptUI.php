@@ -118,15 +118,15 @@ class TranscriptUI
             $this->render['transcript_search'] = array(
                 'transcript_search' => array(
                     '#theme' => 'transcripts_ui_transcript_search',
-                    'search_form' => drupal_build_form('transcripts_ui_search_form',
+                    /*'search_form' => drupal_build_form('transcripts_ui_search_form',
                         array(
                             'no_cache' => TRUE,
                             'build_info' => array(
                                 'args' => array($this),
                             ),
                         )
-                    ),
-                    //'search_form' => drupal_get_form('transcripts_ui_search_form', $this),
+                    ),*/
+                    'search_form' => drupal_get_form('transcripts_ui_search_form', $this),
                 ),
             );
         }
