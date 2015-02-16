@@ -358,7 +358,7 @@ function transcripts_ui_get_form($form_id)
     // Remove $form_id from the arguments.
     array_shift($args);
     $form_state['build_info']['args'] = $args;
-    $form_state['no_cache'] = TRUE;
+    //$form_state['no_cache'] = TRUE;
 
     return drupal_build_form($form_id, $form_state);
 }
