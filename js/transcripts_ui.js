@@ -3,6 +3,7 @@
     Drupal.behaviors.scrollingTranscript = {
         attach: function (context, settings) {
             $('[data-transcripts-role=transcript]', context)
+                .addBack('[data-transcripts-role=transcript]')
                 .once('scrolling-transcript')
                 .each(function () {
                     ScrollingTranscript

@@ -87,7 +87,6 @@
                 playOne: function ($item) {
                     var reset = this.resetSweet;
                     if ($item.attr('data-end') - $item.attr('data-begin') > 0) {
-                        console.log('play from ' + $item.attr('data-begin') + ' to ' + $item.attr('data-end'));
                         this.one = $item;
                         this.endAll();
                         if (reset) {
