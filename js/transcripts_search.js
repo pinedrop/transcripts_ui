@@ -7,16 +7,13 @@
     Drupal.behaviors.transcriptSearch = {
         attach: function (context, settings) {
             $('[data-transcripts-role=transcript-search]', context).addBack('[data-transcripts-role=transcript-search]').once('transcript-search').each(function () {
-                console.log('settings');
-                console.log(settings);
-                console.log('attaching behaviors to transcript search');
-                console.log(this);
-
                 var $form = $(this);
                 var trid = $form.attr('data-transcripts-id');
                 var $transcript = $('[data-transcripts-role=transcript][data-transcripts-id=' + trid + ']');
                 var $scroller = ScrollingTranscript.getUI($transcript);
-                var hitCount = $('#transcript-results-count-' + trid).attr('data-results-count');
+                if (settings.hasOwnProperty('hasSearched') && settings.hasSearched) $form.addClass('has-searched');
+                var hitCount = settings.hasOwnProperty('hitCount') ? settings.hitCount : 0;
+                $('#transcript-results-count-' + trid).attr('data-results-count', hitCount);
 
                 var hitIndex = 1;
                 var scrollHit = function (i) {
