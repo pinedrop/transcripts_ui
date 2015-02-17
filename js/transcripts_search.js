@@ -6,7 +6,8 @@
     //http://drupal.stackexchange.com/questions/79521/invoke-custom-js-function-in-ajax-callback
     Drupal.behaviors.transcriptSearch = {
         attach: function (context, settings) {
-            $('[data-transcripts-role=transcript-search]', context).addBack('[data-transcripts-role=transcript-search]').once('transcript-search').each(function () {
+            $('[data-transcripts-role=transcript-search]', context).once('transcript-search').each(function () {
+            //$('[data-transcripts-role=transcript-search]', context).addBack('[data-transcripts-role=transcript-search]').once('transcript-search').each(function () {
                 var $form = $(this);
                 var trid = $form.attr('data-transcripts-id');
                 var $transcript = $('[data-transcripts-role=transcript][data-transcripts-id=' + trid + ']');
@@ -114,15 +115,10 @@
 
                 // Overwrite beforeSubmit
                 Drupal.ajax['transcript-search-button-' + trid].options.beforeSubmit = function (form_values, element, options) {
-                    console.log('searching');
                     clearHits();
                     $scroller.endAll();
                     $form.addClass('searching');
                 };
-
-                $form.submit(function(e) {
-                    console.log('submitting');
-                });
             });
         }
     };
