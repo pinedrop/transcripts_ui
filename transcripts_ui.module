@@ -7,7 +7,7 @@ function transcripts_ui_tiers()
 
 function transcripts_ui_init()
 {
-    //drupal_add_library('system', 'ui.button');
+    drupal_add_library('system', 'ui.button');
     drupal_add_library('system', 'jquery.bbq');
 }
 
