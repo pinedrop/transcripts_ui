@@ -333,7 +333,7 @@ function transcripts_ui_ajax_hits($form, &$form_state)
     foreach ($tcus as $tcu) {
         $commands[] = ajax_command_replace('#tiers-' . $tcu['tcu_tiers']['#tcuid'], drupal_render($tcu['tcu_tiers']));
     }
-    $commands[] = ajax_command_settings(array('hasSearched' => TRUE, 'hitCount' => $ui->hitCount));
+    //$commands[] = ajax_command_settings(array('hasSearched' => TRUE, 'hitCount' => $ui->hitCount));
     $commands[] = ajax_command_replace('#transcripts-ui-search-form-' . $ui->trid, drupal_render($ui->render['transcript_search']));
     return array('#type' => 'ajax', '#commands' => $commands);
 }
