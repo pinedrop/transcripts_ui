@@ -114,6 +114,7 @@
 
                 // Overwrite beforeSubmit
                 Drupal.ajax['transcript-search-button-' + trid].options.beforeSubmit = function (form_values, element, options) {
+                    console.log('searching');
                     clearHits();
                     $scroller.endAll();
                     $form.addClass('searching');
