@@ -7,6 +7,8 @@
     Drupal.behaviors.transcriptSearch = {
         attach: function (context, settings) {
             $('[data-transcripts-role=transcript-search]', context).addBack('[data-transcripts-role=transcript-search]').once('transcript-search').each(function () {
+                console.log('settings');
+                console.log(settings);
                 console.log('attaching behaviors to transcript search');
                 console.log(this);
 
