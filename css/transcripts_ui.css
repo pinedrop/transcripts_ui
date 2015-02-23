@@ -1,3 +1,9 @@
+.transcript-navigate-results div:last-child {
+    display: none;
+}
+.has-searched .transcript-navigate-results div:last-child {
+    display: block;
+}
 .transcript-search-options label {
     display: none;
 }
