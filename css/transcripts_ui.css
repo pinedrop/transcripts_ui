@@ -1,3 +1,11 @@
+.has-searched .transcript-search-options label,
+.has-searched .transcript-navigate-results .btn {
+    display: inline-block;
+}
+.has-searched .transcript-navigate-results div:last-child {
+    display: block;
+}
+
 .tcu-info {
     float: left;
     width: 200px;
