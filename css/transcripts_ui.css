@@ -1,17 +1,8 @@
-.transcript-navigate-results div:last-child {
+.transcript-navigate-results {
     display: none;
 }
-.has-searched .transcript-navigate-results div:last-child {
-    display: block;
-}
-.transcript-search-options label {
-    display: none;
-}
-.has-searched .transcript-search-options label,
-.has-searched .transcript-navigate-results .btn {
-    display: inline-block;
-}
-.has-searched .transcript-navigate-results div:last-child {
+
+.has-searched .transcript-navigate-results {
     display: block;
 }
 
