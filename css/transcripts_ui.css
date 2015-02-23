@@ -1,7 +1,9 @@
+.transcript-search-options,
 .transcript-navigate-results {
     display: none;
 }
 
+.has-searched .transcript-search-options,
 .has-searched .transcript-navigate-results {
     display: block;
 }
