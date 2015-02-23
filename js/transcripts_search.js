@@ -64,7 +64,7 @@
                         scrollHit(hitIndex);
                     }
 
-                    var $reset = $('.searchreset', $form);
+                    var $reset = $('button[type=reset]', $form);
 
                     var $mbsrch = $('input[name=term]', $form); // the main search input
                     $mbsrch.data('holder', $mbsrch.attr('placeholder'));
