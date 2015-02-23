@@ -1,3 +1,6 @@
+.transcript-search-options label {
+    display: none;
+}
 .has-searched .transcript-search-options label,
 .has-searched .transcript-navigate-results .btn {
     display: inline-block;
