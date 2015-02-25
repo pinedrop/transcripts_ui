@@ -20,7 +20,6 @@ function theme_transcripts_ui_transcript_options($vars)
 function theme_transcripts_ui_transcript_navigation($vars)
 {
     $out = "<div class='btn-group' role='group'>";
-    $out .= "<button type='button' class='btn btn-default play-transcript'>" . t('Toggle') . "</button>";
     $out .= "<button type='button' class='btn btn-default previous' title='Previous line'><span class='glyphicon glyphicon-arrow-left'></span> " . t('Prev') . "</button>";
     $out .= "<button type='button' class='btn btn-default sameagain' title='Same line'><span class='glyphicon glyphicon-repeat'></span>" . t('Same') . "</button>";
     $out .= "<button type='button' class='btn btn-default next' title='Next line'><span class='glyphicon glyphicon-arrow-right'></span>" . t('Next') . "</button>";

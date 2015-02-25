@@ -17,10 +17,6 @@
                         $('.next', this).click(function () {
                             $scroller.next();
                         });
-                        $('.play-transcript', this).click(function () {
-                            $(this).toggleClass('hidden-transcript');
-                            $transcript.toggle();
-                        });
                     }
                 });
         }
