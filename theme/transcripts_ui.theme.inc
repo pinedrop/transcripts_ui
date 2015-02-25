@@ -10,7 +10,7 @@ function theme_transcripts_ui_transcript_options($vars)
 {
     $out = "<label>";
     $out .= t('Languages');
-    $out .= "<select multiple class='tier-selector' data-header='Tiers to display' title='Choose tiers to display'>";
+    $out .= "<select multiple class='tier-selector selectpicker' data-header='Tiers to display' title='Choose tiers to display'>";
     foreach ($vars['element']['data_tiers'] as $key => $val) {
         $out .= "<option value='{$key}'>{$val}</option>";
     }
