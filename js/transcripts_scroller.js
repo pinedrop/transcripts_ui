@@ -97,7 +97,6 @@
                     }
                 },
 
-
                 setOne: function ($tcu) {
                     this.one = $tcu;
                     this.playIndex = parseInt(this.one.attr('data-starts-index'));
@@ -142,20 +141,24 @@
 
                     //sentence out of view above
                     if (idTop <= 0 && this.sweetSpot <= 0) {
+                        console.log('out of view above; sweet spot=0');
                         this.sweetSpot = 0;
                         this.container.scrollTo($id);
                     }
 
                     //sentence above scroll sweet spot
                     else if (idTop < 0 || idTop < this.sweetSpot) {
+                        console.log('sentence above sweet spot');
                         this.container.scrollTo('-=' + (this.sweetSpot - idTop), {axis: 'y'});
                     }
                     //sentence below scroll sweet spot
                     else {
+                        console.log('sentence below sweet spot');
                         this.container.scrollTo('+=' + (idTop - this.sweetSpot), {axis: 'y'});
 
                         //sentence out of view below
                         if ($id.position().top > this.container.height() - $id.height()) {
+                            console.log('sentence out of view below');
                             this.container.scrollTo($id);
                         }
                     }
