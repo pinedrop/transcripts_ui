@@ -97,6 +97,7 @@
                     }
                 },
 
+
                 setOne: function ($tcu) {
                     this.one = $tcu;
                     this.playIndex = parseInt(this.one.attr('data-starts-index'));
