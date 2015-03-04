@@ -139,6 +139,8 @@
                     $id.addClass('playing'); //sentence
                     var idTop = $id.position().top;
 
+                    console.log('idtop=' + idTop + ' ; sweet spot=' + this.sweetSpot);
+
                     //sentence out of view above
                     if (idTop <= 0 && this.sweetSpot <= 0) {
                         console.log('out of view above; sweet spot=0');
