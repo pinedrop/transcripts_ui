@@ -51,12 +51,6 @@
                         player.currentTime = seconds;
                         if (player.paused) player.play();
                     }
-                },
-
-                setOne: function ($tcu) {
-                    this.one = $tcu;
-                    this.playIndex = parseInt(this.one.attr('data-starts-index'));
-                    this.startPlay($tcu); //scroll to sweet spot
                 }
             };
 
@@ -101,6 +95,12 @@
                         this.playIndex = parseInt($item.attr('data-starts-index'));
                         this.playFrom($item.attr('data-begin'));
                     }
+                },
+
+                setOne: function ($tcu) {
+                    this.one = $tcu;
+                    this.playIndex = parseInt(this.one.attr('data-starts-index'));
+                    this.startPlay($tcu); //scroll to sweet spot
                 },
 
                 checkNow: function (now) {
