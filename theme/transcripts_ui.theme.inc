@@ -8,7 +8,7 @@ function theme_transcripts_ui_transcript_controls($vars)
 
 function theme_transcripts_ui_transcript_options($vars)
 {
-    $out = "<select multiple class='tier-selector selectpicker' data-count-selected-text='{0} of {1} languages' data-selected-text-format='count'>";
+    $out = "<select multiple class='tier-selector selectpicker' data-count-selected-text='{0} of {1} tiers' data-selected-text-format='count'>";
     foreach ($vars['element']['data_tiers'] as $key => $val) {
         $out .= "<option value='{$key}'>{$val}</option>";
     }
