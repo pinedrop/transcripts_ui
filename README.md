@@ -102,3 +102,5 @@ Pinedrop's work on Transcripts UI has been sponsored by:
 * The [Digital Scholarship Unit (DSU)](https://www.utsc.utoronto.ca/digitalscholarship/)
 at the UTSC Library.
 * [SHANTI](http://shanti.virginia.edu/) at the University of Virginia.
+
+15 June 2015
