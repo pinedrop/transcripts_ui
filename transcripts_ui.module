@@ -5,9 +5,9 @@ function transcripts_ui_tiers()
     return variable_get('transcripts_ui_tiers', array());
 }
 
-function transcripts_ui_speaker_displays()
+function transcripts_ui_speaker_names()
 {
-    return variable_get('transcripts_ui_speaker_displays', array());
+    return variable_get('transcripts_ui_speaker_names', array());
 }
 
 function transcripts_ui_init()
@@ -145,7 +145,7 @@ function transcripts_ui_render_controls($ui)
                     '#theme' => 'transcripts_ui_transcript_options',
                     'trid' => $ui->trid,
                     'data_tiers' => $ui->tiers,
-                    'speaker_modes' => $ui->tiers,
+                    'speaker_names' => $ui->speakernames,
                     '#attached' => array(
                         'js' => array(
                             drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_tier_selector.js',
