@@ -17,9 +17,9 @@
                             });
 
                             //speaker name selection
-                            $('*[data-transcripts-id=' + trid + ']').find('.speaker-name').removeClass('active');
-                            $('optgroup[data-type=speaker-names] option:selected', this).each(function () {
-                                $('*[data-transcripts-id=' + trid + ']').find('*[data-speaker-name=' + $(this).val() + ']').addClass('active');
+                            $('*[data-transcripts-id=' + trid + ']').find('.speaker-display').removeClass('active');
+                            $('optgroup[data-type=speakers] option:selected', this).each(function () {
+                                $('*[data-transcripts-id=' + trid + ']').find('*[data-speaker-display=' + $(this).val() + ']').addClass('active');
                             });
                             e.preventDefault();
                         }
@@ -33,8 +33,8 @@
                     });
 
                     //hide buttons for speaker name formats that have no data
-                    $('optgroup[data-type=speaker-names] option', $tierSelector).each(function () {
-                        if ($('*[data-transcripts-id=' + trid + ']').find('*[data-speaker-name=' + $(this).val() + ']').size() == 0) {
+                    $('optgroup[data-type=speakers] option', $tierSelector).each(function () {
+                        if ($('*[data-transcripts-id=' + trid + ']').find('*[data-speaker-display=' + $(this).val() + ']').size() == 0) {
                             $(this).remove();
                         }
                     });
