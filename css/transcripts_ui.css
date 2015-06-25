@@ -27,6 +27,14 @@
     width: 100px;
 }
 
+.speaker-display {
+    display: none;
+}
+
+.speaker-display.active {
+    display: inline;
+}
+
 .speaker-tiers {
     margin-left: 200px;
 }
