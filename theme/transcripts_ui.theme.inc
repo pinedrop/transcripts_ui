@@ -39,7 +39,7 @@ function theme_transcripts_ui_speaker_name($vars)
     $vars['classes'][] = 'active';
     $classes = implode(' ', $vars['classes']);
     $out  = "<div class='speaker-name {$vars['speaker_turn']}'>";
-    $out .= "<span data-speaker-display='script' class='$classes'>{$vars['speaker_names']}</span>";
+    $out .= "<span data-speaker-display='script' class='$classes'>{$vars['speaker_name']}</span>";
     $out .= "</div>";
     return $out;
 }
