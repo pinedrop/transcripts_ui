@@ -5,6 +5,11 @@ function transcripts_ui_tiers()
     return variable_get('transcripts_ui_tiers', array());
 }
 
+function transcripts_ui_speaker_displays()
+{
+    return variable_get('transcripts_ui_speaker_displays', array());
+}
+
 function transcripts_ui_init()
 {
     drupal_add_library('system', 'ui.button');

@@ -18,6 +18,7 @@ class TranscriptUI
         $this->trid = 'trid-' . $trid;
         $this->options = $options;
         $this->tiers = transcripts_ui_tiers();
+        $this->speakerdisplays = transcripts_ui_speaker_displays();
         $this->module = $module;
 
         if (in_array($module, module_implements('transcripts_ui_transcript'))) {

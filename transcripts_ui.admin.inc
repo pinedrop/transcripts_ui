@@ -22,6 +22,18 @@ function transcripts_ui_admin()
         '#description' => t('Enter a list of tiers, one per line, each in the form TIER_ID|TIER_NAME.'),
         '#required' => TRUE,
     );
+    $default_speaker_displays = array(
+        'script' => 'Script',
+        'phonetic' => 'Phonetic',
+    );
+    $form['transcripts_ui_tier_settings']['transcripts_ui_speaker_displays'] = array(
+        '#title' => t('Speaker displays'),
+        '#type' => 'textarea',
+        '#rows' => 10,
+        '#default_value' => list_allowed_values_string(variable_get('transcripts_ui_speaker_displays', $default_speaker_displays)),
+        '#description' => t('Enter a list of speaker name display formats, one per line, each in the form SPEAKER_DISPLAY_ID|SPEAKER_DISPLAY_FORMAT.'),
+        '#required' => TRUE,
+    );
 
     $form = system_settings_form($form);
     array_unshift($form['#submit'], 'transcripts_ui_admin_submit');
