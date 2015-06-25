@@ -43,5 +43,7 @@ function transcripts_ui_admin()
 function transcripts_ui_admin_submit($form, &$form_state)
 {
     $tiers = list_extract_allowed_values($form_state['values']['transcripts_ui_tiers'], 'list_text', FALSE);
+    $speaker_names = list_extract_allowed_values($form_state['values']['transcripts_ui_speaker_names'], 'list_text', FALSE);
     $form_state['values']['transcripts_ui_tiers'] = $tiers;
+    $form_state['values']['transcripts_ui_speaker_names'] = $tiers;
 }
