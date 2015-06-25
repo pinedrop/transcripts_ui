@@ -7,11 +7,14 @@
                 .each(function () {
                     var trid = $(this).attr('data-transcripts-id');
 
-                    var $tierSelector = $('.tier-selector', this);
-                    $tierSelector.find('optgroup[data-type=languages] option').attr('selected', true);
+                    //var $tierSelector = $('.tier-selector', this);
+                    //$tierSelector.find('optgroup[data-type=languages] option').attr('selected', true);
+
+                    var $tierSelector = $('.tier-selector optgroup[data-type=languages]', this);
+                    $tierSelector.find('option').attr('selected', true);
                     $tierSelector.change(function (e) {
                             $('*[data-transcripts-id=' + trid + ']').find('.tier').removeClass('active');
-                            $('optgroup[data-type=languages] option:selected', this).each(function () {
+                            $('option:selected', this).each(function () {
                                 $('*[data-transcripts-id=' + trid + ']').find('*[data-tier=' + $(this).val() + ']').addClass('active');
                             });
                             e.preventDefault();
@@ -19,7 +22,8 @@
                     );
 
                     //hide buttons for tiers that have no data
-                    $('optgroup[data-type=languages] option', $tierSelector).each(function () {
+                    //$('optgroup[data-type=languages] option', $tierSelector).each(function () {
+                    $('option', $tierSelector).each(function () {
                         if ($('*[data-transcripts-id=' + trid + ']').find('*[data-tier=' + $(this).val() + ']').size() == 0) {
                             $(this).remove();
                         }
