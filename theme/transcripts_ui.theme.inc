@@ -35,7 +35,9 @@ function theme_transcripts_ui_transcript_search($vars)
 
 function theme_transcripts_ui_speaker_name($vars)
 {
-    $out = "<div class='speaker-name {$vars['speaker_turn']}'>{$vars['speaker_name']}</div>";
+    $out  = "<div class='speaker-name {$vars['speaker_turn']}'>";
+    $out .= "<span data-speaker-name='script'>{$vars['speaker_name']}</span>";
+    $out .= "</div>";
     return $out;
 }
 
