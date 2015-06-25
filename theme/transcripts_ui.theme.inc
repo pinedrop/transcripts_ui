@@ -35,8 +35,11 @@ function theme_transcripts_ui_transcript_search($vars)
 
 function theme_transcripts_ui_speaker_name($vars)
 {
+    $vars['classes'][] = 'speaker-name';
+    $vars['classes'][] = 'active';
+    $classes = implode(' ', $vars['classes']);
     $out  = "<div class='speaker-name {$vars['speaker_turn']}'>";
-    $out .= "<span data-speaker-name='script'>{$vars['speaker_name']}</span>";
+    $out .= "<span data-speaker-name='script' class='$classes'>{$vars['speaker_name']}</span>";
     $out .= "</div>";
     return $out;
 }
