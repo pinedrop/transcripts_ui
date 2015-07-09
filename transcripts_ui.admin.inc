@@ -23,7 +23,7 @@ function transcripts_ui_admin()
         '#required' => TRUE,
     );
     $default_speaker_names = array(
-        'script' => 'Script',
+        '@script' => 'Script',
         'phonetic' => 'Phonetic',
     );
     $form['transcripts_ui_tier_settings']['transcripts_ui_speaker_names'] = array(

@@ -34,6 +34,7 @@ class TranscriptUI
         $tiers = $this->tiers;
         $trid = $this->trid;
         $options = $this->options;
+        $speakernames = $this->speakernames;
 
         $highlight = $highlights !== NULL ? TRUE : FALSE;
         $hitCount = 0;
@@ -97,6 +98,7 @@ class TranscriptUI
                         '#sid' => $sid,
                         '#speaker_name' => $speaker,
                         '#speaker_turn' => $speaker == $lastSpeaker ? 'same-speaker' : 'new-speaker',
+                        '#speaker_name_displays' => $speakernames,
                     ),
                     '#suffix' => "</div>",
                 ),
