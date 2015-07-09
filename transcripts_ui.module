@@ -100,6 +100,7 @@ function transcripts_ui_theme()
             'variables' => array(
                 'speaker_name' => '',
                 'speaker_turn' => '',
+                'speaker_name_displays' => array(),
             ),
         ),
         'transcripts_ui_tcu_tier' => array(
