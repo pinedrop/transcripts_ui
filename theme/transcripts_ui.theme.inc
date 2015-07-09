@@ -42,7 +42,7 @@ function theme_transcripts_ui_speaker_name($vars)
     $i = 0;
     $speakernames = explode('|', $vars['speaker_name']);
     foreach ($vars['speaker_displays'] as $key => $val) {
-        $out .= "<span data-speaker-display='$key' class='$classes'>" . ($i < count($speakernames) ? $speakernames[$i] : "NULL") . "</span>";
+        $out .= "<span data-speaker-display='$key' class='$classes'>" . ($i < count($speakernames) ? $speakernames[$i] : "NULL") . "</span> ";
         $i++;
     }
     $out .= "</div>";
