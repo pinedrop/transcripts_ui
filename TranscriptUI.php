@@ -98,7 +98,7 @@ class TranscriptUI
                         '#sid' => $sid,
                         '#speaker_name' => $speaker,
                         '#speaker_turn' => $speaker == $lastSpeaker ? 'same-speaker' : 'new-speaker',
-                        '#speaker_name_displays' => $speakernames,
+                        '#speaker_displays' => $speakernames,
                     ),
                     '#suffix' => "</div>",
                 ),
