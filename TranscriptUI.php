@@ -18,6 +18,7 @@ class TranscriptUI
         $this->trid = 'trid-' . $trid;
         $this->options = $options;
         $this->tiers = transcripts_ui_tiers();
+        $this->speakernames = transcripts_ui_speaker_names();
         $this->module = $module;
 
         if (in_array($module, module_implements('transcripts_ui_transcript'))) {
@@ -33,6 +34,7 @@ class TranscriptUI
         $tiers = $this->tiers;
         $trid = $this->trid;
         $options = $this->options;
+        $speakernames = $this->speakernames;
 
         $highlight = $highlights !== NULL ? TRUE : FALSE;
         $hitCount = 0;
@@ -96,6 +98,7 @@ class TranscriptUI
                         '#sid' => $sid,
                         '#speaker_name' => $speaker,
                         '#speaker_turn' => $speaker == $lastSpeaker ? 'same-speaker' : 'new-speaker',
+                        '#speaker_displays' => $speakernames,
                     ),
                     '#suffix' => "</div>",
                 ),

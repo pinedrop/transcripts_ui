@@ -35,7 +35,20 @@ function theme_transcripts_ui_transcript_search($vars)
 
 function theme_transcripts_ui_speaker_name($vars)
 {
-    $out = "<div class='speaker-name {$vars['speaker_turn']}'>{$vars['speaker_name']}</div>";
+    $vars['classes'][] = 'speaker-display';
+    $vars['classes'][] = 'active';
+    $classes = implode(' ', $vars['classes']);
+    $out  = "<div class='speaker-name {$vars['speaker_turn']}'>";
+    $i = 0;
+    $speakernames = explode('|', $vars['speaker_name']);
+    foreach ($vars['speaker_displays'] as $key => $val) {
+        if ($i < count($speakernames)) {
+            $out .= "<span data-speaker-display='$key' class='$classes'>" . $speakernames[$i] . "</span> ";
+            $i++;
+        }
+        else break;
+    }
+    $out .= "</div>";
     return $out;
 }
 
