@@ -44,12 +44,17 @@ class TranscriptUI
 
         foreach ($timecodeunits as $sentence) {
             $sid = $sentence->tcuid;
-            $speaker = isset($sentence->speaker) ? $sentence->speaker : '';
             $begin = isset($sentence->start) ? $sentence->start : 0;
             $end = isset($sentence->end) ? $sentence->end : 0;
 
-            $tier_list = array();
+            $speaker_tiers = array();
+            foreach (array_keys($speakernames) as $tier) {
+                if (isset($sentence->$tier)) {
+                    $speaker_tiers[$tier] = $sentence->$tier;
+                }
+            }
 
+            $tier_list = array();
             foreach (array_keys($tiers) as $tier) {
                 if (isset($sentence->$tier)) {
                     if ($highlight) {
@@ -96,9 +101,9 @@ class TranscriptUI
                     'speaker_name' => array(
                         '#theme' => 'transcripts_ui_speaker_name',
                         '#sid' => $sid,
-                        '#speaker_name' => $speaker,
-                        '#speaker_turn' => $speaker == $lastSpeaker ? 'same-speaker' : 'new-speaker',
-                        '#speaker_displays' => $speakernames,
+                        '#speaker_name' => $speaker_tiers,
+                        '#speaker_turn' => 'new-speaker', //$speaker == $lastSpeaker ? 'same-speaker' : 'new-speaker',
+                        //'#speaker_displays' => $speakernames,
                     ),
                     '#suffix' => "</div>",
                 ),

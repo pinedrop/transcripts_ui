@@ -98,9 +98,8 @@ function transcripts_ui_theme()
             'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
             'file' => 'transcripts_ui.theme.inc',
             'variables' => array(
-                'speaker_name' => '',
+                'speaker_name' => array(),
                 'speaker_turn' => '',
-                'speaker_displays' => array(),
             ),
         ),
         'transcripts_ui_tcu_tier' => array(
