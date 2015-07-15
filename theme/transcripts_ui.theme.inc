@@ -8,12 +8,23 @@ function theme_transcripts_ui_transcript_controls($vars)
 
 function theme_transcripts_ui_transcript_options($vars)
 {
-    $out = "<select multiple class='tier-selector selectpicker' data-count-selected-text='{0} of {1} languages' data-selected-text-format='count'>";
+    $out  = "<select multiple class='selectpicker tier-selector' data-header='Select languages'>";
+
+    //language selector
+    $out .= "<optgroup label='Transcript' data-type='languages'>";
     foreach ($vars['element']['data_tiers'] as $key => $val) {
         $out .= "<option value='{$key}'>{$val}</option>";
     }
-    $out .= "</select>";
+    $out .= "</optgroup>";
 
+    //speaker name selector
+    $out .= "<optgroup label='Speaker names' data-type='speakers'>";
+    foreach ($vars['element']['speaker_names'] as $key => $val) {
+        $out .= "<option value='{$key}'>{$val}</option>";
+    }
+    $out .= "</optgroup>";
+
+    $out .= "</select>";
     return $out;
 }
 
