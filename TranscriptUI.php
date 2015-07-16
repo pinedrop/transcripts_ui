@@ -39,7 +39,7 @@ class TranscriptUI
         $highlight = $highlights !== NULL ? TRUE : FALSE;
         $hitCount = 0;
 
-        $lastSpeaker = "";
+        //$lastSpeaker = "";
         $tcus = array();
 
         foreach ($timecodeunits as $sentence) {
@@ -116,7 +116,7 @@ class TranscriptUI
                 '#suffix' => "</li>",
             );
 
-            $lastSpeaker = $speaker;
+            //$lastSpeaker = $speaker;
         }
 
         $this->hitCount = $hitCount;
