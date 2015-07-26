@@ -39,7 +39,7 @@ class TranscriptUI
         $highlight = $highlights !== NULL ? TRUE : FALSE;
         $hitCount = 0;
 
-        //$lastSpeaker = "";
+        $last_speaker_tiers = array();
         $tcus = array();
 
         foreach ($timecodeunits as $sentence) {
@@ -102,8 +102,7 @@ class TranscriptUI
                         '#theme' => 'transcripts_ui_speaker_name',
                         '#sid' => $sid,
                         '#speaker_name' => $speaker_tiers,
-                        '#speaker_turn' => 'new-speaker', //$speaker == $lastSpeaker ? 'same-speaker' : 'new-speaker',
-                        //'#speaker_displays' => $speakernames,
+                        '#speaker_turn' => $speaker_tiers == $last_speaker_tiers ? 'same-speaker' : 'new-speaker',
                     ),
                     '#suffix' => "</div>",
                 ),
@@ -116,7 +115,7 @@ class TranscriptUI
                 '#suffix' => "</li>",
             );
 
-            //$lastSpeaker = $speaker;
+            $last_speaker_tiers = $speaker_tiers;
         }
 
         $this->hitCount = $hitCount;
