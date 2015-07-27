@@ -50,14 +50,10 @@ function theme_transcripts_ui_speaker_name($vars)
     $vars['classes'][] = 'active';
     $classes = implode(' ', $vars['classes']);
     $out  = "<div class='speaker-name {$vars['speaker_turn']}'>";
-    $i = 0;
-    $speakernames = explode('|', $vars['speaker_name']);
-    foreach ($vars['speaker_displays'] as $key => $val) {
-        if ($i < count($speakernames)) {
-            $out .= "<span data-speaker-display='$key' class='$classes'>" . $speakernames[$i] . "</span> ";
-            $i++;
+    if (is_array($vars['speaker_name'])) {
+        foreach ($vars['speaker_name'] as $key => $val) {
+            $out .= "<span data-speaker-display='$key' class='$classes'>$val</span> ";
         }
-        else break;
     }
     $out .= "</div>";
     return $out;
