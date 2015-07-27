@@ -53,6 +53,7 @@ class TranscriptUI
                     $speaker_tiers[$tier] = $sentence->$tier;
                 }
             }
+            $speaker = implode('/', array_values($speaker_tiers));
 
             $tier_list = array();
             foreach (array_keys($tiers) as $tier) {
