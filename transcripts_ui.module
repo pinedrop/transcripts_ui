@@ -5,6 +5,11 @@ function transcripts_ui_tiers()
     return variable_get('transcripts_ui_tiers', array());
 }
 
+function transcripts_ui_speaker_names()
+{
+    return variable_get('transcripts_ui_speaker_names', array());
+}
+
 function transcripts_ui_init()
 {
     drupal_add_library('system', 'ui.button');
@@ -93,7 +98,7 @@ function transcripts_ui_theme()
             'path' => drupal_get_path('module', 'transcripts_ui') . '/theme',
             'file' => 'transcripts_ui.theme.inc',
             'variables' => array(
-                'speaker_name' => '',
+                'speaker_name' => array(),
                 'speaker_turn' => '',
             ),
         ),
@@ -140,11 +145,10 @@ function transcripts_ui_render_controls($ui)
                     '#theme' => 'transcripts_ui_transcript_options',
                     'trid' => $ui->trid,
                     'data_tiers' => $ui->tiers,
-                    'speaker_modes' => $ui->tiers,
+                    'speaker_names' => $ui->speakernames,
                     '#attached' => array(
                         'js' => array(
                             drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_tier_selector.js',
-                            //drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_speaker_selector.js',
                         ),
                     ),
                 ),

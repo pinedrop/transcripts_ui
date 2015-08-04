@@ -8,12 +8,23 @@ function theme_transcripts_ui_transcript_controls($vars)
 
 function theme_transcripts_ui_transcript_options($vars)
 {
-    $out = "<select multiple class='tier-selector selectpicker' data-count-selected-text='{0} of {1} languages' data-selected-text-format='count'>";
+    $out  = "<select multiple class='selectpicker tier-selector' data-header='Select languages'>";
+
+    //language selector
+    $out .= "<optgroup label='Transcript' data-type='languages'>";
     foreach ($vars['element']['data_tiers'] as $key => $val) {
         $out .= "<option value='{$key}'>{$val}</option>";
     }
-    $out .= "</select>";
+    $out .= "</optgroup>";
 
+    //speaker name selector
+    $out .= "<optgroup label='Speaker names' data-type='speakers'>";
+    foreach ($vars['element']['speaker_names'] as $key => $val) {
+        $out .= "<option value='{$key}'>{$val}</option>";
+    }
+    $out .= "</optgroup>";
+
+    $out .= "</select>";
     return $out;
 }
 
@@ -35,7 +46,16 @@ function theme_transcripts_ui_transcript_search($vars)
 
 function theme_transcripts_ui_speaker_name($vars)
 {
-    $out = "<div class='speaker-name {$vars['speaker_turn']}'>{$vars['speaker_name']}</div>";
+    $vars['classes'][] = 'speaker-display';
+    $vars['classes'][] = 'active';
+    $classes = implode(' ', $vars['classes']);
+    $out  = "<div class='speaker-name {$vars['speaker_turn']}'>";
+    if (is_array($vars['speaker_name'])) {
+        foreach ($vars['speaker_name'] as $key => $val) {
+            $out .= "<span data-speaker-display='$key' class='$classes'>$val</span> ";
+        }
+    }
+    $out .= "</div>";
     return $out;
 }
 
