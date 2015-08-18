@@ -39,17 +39,24 @@ class TranscriptUI
         $highlight = $highlights !== NULL ? TRUE : FALSE;
         $hitCount = 0;
 
-        $lastSpeaker = "";
+        $last_speaker_tiers = array();
         $tcus = array();
 
         foreach ($timecodeunits as $sentence) {
+
             $sid = $sentence->id;
-            $speaker = isset($sentence->speaker) ? $sentence->speaker : '';
             $begin = isset($sentence->start) ? $sentence->start : 0;
             $end = isset($sentence->end) ? $sentence->end : 0;
 
-            $tier_list = array();
+            $speaker_tiers = array();
+            foreach (array_keys($speakernames) as $tier) {
+                if (isset($sentence->$tier)) {
+                    $speaker_tiers[$tier] = $sentence->$tier;
+                }
+            }
+            $speaker = implode('/', array_values($speaker_tiers));
 
+            $tier_list = array();
             foreach (array_keys($tiers) as $tier) {
                 if (isset($sentence->$tier)) {
                     if ($highlight) {
@@ -96,9 +103,8 @@ class TranscriptUI
                     'speaker_name' => array(
                         '#theme' => 'transcripts_ui_speaker_name',
                         '#sid' => $sid,
-                        '#speaker_name' => $speaker,
-                        '#speaker_turn' => $speaker == $lastSpeaker ? 'same-speaker' : 'new-speaker',
-                        '#speaker_displays' => $speakernames,
+                        '#speaker_name' => $speaker_tiers,
+                        '#speaker_turn' => $speaker_tiers == $last_speaker_tiers ? 'same-speaker' : 'new-speaker',
                     ),
                     '#suffix' => "</div>",
                 ),
@@ -111,7 +117,7 @@ class TranscriptUI
                 '#suffix' => "</li>",
             );
 
-            $lastSpeaker = $speaker;
+            $last_speaker_tiers = $speaker_tiers;
         }
 
         $this->hitCount = $hitCount;
