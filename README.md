@@ -6,9 +6,10 @@ Transcripts UI provides a themeable interface for interacting with
 timecoded transcripts in Drupal. The module assumes a very simple
 data model for transcripts, which may work for you. A transcript is
 divided into a number of Time Code Units (TCUs). Each TCU has an
-optional speaker, a start time, and an end time. In addition, each
-TCU has any number of "tiers". Tiers can be anything, but by
-convention they are things like:
+optional speaker in one or more transliteration formats, a start
+time, and an end time. In addition, each TCU has any number of
+"tiers". Tiers can be anything, but by convention they are things
+like:
 
 * a transcription of what the speaker said
 * a translation of what the speaker said
@@ -22,7 +23,9 @@ The acronym "TCU" was inspired by its use within the
 Enable the transcript_ui module.
 
 Go to admin/config/user-interface/transcripts, and define
-a list of tier identifiers and tier names.
+a list of tier identifiers and tier names. On that page you
+can also define a list of speaker display formats, also in
+key|label notation.
 
 Transcripts UI generates 'Bootstrap' compatible markup, if you are
 using the [Bootstrap theme](https://www.drupal.org/project/bootstrap)
@@ -103,4 +106,4 @@ Pinedrop's work on Transcripts UI has been sponsored by:
 at the UTSC Library.
 * [SHANTI](http://shanti.virginia.edu/) at the University of Virginia.
 
-[20 July 2015]
+[24 August 2015]
