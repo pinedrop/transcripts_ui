@@ -23,7 +23,9 @@ The acronym "TCU" was inspired by its use within the
 Enable the transcript_ui module.
 
 Go to admin/config/user-interface/transcripts, and define
-a list of tier identifiers and tier names.
+a list of tier identifiers and tier names. On that page you
+can also define a list of speaker display formats, also in
+key|label notation.
 
 Transcripts UI generates 'Bootstrap' compatible markup, if you are
 using the [Bootstrap theme](https://www.drupal.org/project/bootstrap)
