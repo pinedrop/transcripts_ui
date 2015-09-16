@@ -43,7 +43,8 @@ class TranscriptUI
         $tcus = array();
 
         foreach ($timecodeunits as $sentence) {
-            $sid = $sentence->tcuid;
+
+            $sid = $sentence->id;
             $begin = isset($sentence->start) ? $sentence->start : 0;
             $end = isset($sentence->end) ? $sentence->end : 0;
 
