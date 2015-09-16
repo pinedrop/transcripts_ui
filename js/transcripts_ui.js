@@ -8,6 +8,7 @@
                 .each(function () {
                     ScrollingTranscript
                         .getUI($(this))
+                        .setContainer($(this).parents('.transcript-container'))
                         .setVideo($('[data-transcripts-role=video][data-transcripts-id=' + $(this).attr('data-transcripts-id') + ']').find('video,audio')[0]);
                 });
         }
