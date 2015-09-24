@@ -88,7 +88,7 @@ class TranscriptUI
 
             $tcus[] = array(
                 //div had class clearfix
-                '#prefix' => "<li id='{$sid}' class='clearfix list-group-item transcripts-ui-tcu' data-tcuid='{$sid}' data-participant='{$speaker}' data-begin='{$begin}' data-end='{$end}'>",
+                '#prefix' => "<li id='{$sid}' class='clearfix list-group-item transcripts-ui-tcu' data-tcuid='{$sid}' data-begin='{$begin}' data-end='{$end}'>",
                 'tcu_info' => array(
                     '#prefix' => "<div class='clearfix tcu-info'>",
                     'link' => array(

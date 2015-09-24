@@ -18,13 +18,15 @@
     margin-right: -100px;
 }
 
-.same-speaker {
-    display: none;
-}
-
+/* SPEAKER NAMES */
 .speaker-name {
     float: right;
     width: 100px;
+}
+
+/*
+.same-speaker {
+    display: none;
 }
 
 .speaker-display {
@@ -34,17 +36,11 @@
 .speaker-display.active {
     display: inline;
 }
+*/
 
+/* DATA TIERS */
 .speaker-tiers {
     margin-left: 200px;
-}
-
-.scroller .tier {
-    display: none;
-}
-
-.scroller .tier.active {
-    display: block;
 }
 
 .scroller .playing {
@@ -54,3 +50,15 @@
 .scroller ul {
     list-style: none;
 }
+
+/*
+.scroller .tier {
+    display: none;
+}
+
+.scroller .tier.active {
+    display: block;
+}
+*/
+
+
