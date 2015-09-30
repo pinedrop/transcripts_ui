@@ -86,16 +86,21 @@
                     return a.end - b.end;
                 }),
 
-                playOne: function ($item) {
+                playOne: function ($item, begin, end) {
                     var reset = this.resetSweet;
-                    if ($item.attr('data-end') - $item.attr('data-begin') > 0) {
+
+                    //to support transcript editing where times could be modified
+                    if (begin === undefined) begin = $item.attr('data-begin');
+                    if (end === undefined) end = $item.attr('data-end');
+
+                    if (end-begin > 0) {
                         this.one = $item;
                         this.endAll();
                         if (reset) {
                             this.sweetSpot = $item.position().top;
                         }
                         this.playIndex = parseInt($item.attr('data-starts-index'));
-                        this.playFrom($item.attr('data-begin'));
+                        this.playFrom(begin);
                     }
                 },
 
