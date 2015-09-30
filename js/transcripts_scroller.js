@@ -53,6 +53,12 @@
                         player.currentTime = seconds;
                         if (player.paused) player.play();
                     }
+                },
+
+                setCurrentTime: function (seconds) {
+                    if (player != null) {
+                        player.currentTime = seconds;
+                    }
                 }
             };
 
