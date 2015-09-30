@@ -1,5 +1,7 @@
 (function ($) {
 
+    Drupal.settings.scrollingTranscript = [];
+
     ScrollingTranscript = (function () {
         var ui = [];
 
