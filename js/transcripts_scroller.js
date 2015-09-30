@@ -86,7 +86,7 @@
                     return a.end - b.end;
                 }),
 
-                playOne: function ($item, begin, end) {
+                playOne: function ($item, noscroll, begin, end) {
                     var reset = this.resetSweet;
 
                     //to support transcript editing where times could be modified
@@ -104,10 +104,13 @@
                     }
                 },
 
-                setOne: function ($tcu) {
+                setOne: function ($tcu, noscroll) {
+                    noscroll = noscroll || false;
                     this.one = $tcu;
                     this.playIndex = parseInt(this.one.attr('data-starts-index'));
-                    this.startPlay($tcu); //scroll to sweet spot
+                    if (!noscroll) {
+                        this.startPlay($tcu); //scroll to sweet spot
+                    }
                 },
 
                 checkNow: function (now) {
