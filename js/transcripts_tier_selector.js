@@ -12,15 +12,15 @@
                     $tierSelector.find('optgroup[data-type=speakers] option').attr('selected', true)
                     $tierSelector.change(function (e) {
                             //language selection
-                            $('*[data-transcripts-id=' + trid + ']').find('.tier').hide(); //removeClass('active');
+                            $('*[data-transcripts-id=' + trid + ']').find('.tier').hide();
                             $('optgroup[data-type=languages] option:selected', this).each(function () {
-                                $('*[data-transcripts-id=' + trid + ']').find('*[data-tier=' + $(this).val() + ']').show(); //addClass('active');
+                                $('*[data-transcripts-id=' + trid + ']').find('*[data-tier=' + $(this).val() + ']').show();
                             });
 
                             //speaker name selection
-                            $('*[data-transcripts-id=' + trid + ']').find('.speaker-display').hide(); //removeClass('active');
+                            $('*[data-transcripts-id=' + trid + ']').find('.speaker-display').hide();
                             $('optgroup[data-type=speakers] option:selected', this).each(function () {
-                                $('*[data-transcripts-id=' + trid + ']').find('*[data-speaker-display=' + $(this).val() + ']').show(); //addClass('active');
+                                $('*[data-transcripts-id=' + trid + ']').find('*[data-speaker-display=' + $(this).val() + ']').show();
                             });
                             e.preventDefault();
                         }

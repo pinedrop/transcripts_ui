@@ -2,17 +2,14 @@
 .transcript-navigate-results {
     display: none;
 }
-
 .has-searched .transcript-search-options,
 .has-searched .transcript-navigate-results {
     display: block;
 }
-
 .tcu-info {
     float: left;
     width: 200px;
 }
-
 .play-button {
     float: left;
     margin-right: -100px;
@@ -23,18 +20,9 @@
     float: right;
     width: 100px;
 }
-
 /*
 .same-speaker {
     display: none;
-}
-
-.speaker-display {
-    display: none;
-}
-
-.speaker-display.active {
-    display: inline;
 }
 */
 
@@ -42,23 +30,10 @@
 .speaker-tiers {
     margin-left: 200px;
 }
-
 .scroller .playing {
     background-color: #6cf;
 }
-
 .scroller ul {
     list-style: none;
 }
-
-/*
-.scroller .tier {
-    display: none;
-}
-
-.scroller .tier.active {
-    display: block;
-}
-*/
-
 
