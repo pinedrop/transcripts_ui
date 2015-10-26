@@ -47,7 +47,6 @@ function theme_transcripts_ui_transcript_search($vars)
 function theme_transcripts_ui_speaker_name($vars)
 {
     $vars['classes'][] = 'speaker-display';
-    $vars['classes'][] = 'active';
     $classes = implode(' ', $vars['classes']);
     $out  = "<div class='speaker-name {$vars['speaker_turn']}'>";
     if (is_array($vars['speaker_name'])) {
@@ -62,7 +61,6 @@ function theme_transcripts_ui_speaker_name($vars)
 function theme_transcripts_ui_tcu_tier($vars)
 {
     $vars['classes'][] = 'tier';
-    $vars['classes'][] = 'active';
     $classes = implode(' ', $vars['classes']);
     $out = "<div data-tier='{$vars['tier_name']}' class='$classes'>{$vars['tier_text']}</div>";
     return $out;
