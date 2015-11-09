@@ -1,11 +1,3 @@
-.transcript-search-options,
-.transcript-navigate-results {
-    display: none;
-}
-.has-searched .transcript-search-options,
-.has-searched .transcript-navigate-results {
-    display: block;
-}
 .tcu-info {
     float: left;
     width: 200px;
@@ -19,12 +11,10 @@
 .speaker-name {
     float: right;
     width: 100px;
-}
-/*
+}/*
 .same-speaker {
     display: none;
-}
-*/
+}*/
 
 /* DATA TIERS */
 .speaker-tiers {
