@@ -29,6 +29,8 @@
                         $scroller.setOne($tcu);
                         $scroller.container.scrollTo($tcu);
                         $('#transcript-results-count-' + trid).html(i + ' of ' + hitCount);
+                        $('#transcript-previousresult-' + trid).toggleClass('has-result', i == 1);
+                        $('#transcript-nextresult-' + trid).toggleClass('has-result', i == hitCount);
                     };
 
                     var clearHits = function () {
