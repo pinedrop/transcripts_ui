@@ -16,10 +16,6 @@
                     var $scroller = ScrollingTranscript.getUI($transcript);
                     if (settings.hasOwnProperty('hasSearched') && settings.hasSearched) $form.addClass('has-searched');
                     var hitCount = settings.hasOwnProperty('hitCount') ? settings.hitCount : 0;
-                    if (hitCount > 0) {
-                        $('#transcript-nextresult-' + trid).addClass('has-result');
-                        $('#transcript-previousresult-' + trid).addClass('has-result');
-                    }
                     $('#transcript-results-count-' + trid).attr('data-results-count', hitCount);
 
                     var hitIndex = 1;
@@ -29,8 +25,8 @@
                         $scroller.setOne($tcu);
                         $scroller.container.scrollTo($tcu);
                         $('#transcript-results-count-' + trid).html(i + ' of ' + hitCount);
-                        $('#transcript-previousresult-' + trid).toggleClass('has-result', i != 1);
-                        $('#transcript-nextresult-' + trid).toggleClass('has-result', i != hitCount);
+                        $('#transcript-previousresult-' + trid).toggleClass('has-result', i > 1);
+                        $('#transcript-nextresult-' + trid).toggleClass('has-result', i < hitCount);
                     };
 
                     var clearHits = function () {
