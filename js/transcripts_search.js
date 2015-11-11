@@ -16,6 +16,10 @@
                     var $scroller = ScrollingTranscript.getUI($transcript);
                     if (settings.hasOwnProperty('hasSearched') && settings.hasSearched) $form.addClass('has-searched');
                     var hitCount = settings.hasOwnProperty('hitCount') ? settings.hitCount : 0;
+                    if (hitCount > 0) {
+                        $('#transcript-nextresult-' + trid).addClass('has-result');
+                        $('#transcript-previousresult-' + trid).addClass('has-result');
+                    }
                     $('#transcript-results-count-' + trid).attr('data-results-count', hitCount);
 
                     var hitIndex = 1;
