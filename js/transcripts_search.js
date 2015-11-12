@@ -32,23 +32,33 @@
                     var clearHits = function () {
                         $('.hit', $transcript).removeClass('hit').find('mark').contents().unwrap();
                     };
-
-                    $('input:radio[name=transcript-search-options]', $form).click(function () {
-                        if ($(this).attr('data-value') == 0) {
-                            $('li[data-tcuid]', $transcript).show();
-                            if (hitCount > 0) {
-                                scrollHit(hitIndex);
-                            }
+                    var showAll = function() {
+                        $('li[data-tcuid]', $transcript).show();
+                        if (hitCount > 0) {
+                            scrollHit(hitIndex);
                         }
-                        else {
-                            $('li[data-tcuid]:not(:has(.hit))').hide();
-                            if (hitCount > 0) {
-                                scrollHit(hitIndex);
-                            }
+                    };
+                    var showHits = function() {
+                        $('li[data-tcuid]:not(:has(.hit))').hide();
+                        if (hitCount > 0) {
+                            scrollHit(hitIndex);
                         }
-                    });
-                    $('input:radio[name=transcript-search-options]', $form).first().click();
-
+                    };
+                    if (hitCount == 0) {
+                        $('input:radio[name=transcript-search-options]').attr('disabled', true);
+                        showAll();
+                    }
+                    else {
+                        $('input:radio[name=transcript-search-options]', $form).click(function () {
+                            if ($(this).attr('data-value') == 0) {
+                                showAll();
+                            }
+                            else {
+                                showHits();
+                            }
+                        });
+                        $('input:radio[name=transcript-search-options]', $form).first().click();
+                    }
                     if (hitCount > 0) {
                         $('#transcript-nextresult-' + trid).click(function () {
                             if (hitIndex < hitCount) {
@@ -62,7 +72,6 @@
                                 scrollHit(hitIndex);
                             }
                         });
-
                         scrollHit(hitIndex);
                     }
 
