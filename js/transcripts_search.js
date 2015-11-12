@@ -127,6 +127,10 @@
                         e.preventDefault();
                     });
 
+                    $('.transcript-search-wrapper > span').click(function() {
+                        $(this).parent().slideToggle();
+                    });
+
                     // Overwrite beforeSubmit
                     Drupal.ajax['transcript-search-button-' + trid].options.beforeSubmit = function (form_values, element, options) {
                         clearHits();
