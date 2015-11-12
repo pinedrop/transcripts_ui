@@ -38,6 +38,13 @@ function theme_transcripts_ui_transcript_navigation($vars)
     return $out;
 }
 
+function theme_transcripts_ui_transcript_search_wrapper($vars)
+{
+    $out = "<span class='glyphicon glyphicon-remove-circle'></span>";
+    $out .= drupal_render($vars['element']['content']);
+    return $out;
+}
+
 function theme_transcripts_ui_transcript_search($vars)
 {
     $out = drupal_render($vars['element']['search_form']);
