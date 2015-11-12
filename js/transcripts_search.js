@@ -45,6 +45,7 @@
                         }
                     };
                     if (hitCount == 0) {
+                        $form.addClass('no-results');
                         $('input:radio[name=transcript-search-options]', $form).attr('disabled', true);
                     }
                     else {
