@@ -45,8 +45,7 @@
                         }
                     };
                     if (hitCount == 0) {
-                        $('input:radio[name=transcript-search-options]').attr('disabled', true);
-                        showAll();
+                        $('input:radio[name=transcript-search-options]', $form).attr('disabled', true);
                     }
                     else {
                         $('input:radio[name=transcript-search-options]', $form).click(function () {
@@ -57,8 +56,9 @@
                                 showHits();
                             }
                         });
-                        $('input:radio[name=transcript-search-options]', $form).first().click();
                     }
+                    showAll();
+
                     if (hitCount > 0) {
                         $('#transcript-nextresult-' + trid).click(function () {
                             if (hitIndex < hitCount) {
