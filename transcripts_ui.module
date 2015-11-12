@@ -175,6 +175,11 @@ function transcripts_ui_render_controls($ui)
                         ),
                     ),
                     '#suffix' => "</div>",
+                    '#attached' => array(
+                        'js' => array(
+                            drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_search_wrapper.js',
+                        ),
+                    ),
                 ),
             ),
             '#suffix' => "</div>",

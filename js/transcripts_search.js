@@ -2,7 +2,6 @@
  * Created by edwardjgarrett on 1/29/15.
  */
 (function ($) {
-
     //http://drupal.stackexchange.com/questions/79521/invoke-custom-js-function-in-ajax-callback
     Drupal.behaviors.transcriptSearch = {
         attach: function (context, settings) {
@@ -125,10 +124,6 @@
                         $(this).hide();
                         clearHits();
                         e.preventDefault();
-                    });
-
-                    $('.transcript-search-wrapper > span').click(function() {
-                        $(this).parent().slideToggle();
                     });
 
                     // Overwrite beforeSubmit
