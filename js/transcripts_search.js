@@ -31,7 +31,7 @@
                         $('.hit', $transcript).removeClass('hit').find('mark').contents().unwrap();
                         $form.addClass('no-results');
                         $('input:radio[name=transcript-search-options]', $form).attr('disabled', true);
-                        $('#transcript-results-count-' + trid).html('0 of 0');
+                        $('#transcript-results-count-' + trid).attr('data-results-count', 0).html('0 of 0');
                         $('#transcript-previousresult-' + trid).removeClass('has-result');
                         $('#transcript-nextresult-' + trid).removeClass('has-result');
                     };
