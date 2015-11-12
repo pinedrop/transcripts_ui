@@ -27,9 +27,13 @@
                         $('#transcript-previousresult-' + trid).toggleClass('has-result', i > 1);
                         $('#transcript-nextresult-' + trid).toggleClass('has-result', i < hitCount);
                     };
-
                     var clearHits = function () {
                         $('.hit', $transcript).removeClass('hit').find('mark').contents().unwrap();
+                        $form.addClass('no-results');
+                        $('input:radio[name=transcript-search-options]', $form).attr('disabled', true);
+                        $('#transcript-results-count-' + trid).html('0 of 0');
+                        $('#transcript-previousresult-' + trid).removeClass('has-result');
+                        $('#transcript-nextresult-' + trid).removeClass('has-result');
                     };
                     var showAll = function() {
                         $('li[data-tcuid]', $transcript).show();
