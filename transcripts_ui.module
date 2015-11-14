@@ -246,7 +246,7 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
         '#suffix' => "</span>",
     );
     $form['search']['input']['buttons']['spinner'] = array(
-        '#markup' => "<span class='icon spinner'><span class='icon-spin icon-refresh'></span></span>",
+        '#markup' => "<span class='icon fa-spinner'></span>",
     );
     $form['search']['input']['buttons']['go'] = array(
         '#type' => 'button',
