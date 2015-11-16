@@ -2,7 +2,6 @@
  * Created by edwardjgarrett on 1/29/15.
  */
 (function ($) {
-
     //http://drupal.stackexchange.com/questions/79521/invoke-custom-js-function-in-ajax-callback
     Drupal.behaviors.transcriptSearch = {
         attach: function (context, settings) {
@@ -25,27 +24,44 @@
                         $scroller.setOne($tcu);
                         $scroller.container.scrollTo($tcu);
                         $('#transcript-results-count-' + trid).html(i + ' of ' + hitCount);
+                        $('#transcript-previousresult-' + trid).toggleClass('has-result', i > 1);
+                        $('#transcript-nextresult-' + trid).toggleClass('has-result', i < hitCount);
                     };
-
                     var clearHits = function () {
                         $('.hit', $transcript).removeClass('hit').find('mark').contents().unwrap();
+                        $form.addClass('no-results');
+                        $('input:radio[name=transcript-search-options]', $form).attr('disabled', true);
+                        $('#transcript-results-count-' + trid).attr('data-results-count', 0).html('0 of 0');
+                        $('#transcript-previousresult-' + trid).removeClass('has-result');
+                        $('#transcript-nextresult-' + trid).removeClass('has-result');
                     };
-
-                    $('input:radio[name=transcript-search-options]', $form).click(function () {
-                        if ($(this).attr('data-value') == 0) {
-                            $('li[data-tcuid]', $transcript).show();
-                            if (hitCount > 0) {
-                                scrollHit(hitIndex);
-                            }
+                    var showAll = function() {
+                        $('li[data-tcuid]', $transcript).show();
+                        if (hitCount > 0) {
+                            scrollHit(hitIndex);
                         }
-                        else {
-                            $('li[data-tcuid]:not(:has(.hit))').hide();
-                            if (hitCount > 0) {
-                                scrollHit(hitIndex);
-                            }
+                    };
+                    var showHits = function() {
+                        $('li[data-tcuid]:not(:has(.hit))').hide();
+                        if (hitCount > 0) {
+                            scrollHit(hitIndex);
                         }
-                    });
-                    $('input:radio[name=transcript-search-options]', $form).first().click();
+                    };
+                    if (hitCount == 0) {
+                        $form.addClass('no-results');
+                        $('input:radio[name=transcript-search-options]', $form).attr('disabled', true);
+                    }
+                    else {
+                        $('input:radio[name=transcript-search-options]', $form).click(function () {
+                            if ($(this).attr('data-value') == 0) {
+                                showAll();
+                            }
+                            else {
+                                showHits();
+                            }
+                        });
+                    }
+                    showAll();
 
                     if (hitCount > 0) {
                         $('#transcript-nextresult-' + trid).click(function () {
@@ -60,7 +76,6 @@
                                 scrollHit(hitIndex);
                             }
                         });
-
                         scrollHit(hitIndex);
                     }
 

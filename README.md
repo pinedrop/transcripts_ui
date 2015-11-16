@@ -34,8 +34,8 @@ the Bootstrap classes if you are using another theme.
 
 ## Creating a UI
 
-* To create a UI, pass your module's name along with a unique transcript identifier
-and some options to transcripts_ui_ui().
+* To create a UI, pass your module's name along with a unique transcript 
+identifier and some options to transcripts_ui_ui().
 * To render a UI, pass it to transcripts_ui_render().
 
 ## UI Components
@@ -65,7 +65,7 @@ by this [JavaScript file](https://github.com/pinedrop/transcripts_ui/blob/master
 
 To override the default, implement [hook_transcripts_ui_js_alter](https://github.com/pinedrop/transcripts_ui/blob/master/transcripts_ui.api.php).
 For example, Shanti UVA's Mediabase implements the hook in order to
-grab a video tag from an iFrame introduced by the [Kaltura player](https://github.com/shanti-uva/drupal_mediabase/blob/newtheme/mb_kaltura/js/transcripts_ui.js).
+grab a video tag from an iFrame introduced by the [Kaltura player](https://github.com/shanti-uva/drupal_mediabase/blob/master/mb_kaltura/js/transcripts_ui.js).
 
 Your module is also responsible for retrieving transcripts for the
 UI; this is done by implementing hook_transcripts_ui_transcript().
@@ -102,8 +102,8 @@ is one module that makes use of transcripts_ui.
 
 Pinedrop's work on Transcripts UI has been sponsored by:
 
-* The [Digital Scholarship Unit (DSU)](https://www.utsc.utoronto.ca/digitalscholarship/)
-at the UTSC Library.
-* [SHANTI](http://shanti.virginia.edu/) at the University of Virginia.
-
 [24 August 2015]
+=======
+* (Primarily) [SHANTI](http://shanti.virginia.edu/) at the University of Virginia
+* (Also) The [Digital Scholarship Unit (DSU)](https://www.utsc.utoronto.ca/digitalscholarship/)
+at the UTSC Library..
