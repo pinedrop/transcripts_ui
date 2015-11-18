@@ -139,6 +139,47 @@ function transcripts_ui_render($ui)
     return array_merge($vars, transcripts_ui_render_controls($ui));
 }
 
+function transcripts_ui_tcu($sentence, $speaker_turn, $speaker_tiers = array(), $tier_list = array())
+{
+    $sid = $sentence->tcuid;
+    $begin = isset($sentence->start) ? $sentence->start : 0;
+    $end = isset($sentence->end) ? $sentence->end : 0;
+
+    $tcu = array(
+        //div had class clearfix
+        '#prefix' => "<li id='{$sid}' class='clearfix list-group-item transcripts-ui-tcu' data-tcuid='{$sid}' data-begin='{$begin}' data-end='{$end}'>",
+        '#suffix' => "</li>",
+        'content' => array(
+            'tcu_info' => array(
+                '#prefix' => "<div class='clearfix tcu-info'>",
+                'speaker_name' => array(
+                    '#theme' => 'transcripts_ui_speaker_name',
+                    '#sid' => $sid,
+                    '#speaker_name' => $speaker_tiers,
+                    '#speaker_turn' => $speaker_turn,
+                ),
+                'link' => array(
+                    '#prefix' => "<div class='play-button'>",
+                    '#theme' => 'transcripts_ui_play_tcu',
+                    '#linkurl' => '#tcu/' . $sid,
+                    '#timecoded' => $sentence->end == 0 ? FALSE : TRUE,
+                    '#time' => $sentence->start,
+                    '#suffix' => "</div>",
+                ),
+                '#suffix' => "</div>",
+            ),
+            'tcu_tiers' => array(
+                '#prefix' => "<div id='tiers-{$sid}' class='tiers speaker-tiers'>",
+                '#tcuid' => $sid,
+                'tier_list' => $tier_list,
+                '#suffix' => "</div>",
+            ),
+        ),
+    );
+    drupal_alter('transcripts_ui_tcu', $tcu);
+    return $tcu;
+}
+
 function transcripts_ui_render_controls($ui)
 {
     return array(

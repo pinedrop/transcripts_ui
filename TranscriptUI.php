@@ -43,10 +43,6 @@ class TranscriptUI
         $tcus = array();
 
         foreach ($timecodeunits as $sentence) {
-            $sid = $sentence->tcuid;
-            $begin = isset($sentence->start) ? $sentence->start : 0;
-            $end = isset($sentence->end) ? $sentence->end : 0;
-
             $speaker_tiers = array();
             foreach (array_keys($speakernames) as $tier) {
                 if (isset($sentence->$tier)) {
@@ -86,40 +82,8 @@ class TranscriptUI
                 }
             }
 
-            $tcu = array(
-                //div had class clearfix
-                '#prefix' => "<li id='{$sid}' class='clearfix list-group-item transcripts-ui-tcu' data-tcuid='{$sid}' data-begin='{$begin}' data-end='{$end}'>",
-                '#suffix' => "</li>",
-                'content' => array(
-                    'tcu_info' => array(
-                        '#prefix' => "<div class='clearfix tcu-info'>",
-                        'speaker_name' => array(
-                            '#theme' => 'transcripts_ui_speaker_name',
-                            '#sid' => $sid,
-                            '#speaker_name' => $speaker_tiers,
-                            '#speaker_turn' => $speaker_tiers == $last_speaker_tiers ? 'same-speaker' : 'new-speaker',
-                        ),
-                        'link' => array(
-                            '#prefix' => "<div class='play-button'>",
-                            '#theme' => 'transcripts_ui_play_tcu',
-                            '#linkurl' => '#tcu/' . $sid,
-                            '#timecoded' => $sentence->end == 0 ? FALSE : TRUE,
-                            '#time' => $sentence->start,
-                            '#suffix' => "</div>",
-                        ),
-                        '#suffix' => "</div>",
-                    ),
-                    'tcu_tiers' => array(
-                        '#prefix' => "<div id='tiers-{$sid}' class='tiers speaker-tiers'>",
-                        '#tcuid' => $sid,
-                        'tier_list' => $tier_list,
-                        '#suffix' => "</div>",
-                    ),
-                ),
-            );
-            drupal_alter('transcripts_ui_tcu', $tcu);
-            $tcus[] = $tcu;
-
+            $speaker_turn = $speaker_tiers == $last_speaker_tiers ? 'same-speaker' : 'new-speaker';
+            $tcus[] = transcripts_ui_tcu($sentence, $speaker_turn, $speaker_tiers, $tier_list);
             $last_speaker_tiers = $speaker_tiers;
         }
 
@@ -141,13 +105,14 @@ class TranscriptUI
         );
         drupal_alter('transcripts_ui_js', $js);
 
-        $this->render['transcript'] = array(
-            '#prefix' => "<div id='transcripts-ui-transcript-{$this->trid}' class='scroller' data-transcripts-role='transcript' data-transcripts-id='{$this->trid}'>",
+        $transcript = array(
             'contents' => array(
                 '#prefix' => "<ul class='list-group'>",
                 'tcu_list' => $tcus,
                 '#suffix' => "</ul>",
             ),
+            '#trid' => $this->trid,
+            '#prefix' => "<div id='transcripts-ui-transcript-{$this->trid}' class='scroller' data-transcripts-role='transcript' data-transcripts-id='{$this->trid}'>",
             '#suffix' => "</div>",
             '#attached' => array(
                 'css' => array(drupal_get_path('module', 'transcripts_ui') . '/css/transcripts_ui.css'),
@@ -158,5 +123,7 @@ class TranscriptUI
                 ),
             ),
         );
+        drupal_alter('transcripts_ui_transcript', $transcript);
+        $this->render['transcript'] = $transcript;
     }
 }

@@ -57,3 +57,7 @@ function hook_transcripts_ui_js_alter(&$scripts)
 function hook_transcripts_ui_tcu_alter(&$tcu)
 {
 }
+
+function hook_transcripts_ui_transcript_alter(&$transcript)
+{
+}
