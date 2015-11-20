@@ -27,3 +27,9 @@
     list-style: none;
 }
 
+/* Styles for .transcript-container: it fixes the scrolling issues with transcript_ui.js */
+.transcript-container {
+    height: 500px;
+    overflow-x: auto;
+    transition: all 100ms ease 0s;
+}
