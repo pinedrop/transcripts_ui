@@ -26,10 +26,3 @@
 .scroller ul {
     list-style: none;
 }
-
-/* scrolling transcript */
-.transcript-container {
-    height: 500px;
-    overflow-x: auto;
-    transition: all 100ms ease 0s;
-}

@@ -74,9 +74,21 @@ Your module is then free to position and style the rendered components.
 
 ## Scrolling Transcripts
 
-Transcript scrolling depends on the presence of an element with class
-"transcript-container" which contains the themed transcript. Please ensure
-that you insert a parent with this class into the markup.
+A transcript will attempt to scroll within the container defined by the
+setContainer($container) method in transcripts_scroller.js. By default,
+the container is set to the transcript element itself, that is div.scroller;
+but this default setting can be overriden.
+
+It is necessary to set styles on the container to support scrolling. To use
+the transcript itself as the scrolling container, apply the following CSS.
+
+```
+.scroller {
+    height: 500px;
+    overflow-x: auto;
+    transition: all 100ms ease 0s;
+}
+```
 
 ## Themeing Output
 
