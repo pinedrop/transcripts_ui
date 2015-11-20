@@ -72,6 +72,12 @@ UI; this is done by implementing hook_transcripts_ui_transcript().
 
 Your module is then free to position and style the rendered components.
 
+## Scrolling Transcripts
+
+Transcript scrolling depends on the presence of an element with class
+"transcript-container" which contains the themed transcript. Please ensure
+that you insert a parent with this class into the markup.
+
 ## Themeing Output
 
 Components and sub-components can be differently themed by 
