@@ -7,7 +7,10 @@
                 .once('scrolling-transcript')
                 .each(function () {
                     var trid = $(this).attr('data-transcripts-id');
-                    Drupal.settings.scrollingTranscript[trid] = ScrollingTranscript.getUI($(this)).setVideo($('[data-transcripts-role=video][data-transcripts-id=' + trid + ']').find('video,audio')[0]);
+                    var scroller = ScrollingTranscript.getUI($(this));
+                    scroller.setContainer($(this).parents('.transcript-container'));
+                    scroller.setVideo($('[data-transcripts-role=video][data-transcripts-id=' + trid + ']').find('video,audio')[0]);
+                    Drupal.settings.scrollingTranscript[trid] = scroller;
                 });
         }
     }
