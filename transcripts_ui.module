@@ -152,12 +152,6 @@ function transcripts_ui_tcu($sentence, $speaker_turn, $speaker_tiers = array(), 
         'content' => array(
             'tcu_info' => array(
                 '#prefix' => "<div class='clearfix tcu-info'>",
-                'speaker_name' => array(
-                    '#theme' => 'transcripts_ui_speaker_name',
-                    '#sid' => $sid,
-                    '#speaker_name' => $speaker_tiers,
-                    '#speaker_turn' => $speaker_turn,
-                ),
                 'link' => array(
                     '#prefix' => "<div class='play-button'>",
                     '#theme' => 'transcripts_ui_play_tcu',
@@ -165,6 +159,12 @@ function transcripts_ui_tcu($sentence, $speaker_turn, $speaker_tiers = array(), 
                     '#timecoded' => $sentence->end == 0 ? FALSE : TRUE,
                     '#time' => $sentence->start,
                     '#suffix' => "</div>",
+                ),
+                'speaker_name' => array(
+                    '#theme' => 'transcripts_ui_speaker_name',
+                    '#sid' => $sid,
+                    '#speaker_name' => $speaker_tiers,
+                    '#speaker_turn' => $speaker_turn,
                 ),
                 '#suffix' => "</div>",
             ),
