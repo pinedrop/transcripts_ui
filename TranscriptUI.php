@@ -59,25 +59,12 @@ class TranscriptUI
                         if (isset($highlights->$id->$tier)) {
                             $hitCount++;
                             $replace = $highlights->$id->$tier;
-                            $tier_list[] = array(
-                                '#theme' => 'transcripts_ui_tcu_tier',
-                                '#tier_name' => $tier,
-                                '#tier_text' => $replace[0],
-                                '#classes' => array('hit'),
-                            );
+                            $tier_list[] = transcripts_ui_tier($tier, $replace[0], array('hit'));
                         } else {
-                            $tier_list[] = array(
-                                '#theme' => 'transcripts_ui_tcu_tier',
-                                '#tier_name' => $tier,
-                                '#tier_text' => $sentence->$tier,
-                            );
+                            $tier_list[] = transcripts_ui_tier($tier, $sentence->$tier);
                         }
                     } else {
-                        $tier_list[] = array(
-                            '#theme' => 'transcripts_ui_tcu_tier',
-                            '#tier_name' => $tier,
-                            '#tier_text' => $sentence->$tier,
-                        );
+                        $tier_list[] = transcripts_ui_tier($tier, $sentence->$tier);
                     }
                 }
             }

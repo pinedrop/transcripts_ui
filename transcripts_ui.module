@@ -180,6 +180,25 @@ function transcripts_ui_tcu($sentence, $speaker_turn, $speaker_tiers = array(), 
     return $tcu;
 }
 
+function transcripts_ui_tier($tier, $value, $classes = array())
+{
+    return array(
+        '#theme' => 'transcripts_ui_tcu_tier',
+        '#tier_name' => $tier,
+        '#tier_text' => $value,
+        '#classes' => $classes,
+    );
+}
+
+function transcripts_ui_tier_list($tiers)
+{
+    $tier_list = array();
+    foreach ($tiers as $tier => $value) {
+        $tier_list[] = transcripts_ui_tier($tier, $value);
+    }
+    return $tier_list;
+}
+
 function transcripts_ui_render_controls($ui)
 {
     return array(
