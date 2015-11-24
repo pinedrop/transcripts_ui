@@ -212,6 +212,9 @@ function transcripts_ui_render_controls($ui)
                     'data_tiers' => $ui->tiers,
                     'speaker_names' => $ui->speakernames,
                     '#attached' => array(
+                        'css' => array(
+                            drupal_get_path('module', 'transcripts_ui') . '/css/transcripts_tier_selector.css',
+                        ),
                         'js' => array(
                             drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_tier_selector.js',
                         ),
