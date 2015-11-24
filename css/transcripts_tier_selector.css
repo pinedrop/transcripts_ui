@@ -1,3 +1,4 @@
-.tier-selector .dropdown-menu.open {
-    min-width: 18rem;
+.tier-selector .bootstrap-select.btn-group .dropdown-menu.open {
+    min-width: 16rem;
+    padding-bottom: 1rem;
 }
