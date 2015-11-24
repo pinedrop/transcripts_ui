@@ -26,3 +26,11 @@
 .scroller ul {
     list-style: none;
 }
+
+/* transcript search */
+.transcript-search-wrapper {
+    display: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
