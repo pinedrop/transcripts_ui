@@ -1,14 +1,17 @@
 <?php
 
-function theme_transcripts_ui_transcript_controls($vars)
-{
-    $out = drupal_render($vars['element']['content']);
+function theme_transcripts_ui_transcript_controls($vars) {
+    $out  = "<div class='btn-group btn-group-justified btn-group-transcript' role='group'>";
+    $out .= drupal_render($vars['element']['content']['transcript_options']);
+    $out .= drupal_render($vars['element']['content']['transcript_navigation']);
+    $out .= "</div>";
+    $out .= drupal_render($vars['element']['content']['transcript_search_wrapper']);
     return $out;
 }
 
 function theme_transcripts_ui_transcript_options($vars)
 {
-    $out  = "<select multiple class='selectpicker tier-selector' data-header='Select languages'>";
+    $out  = "<select style='display:none;' multiple class='selectpicker tier-selector' data-header='Select languages'>";
 
     //language selector
     $out .= "<optgroup label='Transcript' data-type='languages'>";
@@ -28,13 +31,12 @@ function theme_transcripts_ui_transcript_options($vars)
     return $out;
 }
 
-function theme_transcripts_ui_transcript_navigation($vars)
-{
-    $out = "<div class='btn-group' role='group'>";
-    $out .= "<button type='button' class='btn btn-default previous' title='Previous line'><span class='glyphicon glyphicon-arrow-left'></span> " . t('Prev') . "</button>";
-    $out .= "<button type='button' class='btn btn-default sameagain' title='Same line'><span class='glyphicon glyphicon-repeat'></span>" . t('Same') . "</button>";
-    $out .= "<button type='button' class='btn btn-default next' title='Next line'><span class='glyphicon glyphicon-arrow-right'></span>" . t('Next') . "</button>";
-    $out .= "</div>";
+function theme_transcripts_ui_transcript_navigation($vars) {
+    $out  = "<button type='button' class='btn btn-default btn-icon playpause' title='Play / Pause'><span class='fa fa-play'></span></button>";
+    $out .= "<button type='button' class='btn btn-default btn-icon previous' title='Previous line'><span class='glyphicon glyphicon-arrow-left'></span> " .t('Prev'). "</button>";
+    $out .= "<button type='button' class='btn btn-default btn-icon sameagain' title='Same line'><span class='glyphicon glyphicon-repeat'></span> " .t('Same'). "</button>";
+    $out .= "<button type='button' class='btn btn-default btn-icon next' title='Next line'><span class='glyphicon glyphicon-arrow-right'></span> " .t('Next'). "</button>";
+    $out .= "<button type='button' class='btn btn-default btn-icon searchtrans' title='Search Transcript'><span class='icon shanticon-magnify'></span></button>";
     return $out;
 }
 
