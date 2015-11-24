@@ -4,10 +4,14 @@
 (function ($) {
     Drupal.behaviors.transcriptSearchWrapper = {
         attach: function (context, settings) {
-            $('.transcript-search-wrapper > span', context)
-                .once('toggle')
-                .click(function() {
-                    $(this).parent().slideToggle();
+            $('[data-transcripts-role=transcript-controls]', context)
+                .addBack('[data-transcripts-role=transcript-controls]')
+                .once('search-wrapper')
+                .each(function () {
+                    var controls = this;
+                    $('.searchtrans, .transcript-search-wrapper > span', controls).click(function () {
+                        $('.transcript-search-wrapper', controls).slideToggle();
+                    });
                 });
         }
     };
