@@ -19,7 +19,8 @@
 
 /* DATA TIERS */
 .speaker-tiers {
-    margin-left: 200px;
+    margin-left: 0;
+    margin-right: 16rem;
 }
 .scroller ul {
     list-style: none;
