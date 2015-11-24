@@ -11,7 +11,7 @@ function theme_transcripts_ui_transcript_controls($vars) {
 
 function theme_transcripts_ui_transcript_options($vars)
 {
-    $out  = "<select style='display:none;' multiple class='selectpicker tier-selector' data-header='Select languages'>";
+    $out  = "<select style='display:none;' multiple class='tier-selector' data-header='Select languages'>";
 
     //language selector
     $out .= "<optgroup label='Transcript' data-type='languages'>";

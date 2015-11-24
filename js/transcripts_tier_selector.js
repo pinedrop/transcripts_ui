@@ -7,7 +7,7 @@
                 .each(function () {
                     var trid = $(this).attr('data-transcripts-id');
 
-                    var $tierSelector = $('.tier-selector', this);
+                    var $tierSelector = $('select.tier-selector', this);
                     $tierSelector.find('optgroup[data-type=languages] option').attr('selected', true);
                     $tierSelector.find('optgroup[data-type=speakers] option').attr('selected', true)
                     $tierSelector.change(function (e) {
@@ -39,6 +39,11 @@
                             $(this).remove();
                         }
                     });
+
+                    $tierSelector.selectpicker({
+                        dropupAuto: false
+                    }); // initiates jq-bootstrap-select
+                    $('button.selectpicker span:first-child', this).replaceWith('<span class="glyphicon glyphicon-globe"></span>');
                 });
         }
     };
