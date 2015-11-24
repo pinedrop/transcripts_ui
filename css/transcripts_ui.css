@@ -23,11 +23,8 @@
 .scroller ul {
     list-style: none;
 }
-.scroller li.playing {
-    border-color: #999;
-}
 .scroller li.playing .speaker-tiers{
-    box-shadow: 0 0 3px 2px #888;
+    box-shadow: 0 0 5px 3px #888;
 }
 .scroller li.playing .speaker-display{
     color: white !important;
