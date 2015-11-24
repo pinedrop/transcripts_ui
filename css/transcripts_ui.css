@@ -1,7 +1,7 @@
 .tcu-info {
     float: right;
     padding-top: 1rem;
-    width: 16rem;
+    width: 10rem;
 }
 .play-button {
     float: left;
@@ -20,7 +20,7 @@
 /* DATA TIERS */
 .speaker-tiers {
     margin-left: 0;
-    margin-right: 16rem;
+    margin-right: 10rem;
 }
 .scroller ul {
     list-style: none;
