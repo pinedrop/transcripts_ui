@@ -39,7 +39,6 @@
     background: #888;
     padding: 0;
     display: none;
-    height: 8rem;
     position: relative;
     margin: 0;
 }
@@ -86,7 +85,7 @@
     border-collapse: separate;
 }
 
-.transcript-search-wrapper .shanticon-close2{
+.transcript-search-wrapper .glyphicon-remove-circle{
     right: 0.4rem;
     top: -5.5rem;
     color: #ccc;
@@ -94,12 +93,12 @@
     font-family: 'shanticon';
 }
 
-.transcript-search-wrapper .shanticon-close2:hover,
-.transcript-search-wrapper .shanticon-close2:active{
+.transcript-search-wrapper .glyphicon-remove-circle:hover,
+.transcript-search-wrapper .glyphicon-remove-circle:active{
     color: #ccc;
 }
 
-.transcript-search-wrapper .shanticon-close2:before{
+.transcript-search-wrapper .glyphicon-remove-circle:before{
     content: '\e60f'; /* icon of agent person */
 }
 
@@ -330,8 +329,7 @@
     transition: background 200ms ease 0s;
 }
 
-.transcript-navigate-results .btn .icon {
-    font-family: 'shanticon';
+.transcript-navigate-results .btn .glyphicon {
     background: transparent;
     font-size: 1.75rem;
     line-height: 3.2rem;
@@ -349,27 +347,19 @@
     background: #fff;
 }
 
-.transcript-navigate-results .btn:hover .icon,
-.transcript-navigate-results .btn:active .icon{
+.transcript-navigate-results .btn:hover .glyphicon,
+.transcript-navigate-results .btn:active .glyphicon{
     color: #ddd;
 }
 
-.transcript-navigate-results .btn.has-result .icon{
+.transcript-navigate-results .btn.has-result .glyphicon{
     color: #aaa;
     cursor:pointer;
 }
 
-.transcript-navigate-results .btn.has-result:hover .icon,
-.transcript-navigate-results .btn.has-result:active .icon{
+.transcript-navigate-results .btn.has-result:hover .glyphicon,
+.transcript-navigate-results .btn.has-result:active .glyphicon{
     color:#777;
-}
-
-.transcript-navigate-results .btn.nextresult .icon::before {
-    content: '\e605';
-}
-
-.transcript-navigate-results .btn.previousresult .icon::before {
-    content: '\e608';
 }
 
 .transcript-navigate-results div:last-child {
