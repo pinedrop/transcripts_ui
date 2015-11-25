@@ -357,7 +357,7 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
         ),
     );
     $form['search']['navigate']['buttons'] = array(
-        '#prefix' => "<div>",
+        '#prefix' => "<div class='btn-group btn-group-nextprevious'>",
         '#suffix' => "</div>",
     );
     $form['search']['navigate']['buttons']['next'] = array(
