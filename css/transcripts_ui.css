@@ -55,13 +55,12 @@
 }
 
 .transcript-search-wrapper .form-control {
-    color: #777;
     margin: 0 2rem 0.3rem 2rem;
     padding: 0.2rem 4rem 0 2rem;
     max-width: 88%;
     position: absolute;
     right:0;
-    top: 1rem;
+    top: 2rem;
     overflow: auto;
     vertical-align: middle;
 }
@@ -69,7 +68,6 @@
     position: absolute;
     cursor: pointer;
     right: 0.8rem;
-    top: -3.5rem;
     color: #ccc;
     font-size: 1em;
 }
@@ -158,92 +156,6 @@
     color:#ccc;
 }
 
-/*--- reset search button ---*/
-.transcript-search-wrapper .input-group-btn .searchreset {
-    border: none;
-    background: transparent;
-    background-image: none;
-    position: absolute;
-    right: 5rem;
-    top: 0.45rem;
-    z-index: 10;
-    padding: 0;
-    margin: 0;
-    display: none;
-    border-radius: 50%;
-    background-clip: padding-box;
-}
-
-.transcript-search-wrapper .input-group-btn .searchreset:hover,
-.transcript-search-wrapper .input-group-btn .searchreset:active {
-    color: #777;
-}
-
-.transcript-search-wrapper .input-group-btn .searchreset:active,
-.transcript-search-wrapper .input-group-btn .searchreset.active {
-    background: transparent;
-    border: none;
-    background-image: none;
-    box-shadow: none;
-}
-
-.transcript-search-wrapper .input-group-btn .searchreset .glyphicon {
-    cursor: pointer;
-    width: 2.75rem;
-    height: 2.75rem;
-    border-radius: 50%;
-    background-clip: padding-box;
-    border: none;
-    position: relative;
-    top: 0;
-    left: 0;
-    background: transparent;
-}
-
-.transcript-search-wrapper .input-group-btn .searchreset .glyphicon::before,
-.transcript-search-wrapper .input-group-btn .searchreset .glyphicon::after {
-    background: #aaa;
-    position: absolute;
-    top: 1.3rem;
-    left: 0.5rem;
-    width: 1.7rem;
-    height: 1px;
-    content: '';
-    filter: alpha(opacity=100);
-    opacity:1;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-}
-
-.transcript-search-wrapper .searching .input-group-btn .searchreset .glyphicon::before,
-.transcript-search-wrapper .searching .input-group-btn .searchreset .glyphicon::after{
-    filter: alpha(opacity=0);
-    opacity:0;
-}
-
-.transcript-search-wrapper .input-group-btn .searchreset .glyphicon::after {
-    -webkit-transform: rotate(-45deg);
-    -ms-transform: rotate(-45deg);
-    transform: rotate(-45deg);
-}
-
-.transcript-search-wrapper .input-group-btn .searchreset:hover .glyphicon,
-.transcript-search-wrapper .input-group-btn .searchreset:active .glyphicon {
-    background: #eee;
-}
-
-.transcript-search-wrapper .input-group-btn .searchreset:hover .glyphicon::before,
-.transcript-search-wrapper .input-group-btn .searchreset:hover .glyphicon::after {
-    background: #555;
-}
-
-.transcript-search-wrapper .input-group-btn .searchreset:focus .glyphicon::before,
-.transcript-search-wrapper .input-group-btn .searchreset:focus .glyphicon::after{
-    filter: alpha(opacity=100);
-    opacity:1;
-}
-
 .transcript-search-options {
     margin: 0;
     padding-left: 10%;
@@ -251,15 +163,12 @@
     top: 5.2rem;
     display:none;
 }
-
 .has-searched .transcript-search-options{
     display:block;
 }
-
 .has-searched.no-results .transcript-search-options{
     display:none;
 }
-
 .transcript-search-options label {
     font-size: 90%;
     text-transform: capitalize;
@@ -269,12 +178,6 @@
     cursor:default;
     color:#fff;
 }
-
-.transcript-search-options .iradio_minimal-red{
-    margin-right: .5rem;
-    position: relative;
-    top: -0.2rem;
-}
 .transcript-navigate-results {
     width: 25%;
     padding: 0;
@@ -282,29 +185,6 @@
 .transcript-navigate-results > div {
     text-align: center;
 }
-/*.transcript-navigate-results .btn.nextresult,
-.transcript-navigate-results .btn.previousresult {
-    width: 3rem;
-    height: 3.7rem;
-    display: inline-block;
-    position: relative;
-    border: 1px solid #ddd;
-    margin: 1rem 0 0 0.5rem;
-    box-shadow: none;
-    -webkit-transition: background 200ms ease 0s;
-    transition: background 200ms ease 0s;
-}
-.transcript-navigate-results .btn .glyphicon {
-    background: transparent;
-    font-size: 1.75rem;
-    line-height: 3.2rem;
-    position: absolute;
-    left: .65rem;
-    width: 3.6rem;
-    height: 3.6rem;
-    color: #ddd;
-    cursor:default;
-}*/
 .transcript-navigate-results .btn.has-result .glyphicon{
     color: #aaa;
     cursor:pointer;
