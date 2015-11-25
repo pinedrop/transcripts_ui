@@ -90,16 +90,11 @@
     top: -5.5rem;
     color: #ccc;
     font-size: 1em;
-    font-family: 'shanticon';
 }
 
 .transcript-search-wrapper .glyphicon-remove-circle:hover,
 .transcript-search-wrapper .glyphicon-remove-circle:active{
     color: #ccc;
-}
-
-.transcript-search-wrapper .glyphicon-remove-circle:before{
-    content: '\e60f'; /* icon of agent person */
 }
 
 .transcript-search-wrapper .input-group-btn {
@@ -149,8 +144,7 @@
     color: #aaa;
 }
 
-.transcript-search-wrapper .input-group-btn .btn.btn-default .icon {
-    font-family: 'Glyphicons Halflings' !important;
+.transcript-search-wrapper .input-group-btn .btn.btn-default .glyphicon {
     background: transparent;
     position:relative;
     top: -10px;
@@ -158,11 +152,11 @@
     font-size:18px;
 }
 
-.transcript-search-wrapper .input-group-btn .btn.btn-default .icon::before {
+.transcript-search-wrapper .input-group-btn .btn.btn-default .glyphicon::before {
     content: '\e080';
 }
 
-.transcript-search-wrapper .input-group-btn .icon.fa-spinner{
+.transcript-search-wrapper .input-group-btn .glyphicon.fa-spinner{
     position: absolute;
     top: 0.55rem;
     right: 5.125rem;
@@ -175,7 +169,7 @@
     animation: fa-spin 1s infinite steps(8);
 }
 
-.transcript-search-wrapper .input-group-btn .icon.fa-spinner::before {
+.transcript-search-wrapper .input-group-btn .glyphicon.fa-spinner::before {
     content: '\f110';
     font-family: 'FontAwesome';
     font-size: 3rem;
@@ -185,7 +179,7 @@
     right: 0.05rem;
 }
 
-.transcript-search-wrapper .searching .input-group-btn .icon.fa-spinner::before{
+.transcript-search-wrapper .searching .input-group-btn .glyphicon.fa-spinner::before{
     color:#ccc;
 }
 
@@ -218,7 +212,7 @@
     box-shadow: none;
 }
 
-.transcript-search-wrapper .input-group-btn .searchreset .icon {
+.transcript-search-wrapper .input-group-btn .searchreset .glyphicon {
     cursor: pointer;
     width: 2.75rem;
     height: 2.75rem;
@@ -231,8 +225,8 @@
     background: transparent;
 }
 
-.transcript-search-wrapper .input-group-btn .searchreset .icon::before,
-.transcript-search-wrapper .input-group-btn .searchreset .icon::after {
+.transcript-search-wrapper .input-group-btn .searchreset .glyphicon::before,
+.transcript-search-wrapper .input-group-btn .searchreset .glyphicon::after {
     background: #aaa;
     position: absolute;
     top: 1.3rem;
@@ -247,30 +241,30 @@
     transform: rotate(45deg);
 }
 
-.transcript-search-wrapper .searching .input-group-btn .searchreset .icon::before,
-.transcript-search-wrapper .searching .input-group-btn .searchreset .icon::after{
+.transcript-search-wrapper .searching .input-group-btn .searchreset .glyphicon::before,
+.transcript-search-wrapper .searching .input-group-btn .searchreset .glyphicon::after{
     filter: alpha(opacity=0);
     opacity:0;
 }
 
-.transcript-search-wrapper .input-group-btn .searchreset .icon::after {
+.transcript-search-wrapper .input-group-btn .searchreset .glyphicon::after {
     -webkit-transform: rotate(-45deg);
     -ms-transform: rotate(-45deg);
     transform: rotate(-45deg);
 }
 
-.transcript-search-wrapper .input-group-btn .searchreset:hover .icon,
-.transcript-search-wrapper .input-group-btn .searchreset:active .icon {
+.transcript-search-wrapper .input-group-btn .searchreset:hover .glyphicon,
+.transcript-search-wrapper .input-group-btn .searchreset:active .glyphicon {
     background: #eee;
 }
 
-.transcript-search-wrapper .input-group-btn .searchreset:hover .icon::before,
-.transcript-search-wrapper .input-group-btn .searchreset:hover .icon::after {
+.transcript-search-wrapper .input-group-btn .searchreset:hover .glyphicon::before,
+.transcript-search-wrapper .input-group-btn .searchreset:hover .glyphicon::after {
     background: #555;
 }
 
-.transcript-search-wrapper .input-group-btn .searchreset:focus .icon::before,
-.transcript-search-wrapper .input-group-btn .searchreset:focus .icon::after{
+.transcript-search-wrapper .input-group-btn .searchreset:focus .glyphicon::before,
+.transcript-search-wrapper .input-group-btn .searchreset:focus .glyphicon::after{
     filter: alpha(opacity=100);
     opacity:1;
 }
