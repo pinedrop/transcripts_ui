@@ -282,7 +282,7 @@
 .transcript-navigate-results > div {
     text-align: center;
 }
-.transcript-navigate-results .btn.nextresult,
+/*.transcript-navigate-results .btn.nextresult,
 .transcript-navigate-results .btn.previousresult {
     width: 3rem;
     height: 3.7rem;
@@ -304,7 +304,7 @@
     height: 3.6rem;
     color: #ddd;
     cursor:default;
-}
+}*/
 .transcript-navigate-results .btn.has-result .glyphicon{
     color: #aaa;
     cursor:pointer;
@@ -313,6 +313,7 @@
 .transcript-navigate-results .btn.has-result:active .glyphicon{
     color:#777;
 }
+/*
 .transcript-navigate-results div:last-child {
     margin-top: 0.5rem;
     width: 100%;
@@ -325,5 +326,4 @@
     top:0;
     left:0.5rem;
     color: #eee;
-}
-
+}*/
