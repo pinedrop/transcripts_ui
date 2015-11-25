@@ -81,6 +81,93 @@
     margin: 0;
 }
 
+/*--- reset search button ---*/
+.transcript-search-wrapper .input-group-btn .searchreset {
+    border: none;
+    background: transparent;
+    background-image: none;
+    position: absolute;
+    right: 5rem;
+    top: 0.45rem;
+    z-index: 10;
+    padding: 0;
+    margin: 0;
+    display: none;
+    border-radius: 50%;
+    background-clip: padding-box;
+}
+
+.transcript-search-wrapper .input-group-btn .searchreset:hover,
+.transcript-search-wrapper .input-group-btn .searchreset:active {
+    color: #777;
+}
+
+.transcript-search-wrapper .input-group-btn .searchreset:active,
+.transcript-search-wrapper .input-group-btn .searchreset.active {
+    background: transparent;
+    border: none;
+    background-image: none;
+    box-shadow: none;
+}
+
+.transcript-search-wrapper .input-group-btn .searchreset .glyphicon {
+    cursor: pointer;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background-clip: padding-box;
+    border: none;
+    position: relative;
+    top: 0;
+    left: 0;
+    background: transparent;
+}
+
+.transcript-search-wrapper .input-group-btn .searchreset .glyphicon::before,
+.transcript-search-wrapper .input-group-btn .searchreset .glyphicon::after {
+    background: #aaa;
+    position: absolute;
+    top: 1.3rem;
+    left: 0.5rem;
+    width: 1.7rem;
+    height: 1px;
+    content: '';
+    filter: alpha(opacity=100);
+    opacity:1;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.transcript-search-wrapper .searching .input-group-btn .searchreset .glyphicon::before,
+.transcript-search-wrapper .searching .input-group-btn .searchreset .glyphicon::after{
+    filter: alpha(opacity=0);
+    opacity:0;
+}
+
+.transcript-search-wrapper .input-group-btn .searchreset .glyphicon::after {
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.transcript-search-wrapper .input-group-btn .searchreset:hover .glyphicon,
+.transcript-search-wrapper .input-group-btn .searchreset:active .glyphicon {
+    background: #eee;
+}
+
+.transcript-search-wrapper .input-group-btn .searchreset:hover .glyphicon::before,
+.transcript-search-wrapper .input-group-btn .searchreset:hover .glyphicon::after {
+    background: #555;
+}
+
+.transcript-search-wrapper .input-group-btn .searchreset:focus .glyphicon::before,
+.transcript-search-wrapper .input-group-btn .searchreset:focus .glyphicon::after{
+    filter: alpha(opacity=100);
+    opacity:1;
+}
+
+
 .transcript-search-options {
     margin: 0;
     padding-left: 10%;
