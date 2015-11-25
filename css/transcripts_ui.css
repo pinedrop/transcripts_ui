@@ -185,9 +185,12 @@
 .transcript-navigate-results > div {
     text-align: center;
 }
-.transcript-navigate-results .btn.has-result .glyphicon{
+.transcript-navigate-results .btn .glyphicon{
     color: #aaa;
     cursor:pointer;
+}
+.transcript-navigate-results .btn.has-result .glyphicon{
+    color: #fff;
 }
 .transcript-navigate-results .btn.has-result:hover .glyphicon,
 .transcript-navigate-results .btn.has-result:active .glyphicon{
