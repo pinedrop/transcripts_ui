@@ -51,10 +51,63 @@
     position: relative;
     width: 75%;
 }
-.transcript-navigate-results .btn.nextresult, .transcript-navigate-results .btn.previousresult {
+.transcript-navigate-results {
+    width: 25%;
+    padding: 0;
+}
+.transcript-navigate-results > div {
+    text-align: center;
+}
+.transcript-navigate-results .btn.nextresult,
+.transcript-navigate-results .btn.previousresult {
+    width: 3rem;
+    height: 3.7rem;
     display: inline-block;
-    height: 2.5rem;
-    margin: 1rem 0 0 0.5rem;
     position: relative;
-    width: 3.0rem;
+    border: 1px solid #ddd;
+    margin: 1rem 0 0 0.5rem;
+    box-shadow: none;
+    -webkit-transition: background 200ms ease 0s;
+    transition: background 200ms ease 0s;
+}
+.transcript-navigate-results .btn .glyphicon {
+    font-family: 'shanticon';
+    background: transparent;
+    font-size: 1.75rem;
+    line-height: 3.2rem;
+    position: absolute;
+    left: .65rem;
+    width: 3.6rem;
+    height: 3.6rem;
+    color: #ddd;
+    cursor:default;
+}
+.transcript-navigate-results .btn:hover,
+.transcript-navigate-results .btn:active{
+    background: #fff;
+}
+.transcript-navigate-results .btn:hover .glyphicon,
+.transcript-navigate-results .btn:active .glyphicon{
+    color: #ddd;
+}
+.transcript-navigate-results .btn.has-result .glyphicon{
+    color: #aaa;
+    cursor:pointer;
+}
+.transcript-navigate-results .btn.has-result:hover .glyphicon,
+.transcript-navigate-results .btn.has-result:active .glyphicon{
+    color:#777;
+}
+.transcript-navigate-results div:last-child {
+    margin-top: 0.5rem;
+    width: 100%;
+    text-align: center;
+    padding-right: 0.3rem;
+    -webkit-transition: all 500ms ease 0s;
+    transition: all 500ms ease 0s;
+    display: block;
+    position: relative;
+    top:0;
+    left:0.5rem;
+    color: #eee;
 }
