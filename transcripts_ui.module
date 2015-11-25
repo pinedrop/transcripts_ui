@@ -318,6 +318,7 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
         '#button_type' => 'submit ajax-trigger',
         '#attributes' => array(
             'type' => 'submit',
+            'class' => array('searchbutton'),
         ),
         '#ajax' => array(
             'callback' => 'transcripts_ui_ajax_hits',
