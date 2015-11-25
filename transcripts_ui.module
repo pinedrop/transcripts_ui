@@ -368,7 +368,7 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
             'type' => 'button',
         ),
         '#post_render' => array('transcripts_ui_button_inner'),
-        '#inner' => "<span class='glyphicon glyphicon-next'></span>",
+        '#inner' => "<span class='glyphicon glyphicon-menu-down'></span>",
     );
     $form['search']['navigate']['buttons']['previous'] = array(
         '#type' => 'button',
@@ -378,7 +378,7 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
             'type' => 'button',
         ),
         '#post_render' => array('transcripts_ui_button_inner'),
-        '#inner' => "<span class='glyphicon glyphicon-previous'></span>",
+        '#inner' => "<span class='glyphicon glyphicon-menu-up'></span>",
     );
     $form['search']['navigate']['count'] = array(
         '#prefix' => '<div><span id="transcript-results-count-' . $ui->trid . '" class="transcript-results-count" data-results-count="0">',
