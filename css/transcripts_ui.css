@@ -86,6 +86,8 @@
 }
 
 .transcript-search-wrapper .glyphicon-remove-circle{
+    position: absolute;
+    cursor: pointer;
     right: 0.4rem;
     top: -5.5rem;
     color: #ccc;
