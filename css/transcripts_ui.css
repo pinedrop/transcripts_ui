@@ -42,7 +42,11 @@
     position: relative;
     margin: 0;
 }
-
+.transcript-search-input {
+    float: right;
+    position: relative;
+    width: 75%;
+}
 .transcripts-ui-search-form {
     height: 7.5rem;
 }
@@ -271,16 +275,13 @@
     position: relative;
     top: -0.2rem;
 }
-
 .transcript-navigate-results {
     width: 25%;
     padding: 0;
 }
-
 .transcript-navigate-results > div {
     text-align: center;
 }
-
 .transcript-navigate-results .btn.nextresult,
 .transcript-navigate-results .btn.previousresult {
     width: 3rem;
@@ -293,7 +294,6 @@
     -webkit-transition: background 200ms ease 0s;
     transition: background 200ms ease 0s;
 }
-
 .transcript-navigate-results .btn .glyphicon {
     background: transparent;
     font-size: 1.75rem;
@@ -305,28 +305,14 @@
     color: #ddd;
     cursor:default;
 }
-
-
-.transcript-navigate-results .btn:hover,
-.transcript-navigate-results .btn:active{
-    background: #fff;
-}
-
-.transcript-navigate-results .btn:hover .glyphicon,
-.transcript-navigate-results .btn:active .glyphicon{
-    color: #ddd;
-}
-
 .transcript-navigate-results .btn.has-result .glyphicon{
     color: #aaa;
     cursor:pointer;
 }
-
 .transcript-navigate-results .btn.has-result:hover .glyphicon,
 .transcript-navigate-results .btn.has-result:active .glyphicon{
     color:#777;
 }
-
 .transcript-navigate-results div:last-child {
     margin-top: 0.5rem;
     width: 100%;
