@@ -366,6 +366,7 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
         '#value' => t('Next'),
         '#attributes' => array(
             'type' => 'button',
+            'class' => array('nextresult'),
         ),
         '#post_render' => array('transcripts_ui_button_inner'),
         '#inner' => "<span class='glyphicon glyphicon-menu-down'></span>",
@@ -376,6 +377,7 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
         '#value' => t('Previous'),
         '#attributes' => array(
             'type' => 'button',
+            'class' => array('previousresult'),
         ),
         '#post_render' => array('transcripts_ui_button_inner'),
         '#inner' => "<span class='glyphicon glyphicon-menu-up'></span>",
