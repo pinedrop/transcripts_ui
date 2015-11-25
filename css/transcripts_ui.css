@@ -39,3 +39,10 @@
     padding: 0;
     position: relative;
 }
+.transcript-search-wrapper span:first-child {
+    cursor: pointer;
+    font-size: 1em;
+    position: absolute;
+    right: 0.4rem;
+    z-index: 10;
+}
