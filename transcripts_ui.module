@@ -326,7 +326,9 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
             'progress' => array('type' => 'none'),
             'event' => 'click',
         ),
-        '#post_render' => array('transcripts_ui_button_inner'),
+        '#find' => 'btn-primary',
+        '#replace' => 'btn-default',
+        '#post_render' => array('transcripts_ui_button_inner', 'transcripts_ui_find_replace'),
         '#inner' => "<span class='glyphicon glyphicon-search'></span>",
     );
     $form['search']['input']['buttons']['reset'] = array(
@@ -337,7 +339,9 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
             'type' => 'reset',
             'class' => array('searchreset'),
         ),
-        '#post_render' => array('transcripts_ui_button_inner'),
+        '#find' => 'btn-primary',
+        '#replace' => '',
+        '#post_render' => array('transcripts_ui_button_inner', 'transcripts_ui_find_replace'),
         '#inner' => "<span class='glyphicon glyphicon-reset'></span>",
     );
     $form['search']['input']['options'] = array(
@@ -407,6 +411,10 @@ function transcripts_ui_button_inner($markup, $element)
     $replace = $element['#inner'];
     $markup = str_replace($find, $replace, $markup);
     return $markup;
+}
+
+function transcripts_ui_find_replace($markup, $element) {
+    return str_replace($element['#find'], $element['#replace'], $markup);
 }
 
 function transcripts_ui_ajax_hits($form, &$form_state)
