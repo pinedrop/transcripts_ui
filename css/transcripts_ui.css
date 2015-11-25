@@ -310,20 +310,22 @@
     opacity:1;
 }
 
-
 .transcript-search-options {
     margin: 0;
     padding-left: 10%;
     position:relative;
-    top: 6rem;
+    top: 5.2rem;
     display:none;
 }
+
 .has-searched .transcript-search-options{
     display:block;
 }
+
 .has-searched.no-results .transcript-search-options{
     display:none;
 }
+
 .transcript-search-options label {
     font-size: 90%;
     text-transform: capitalize;
@@ -333,6 +335,13 @@
     cursor:default;
     color:#fff;
 }
+
+.transcript-search-options .iradio_minimal-red{
+    margin-right: .5rem;
+    position: relative;
+    top: -0.2rem;
+}
+
 .transcript-navigate-results {
     width: 25%;
     padding: 0;
@@ -351,7 +360,7 @@
 .transcript-navigate-results .btn.has-result:active .glyphicon{
     color:#777;
 }
-/*
+
 .transcript-navigate-results div:last-child {
     margin-top: 0.5rem;
     width: 100%;
@@ -364,4 +373,4 @@
     top:0;
     left:0.5rem;
     color: #eee;
-}*/
+}
