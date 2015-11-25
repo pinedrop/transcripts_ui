@@ -37,6 +37,7 @@
 /*---------------------------*/
 .transcript-search-wrapper {
     background: #888;
+    height: 10rem;
     padding: 0;
     display: none;
     position: relative;
