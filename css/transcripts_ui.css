@@ -37,17 +37,13 @@
 /*---------------------------*/
 .transcript-search-wrapper {
     background: #888;
-    height: 9rem;
     padding: 0;
     display: none;
+    height: 8rem;
     position: relative;
     margin: 0;
 }
-.transcript-search-input {
-    float: right;
-    position: relative;
-    width: 75%;
-}
+
 .transcripts-ui-search-form {
     height: 7.5rem;
 }
@@ -55,21 +51,62 @@
 .transcripts-ui-search-form > div {
 }
 
+.transcript-search-input {
+    position: relative;
+    float: right;
+    width: 75%;
+}
+
 .transcript-search-wrapper .form-control {
+    color: #777;
+    border: 1px solid #d0d0d0;
+    border-radius: 1.8rem;
+    background-clip: padding-box;
+    font-size: 1.06em;
+    height: 2.5em;
     margin: 0 2rem 0.3rem 2rem;
+    padding: 0.2rem 4rem 0 2rem;
     max-width: 88%;
     position: absolute;
     right:0;
-    top: 2rem;
+    top: 1rem;
     overflow: auto;
     vertical-align: middle;
+    box-shadow: 0 2px 5px #eee inset;
+    border-collapse: separate;
+    background: #fff;
+    -webkit-transition-property: all;
+    transition-property: all;
+    -webkit-transition-duration: 400ms;
+    transition-duration: 400ms;
 }
+
+.transcript-search-wrapper .form-control:hover {
+    border: 1px solid #ccc;
+    color: #777;
+}
+
+.transcript-search-wrapper .form-control:focus {
+    border: 1px solid #9097d3;
+    box-shadow: 0 0 4px #949bd8;
+    border-collapse: separate;
+}
+
 .transcript-search-wrapper .glyphicon-remove-circle{
     position: absolute;
     cursor: pointer;
     right: 0.8rem;
     color: #ccc;
     font-size: 1em;
+}
+
+.transcript-search-wrapper .glyphicon-remove-circle:hover,
+.transcript-search-wrapper .glyphicon-remove-circle:active{
+    color: #ccc;
+}
+
+.transcript-search-wrapper .glyphicon-remove-circle:before{
+    content: '\e60f'; /* icon of agent person */
 }
 
 .transcript-search-wrapper .input-group-btn {
