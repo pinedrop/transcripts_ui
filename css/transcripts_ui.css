@@ -37,7 +37,7 @@
 /*---------------------------*/
 .transcript-search-wrapper {
     background: #888;
-    height: 10rem;
+    height: 9rem;
     padding: 0;
     display: none;
     position: relative;
@@ -57,7 +57,6 @@
 
 .transcript-search-wrapper .form-control {
     margin: 0 2rem 0.3rem 2rem;
-    padding: 0.2rem 4rem 0 2rem;
     max-width: 88%;
     position: absolute;
     right:0;
