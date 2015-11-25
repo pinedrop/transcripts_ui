@@ -46,3 +46,8 @@
     right: 0.4rem;
     z-index: 10;
 }
+.transcript-search-input {
+    float: right;
+    position: relative;
+    width: 75%;
+}
