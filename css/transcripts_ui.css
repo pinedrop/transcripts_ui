@@ -39,7 +39,7 @@
     background: #888;
     padding: 0;
     display: none;
-    height: 8rem;
+    height: 9rem;
     position: relative;
     margin: 0;
 }
@@ -69,7 +69,7 @@
     max-width: 88%;
     position: absolute;
     right:0;
-    top: 1rem;
+    top: 2rem;
     overflow: auto;
     vertical-align: middle;
     box-shadow: 0 2px 5px #eee inset;
@@ -312,7 +312,7 @@
     margin: 0;
     padding-left: 10%;
     position:relative;
-    top: 5.2rem;
+    top: 6rem;
     display:none;
 }
 
