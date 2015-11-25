@@ -399,7 +399,7 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
 
 function transcripts_ui_button_inner($markup, $element)
 {
-    $find = "<span>" . $element['#value'] . "</span>";
+    $find = $element['#value'];
     $replace = $element['#inner'];
     $markup = str_replace($find, $replace, $markup);
     return $markup;
