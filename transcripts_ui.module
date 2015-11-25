@@ -337,10 +337,9 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
         '#value' => t('Reset'),
         '#attributes' => array(
             'type' => 'reset',
-            'class' => array('searchreset'),
         ),
         '#find' => 'btn-primary',
-        '#replace' => '',
+        '#replace' => 'searchreset',
         '#post_render' => array('transcripts_ui_button_inner', 'transcripts_ui_find_replace'),
         '#inner' => "<span class='glyphicon glyphicon-reset'></span>",
     );
