@@ -105,10 +105,6 @@
     color: #ccc;
 }
 
-.transcript-search-wrapper .glyphicon-remove-circle:before{
-    content: '\e60f'; /* icon of agent person */
-}
-
 .transcript-search-wrapper .input-group-btn {
     position: absolute;
     top: 1.1rem;
