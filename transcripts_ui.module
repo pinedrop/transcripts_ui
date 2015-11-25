@@ -326,10 +326,10 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
             'progress' => array('type' => 'none'),
             'event' => 'click',
         ),
+        '#inner' => "<span class='glyphicon glyphicon-search'></span>",
         '#find' => 'btn-primary',
         '#replace' => 'btn-default',
         '#post_render' => array('transcripts_ui_button_inner', 'transcripts_ui_find_replace'),
-        '#inner' => "<span class='glyphicon glyphicon-search'></span>",
     );
     $form['search']['input']['buttons']['reset'] = array(
         '#type' => 'button',
@@ -338,10 +338,10 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
         '#attributes' => array(
             'type' => 'reset',
         ),
+        '#inner' => "<span class='glyphicon glyphicon-reset'></span>",
         '#find' => 'btn-primary',
         '#replace' => 'searchreset',
         '#post_render' => array('transcripts_ui_button_inner', 'transcripts_ui_find_replace'),
-        '#inner' => "<span class='glyphicon glyphicon-reset'></span>",
     );
     $form['search']['input']['options'] = array(
         '#markup' => '<div class="transcript-search-options form-group">'
@@ -373,8 +373,8 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
             'type' => 'button',
             'class' => array('nextresult'),
         ),
-        '#post_render' => array('transcripts_ui_button_inner'),
         '#inner' => "<span class='glyphicon glyphicon-menu-down'></span>",
+        '#post_render' => array('transcripts_ui_button_inner'),
     );
     $form['search']['navigate']['buttons']['previous'] = array(
         '#type' => 'button',
@@ -384,8 +384,8 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
             'type' => 'button',
             'class' => array('previousresult'),
         ),
-        '#post_render' => array('transcripts_ui_button_inner'),
         '#inner' => "<span class='glyphicon glyphicon-menu-up'></span>",
+        '#post_render' => array('transcripts_ui_button_inner'),
     );
     $form['search']['navigate']['count'] = array(
         '#prefix' => '<div><span id="transcript-results-count-' . $ui->trid . '" class="transcript-results-count" data-results-count="0">',
