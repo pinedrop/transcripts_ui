@@ -8,6 +8,11 @@
                     var $transcript = $('[data-transcripts-role=transcript][data-transcripts-id=' + trid + ']');
                     if ($transcript.size() == 1) {
                         var $scroller = ScrollingTranscript.getUI($transcript);
+                        $scroller.playButton(
+                            $('.playpause', this).click(function() {
+                                $scroller.playPause();
+                            })
+                        );
                         $('.previous', this).click(function () {
                             $scroller.previous();
                         });

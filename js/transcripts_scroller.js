@@ -18,6 +18,10 @@
                     var playPause = function (e) {
                         if (!player.paused) { //if playing
                             that.checkNow(player.currentTime);
+                            that.togglePlay('play');
+                        }
+                        else {
+                            that.togglePlay('pause');
                         }
                     };
 
@@ -48,6 +52,13 @@
                     });
                 },
 
+                playPause: function() {
+                    if (player != null) {
+                        if (player.paused) player.play();
+                        else player.pause();
+                    }
+                },
+
                 playFrom: function (seconds) {
                     if (player != null) {
                         player.currentTime = seconds;
@@ -71,6 +82,9 @@
                 playIndex: 0,
                 startPointer: 0,
                 lastNow: 0,
+                playtoggle: null,
+                playicon: null,
+                pauseicon: null,
 
                 starts: $('*[data-begin]', $transcript).not('.deleted').map(function (element, index) {
                     var o = {};
@@ -186,6 +200,21 @@
                     $('.playing', $transcript).each(function () {
                         that.endPlay($(this));
                     });
+                },
+
+                playButton: function($button) {
+                    this.playtoggle = $('span', $button);
+                    this.playicon = $button.attr('data-play-icon');
+                    this.pauseicon = $button.attr('data-pause-icon');
+                },
+
+                togglePlay: function(mode) {
+                    if (mode == 'play') {
+                        this.playtoggle.removeClass(this.playicon).addClass(this.pauseicon);
+                    }
+                    else { //pause
+                        this.playtoggle.removeClass(this.pauseicon).addClass(this.playicon);
+                    }
                 },
 
                 previous: function () {

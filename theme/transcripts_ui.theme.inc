@@ -32,7 +32,7 @@ function theme_transcripts_ui_transcript_options($vars)
 }
 
 function theme_transcripts_ui_transcript_navigation($vars) {
-    $out  = "<button type='button' class='btn btn-default btn-icon playpause' title='Play / Pause'><span class='glyphicon glyphicon-play'></span></button>";
+    $out  = "<button type='button' class='btn btn-default btn-icon playpause' title='Play/Pause' data-play-icon='glyphicon-play' data-pause-icon='glyphicon-pause'><span class='glyphicon glyphicon-play'></span></button>";
     $out .= "<button type='button' class='btn btn-default btn-icon previous' title='Previous line'><span class='glyphicon glyphicon-arrow-left'></span></button>";
     $out .= "<button type='button' class='btn btn-default btn-icon sameagain' title='Same line'><span class='glyphicon glyphicon-repeat'></span></button>";
     $out .= "<button type='button' class='btn btn-default btn-icon next' title='Next line'><span class='glyphicon glyphicon-arrow-right'></span></button>";
