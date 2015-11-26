@@ -146,12 +146,8 @@ function transcripts_ui_tcu($sentence, $speaker_turn, $speaker_tiers = array(), 
     $end = isset($sentence->end) ? $sentence->end : 0;
 
     $tcu = array(
-        //div had class clearfix
-        '#prefix' => "<li id='{$sid}' class='clearfix list-group-item transcripts-ui-tcu' data-tcuid='{$sid}' data-begin='{$begin}' data-end='{$end}'>",
-        '#suffix' => "</li>",
         'content' => array(
             'tcu_info' => array(
-                '#prefix' => "<div class='clearfix tcu-info'>",
                 'link' => array(
                     '#prefix' => "<div class='play-button'>",
                     '#theme' => 'transcripts_ui_play_tcu',
@@ -166,15 +162,18 @@ function transcripts_ui_tcu($sentence, $speaker_turn, $speaker_tiers = array(), 
                     '#speaker_name' => $speaker_tiers,
                     '#speaker_turn' => $speaker_turn,
                 ),
+                '#prefix' => "<div class='clearfix tcu-info'>",
                 '#suffix' => "</div>",
             ),
             'tcu_tiers' => array(
-                '#prefix' => "<div id='tiers-{$sid}' class='tiers speaker-tiers'>",
                 '#tcuid' => $sid,
                 'tier_list' => $tier_list,
+                '#prefix' => "<div id='tiers-{$sid}' class='tiers speaker-tiers'>",
                 '#suffix' => "</div>",
             ),
         ),
+        '#prefix' => "<li id='{$sid}' class='clearfix list-group-item transcripts-ui-tcu' data-tcuid='{$sid}' data-begin='{$begin}' data-end='{$end}'>",
+        '#suffix' => "</li>",
     );
     drupal_alter('transcripts_ui_tcu', $tcu);
     return $tcu;
