@@ -308,6 +308,19 @@
     opacity:1;
 }
 
+.transcript-search-message{
+    display:none;
+}
+
+.has-searched.no-results .transcript-search-message{
+    margin: 0;
+    padding-left: 10%;
+    position:relative;
+    top: 6rem;
+    display: block;
+    color:#fff;
+}
+
 .transcript-search-options {
     margin: 0;
     padding-left: 10%;

@@ -343,6 +343,9 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
         '#inner' => "<span class='glyphicon glyphicon-reset'></span>",
         '#post_render' => array('transcripts_ui_button_inner', 'transcripts_ui_find_replace'),
     );
+    $form['search']['input']['message'] = array(
+        '#markup' => '<div class="transcript-search-message">' .t('No results found for this search'). '</div>',
+    );
     $form['search']['input']['options'] = array(
         '#markup' => '<div class="transcript-search-options form-group">'
             . '<label class="radio-inline"><input type="radio" id="transcript-search-options-' . $ui->trid . '-0" name="transcript-search-options" checked="checked" data-value="0">' . t('Show All') . '</label>'
