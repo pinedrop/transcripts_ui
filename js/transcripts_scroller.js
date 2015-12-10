@@ -85,26 +85,8 @@
                 playtoggle: null,
                 playicon: null,
                 pauseicon: null,
-
-                starts: $('*[data-begin]', $transcript).not('.deleted').map(function (element, index) {
-                    var o = {};
-                    o.$item = $(this);
-                    o.begin = $(this).attr('data-begin');
-                    o.end = $(this).attr('data-end');
-                    return o;
-                }).toArray().sort(function (a, b) {
-                    return a.begin - b.begin;
-                }),
-
-                ends: $('*[data-end]', $transcript).not('.deleted').map(function (element, index) {
-                    var o = {};
-                    o.$item = $(this);
-                    o.begin = $(this).attr('data-begin');
-                    o.end = $(this).attr('data-end');
-                    return o;
-                }).toArray().sort(function (a, b) {
-                    return a.end - b.end;
-                }),
+                starts: null,
+                ends: null,
 
                 playOne: function ($item, noscroll, begin, end) {
                     var reset = this.resetSweet;
@@ -240,14 +222,43 @@
                         that.resetSweet = true;
                         that.playOne($tcu);
                     });
-                }
+                },
 
+                getStarts: function() {
+                    return $('*[data-begin]', $transcript).map(function (element, index) {
+                        var o = {};
+                        o.$item = $(this);
+                        o.begin = $(this).attr('data-begin');
+                        o.end = $(this).attr('data-end');
+                        return o;
+                    }).toArray().sort(function (a, b) {
+                        return a.begin - b.begin;
+                    });
+                },
+
+                getEnds: function() {
+                    return $('*[data-end]', $transcript).map(function (element, index) {
+                        var o = {};
+                        o.$item = $(this);
+                        o.begin = $(this).attr('data-begin');
+                        o.end = $(this).attr('data-end');
+                        return o;
+                    }).toArray().sort(function (a, b) {
+                        return a.end - b.end;
+                    });
+                },
+
+                resetPlayIndex: function() {
+                    this.starts = this.getStarts();
+                    this.ends = this.getEnds();
+                    for (var i=0; i<this.starts.length; i++) {
+                        this.starts[i].$item.attr('data-starts-index', i);
+                    }
+                }
             };
 
             scroller.setContainer($transcript);
-            for (var i = 0; i < scroller.starts.length; i++) {
-                scroller.starts[i].$item.attr('data-starts-index', i);
-            }
+            scroller.resetPlayIndex();
             $.extend(scroller, html5);
 
             $('button.play-tcu', $transcript).click(function () {
