@@ -6,36 +6,45 @@
                 .once('options')
                 .each(function () {
                     var trid = $(this).attr('data-transcripts-id');
+                    var $transcript = $('[data-transcripts-role=transcript][data-transcripts-id=' + trid + ']');
 
                     var $transcriptOptions = $('select.transcript-options', this);
                     $transcriptOptions.find('optgroup[data-type=languages] option').attr('selected', true);
-                    $transcriptOptions.find('optgroup[data-type=speakers] option').attr('selected', true)
+                    $transcriptOptions.find('optgroup[data-type=speakers] option').attr('selected', true);
+                    $transcriptOptions.find('optgroup[data-type=views] option').attr('selected', false);
                     $transcriptOptions.change(function (e) {
                             //language selection
-                            $('*[data-transcripts-id=' + trid + ']').find('.tier').hide();
+
+                            $transcript.find('.tier').hide();
                             $('optgroup[data-type=languages] option:selected', this).each(function () {
-                                $('*[data-transcripts-id=' + trid + ']').find('*[data-tier=' + $(this).val() + ']').show();
+                                $transcript.find('*[data-tier=' + $(this).val() + ']').show();
                             });
 
                             //speaker name selection
-                            $('*[data-transcripts-id=' + trid + ']').find('.speaker-display').hide();
+                            $transcript.find('.speaker-display').hide();
                             $('optgroup[data-type=speakers] option:selected', this).each(function () {
-                                $('*[data-transcripts-id=' + trid + ']').find('*[data-speaker-display=' + $(this).val() + ']').show();
+                                $transcript.find('*[data-speaker-display=' + $(this).val() + ']').show();
                             });
+
+                            //transcript view selection
+                            $('optgroup[data-type=views] option', this).each(function() {
+                                $transcript.toggleClass($(this).val(), $(this).prop('selected'));
+                            });
+
                             e.preventDefault();
                         }
                     );
 
                     //hide buttons for tiers that have no data
                     $('optgroup[data-type=languages] option', $transcriptOptions).each(function () {
-                        if ($('*[data-transcripts-id=' + trid + ']').find('*[data-tier=' + $(this).val() + ']').size() == 0) {
+                        if ($transcript.find('*[data-tier=' + $(this).val() + ']').size() == 0) {
                             $(this).remove();
                         }
                     });
 
                     //hide buttons for speaker name formats that have no data
                     $('optgroup[data-type=speakers] option', $transcriptOptions).each(function () {
-                        if ($('*[data-transcripts-id=' + trid + ']').find('*[data-speaker-display=' + $(this).val() + ']').size() == 0) {
+                        if ($transcript.find('*[data-speaker-display=' + $(this).val() + ']').size() == 0) {
                             $(this).remove();
                         }
                     });
