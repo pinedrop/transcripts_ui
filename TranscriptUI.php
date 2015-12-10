@@ -7,6 +7,8 @@ class TranscriptUI
     var $shorttrid; //short id
     var $options; //display options
     var $tiers; //data tiers
+    var $speakernames; //speaker names
+    var $transcriptviews; //transcript views
     var $tcuCount = 0; //number of result documents
     var $hitCount = 0; //number of hits if a search
     var $render; //array of rendered components
@@ -19,6 +21,7 @@ class TranscriptUI
         $this->options = $options;
         $this->tiers = transcripts_ui_tiers();
         $this->speakernames = transcripts_ui_speaker_names();
+        $this->transcriptviews = transcripts_ui_transcript_views();
         $this->module = $module;
 
         if (in_array($module, module_implements('transcripts_ui_transcript'))) {
@@ -32,8 +35,6 @@ class TranscriptUI
     {
         $this->tcuCount = count($timecodeunits);
         $tiers = $this->tiers;
-        $trid = $this->trid;
-        $options = $this->options;
         $speakernames = $this->speakernames;
 
         $highlight = $highlights !== NULL ? TRUE : FALSE;
@@ -87,8 +88,8 @@ class TranscriptUI
         }
 
         $js = array(
-            'ui' => drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_ui.js',
-            'scroller' => drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_scroller.js',
+            'ui' => drupal_get_path('module', 'transcripts_ui') . '/js/transcripts-ui.js',
+            'scroller' => drupal_get_path('module', 'transcripts_ui') . '/js/transcripts-scroller.js',
         );
         drupal_alter('transcripts_ui_js', $js);
 
@@ -102,7 +103,7 @@ class TranscriptUI
             '#prefix' => "<div id='transcripts-ui-transcript-{$this->trid}' class='scroller' data-transcripts-role='transcript' data-transcripts-id='{$this->trid}'>",
             '#suffix' => "</div>",
             '#attached' => array(
-                'css' => array(drupal_get_path('module', 'transcripts_ui') . '/css/transcripts_ui.css'),
+                'css' => array(drupal_get_path('module', 'transcripts_ui') . '/css/transcripts-ui.css'),
                 'js' => array(
                     drupal_get_path('module', 'transcripts_ui') . '/js/jquery.scrollTo.min.js',
                     $js['ui'],

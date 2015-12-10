@@ -10,6 +10,11 @@ function transcripts_ui_speaker_names()
     return variable_get('transcripts_ui_speaker_names', array());
 }
 
+function transcripts_ui_transcript_views()
+{
+    return array('minimal-view' => t('Minimal'));
+}
+
 function transcripts_ui_init()
 {
     drupal_add_library('system', 'ui.button');
@@ -210,12 +215,13 @@ function transcripts_ui_render_controls($ui)
                     'trid' => $ui->trid,
                     'data_tiers' => $ui->tiers,
                     'speaker_names' => $ui->speakernames,
+                    'transcript_views' => $ui->transcriptviews,
                     '#attached' => array(
                         'css' => array(
-                            drupal_get_path('module', 'transcripts_ui') . '/css/transcripts_tier_selector.css',
+                            drupal_get_path('module', 'transcripts_ui') . '/css/transcripts-options.css',
                         ),
                         'js' => array(
-                            drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_tier_selector.js',
+                            drupal_get_path('module', 'transcripts_ui') . '/js/transcripts-options.js',
                         ),
                     ),
                 ),
@@ -223,7 +229,7 @@ function transcripts_ui_render_controls($ui)
                     '#theme' => 'transcripts_ui_transcript_navigation',
                     '#attached' => array(
                         'js' => array(
-                            drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_navigation.js',
+                            drupal_get_path('module', 'transcripts_ui') . '/js/transcripts-navigation.js',
                         ),
                     ),
                 ),
@@ -239,7 +245,7 @@ function transcripts_ui_render_controls($ui)
                     '#suffix' => "</div>",
                     '#attached' => array(
                         'js' => array(
-                            drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_search_wrapper.js',
+                            drupal_get_path('module', 'transcripts_ui') . '/js/transcripts-search-wrapper.js',
                         ),
                     ),
                 ),
@@ -247,26 +253,6 @@ function transcripts_ui_render_controls($ui)
             '#suffix' => "</div>",
         ),
     );
-}
-
-//'viewer_selector' => drupal_get_form('transcripts_ui_viewer_selector', $ui->trid, $ui->viewers),
-function transcripts_ui_viewer_selector($form, &$form_state, $trid, $viewer)
-{
-    $form = array();
-
-    $form['viewer_selector'] = array(
-        '#type' => 'select',
-        '#title' => t('Views'),
-        '#options' => $viewer,
-        '#attributes' => array('class' => array('viewer-select')),
-    );
-    $form['#attributes'] = array(
-        'data-transcripts-role' => 'viewer-selector',
-        'data-transcripts-id' => $trid,
-    );
-    $form['#attached']['js'] = array(drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_ui_viewer_selector.js');
-
-    return $form;
 }
 
 function transcripts_ui_search_form($form, &$form_state, $ui)
@@ -279,7 +265,7 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
         'data-transcripts-id' => array($ui->trid),
     );
     $form['#attached'] = array(
-        'js' => array(drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_search.js'),
+        'js' => array(drupal_get_path('module', 'transcripts_ui') . '/js/transcripts-search.js'),
     );
 
     $term = '';

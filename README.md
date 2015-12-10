@@ -75,7 +75,7 @@ Your module is then free to position and style the rendered components.
 ## Scrolling Transcripts
 
 A transcript will attempt to scroll within the container defined by the
-setContainer($container) method in transcripts_scroller.js. By default,
+setContainer($container) method in transcripts-scroller.js. By default,
 the container is set to the transcript element itself, that is div.scroller;
 but this default setting can be overriden.
 
