@@ -14,7 +14,6 @@
                     $transcriptOptions.find('optgroup[data-type=views] option').attr('selected', false);
                     $transcriptOptions.change(function (e) {
                             //language selection
-
                             $transcript.find('.tier').hide();
                             $('optgroup[data-type=languages] option:selected', this).each(function () {
                                 $transcript.find('*[data-tier=' + $(this).val() + ']').show();
@@ -25,6 +24,7 @@
                             $('optgroup[data-type=speakers] option:selected', this).each(function () {
                                 $transcript.find('*[data-speaker-display=' + $(this).val() + ']').show();
                             });
+                            $transcript.toggleClass('no-speaker-names', $('optgroup[data-type=speakers] option:selected', this).length == 0);
 
                             //transcript view selection
                             $('optgroup[data-type=views] option', this).each(function() {
