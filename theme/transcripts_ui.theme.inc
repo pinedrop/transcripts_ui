@@ -1,25 +1,35 @@
 <?php
 
-function theme_transcripts_ui_transcript_controls($vars)
-{
-    $out = drupal_render($vars['element']['content']);
+function theme_transcripts_ui_transcript_controls($vars) {
+    $out  = "<div class='btn-group btn-group-justified btn-group-transcript' role='group'>";
+    $out .= drupal_render($vars['element']['content']['transcript_options']);
+    $out .= drupal_render($vars['element']['content']['transcript_navigation']);
+    $out .= "</div>";
+    $out .= drupal_render($vars['element']['content']['transcript_search_wrapper']);
     return $out;
 }
 
 function theme_transcripts_ui_transcript_options($vars)
 {
-    $out  = "<select multiple class='selectpicker tier-selector' data-header='Select languages'>";
+    $out  = "<select style='display:none;' multiple class='transcript-options' data-header='Transcript options'>";
 
     //language selector
-    $out .= "<optgroup label='Transcript' data-type='languages'>";
+    $out .= "<optgroup label='Text' data-type='languages'>";
     foreach ($vars['element']['data_tiers'] as $key => $val) {
         $out .= "<option value='{$key}'>{$val}</option>";
     }
     $out .= "</optgroup>";
 
     //speaker name selector
-    $out .= "<optgroup label='Speaker names' data-type='speakers'>";
+    $out .= "<optgroup label='Speakers' data-type='speakers'>";
     foreach ($vars['element']['speaker_names'] as $key => $val) {
+        $out .= "<option value='{$key}'>{$val}</option>";
+    }
+    $out .= "</optgroup>";
+
+    //view selector
+    $out .= "<optgroup label='Views' data-type='views'>";
+    foreach ($vars['element']['transcript_views'] as $key => $val) {
         $out .= "<option value='{$key}'>{$val}</option>";
     }
     $out .= "</optgroup>";
@@ -28,13 +38,12 @@ function theme_transcripts_ui_transcript_options($vars)
     return $out;
 }
 
-function theme_transcripts_ui_transcript_navigation($vars)
-{
-    $out = "<div class='btn-group' role='group'>";
-    $out .= "<button type='button' class='btn btn-default previous' title='Previous line'><span class='glyphicon glyphicon-arrow-left'></span> " . t('Prev') . "</button>";
-    $out .= "<button type='button' class='btn btn-default sameagain' title='Same line'><span class='glyphicon glyphicon-repeat'></span>" . t('Same') . "</button>";
-    $out .= "<button type='button' class='btn btn-default next' title='Next line'><span class='glyphicon glyphicon-arrow-right'></span>" . t('Next') . "</button>";
-    $out .= "</div>";
+function theme_transcripts_ui_transcript_navigation($vars) {
+    $out  = "<button type='button' class='btn btn-default btn-icon playpause' title='Play/Pause' data-play-icon='glyphicon-play' data-pause-icon='glyphicon-pause'><span class='glyphicon glyphicon-play'></span></button>";
+    $out .= "<button type='button' class='btn btn-default btn-icon previous' title='Previous line'><span class='glyphicon glyphicon-arrow-left'></span></button>";
+    $out .= "<button type='button' class='btn btn-default btn-icon sameagain' title='Same line'><span class='glyphicon glyphicon-repeat'></span></button>";
+    $out .= "<button type='button' class='btn btn-default btn-icon next' title='Next line'><span class='glyphicon glyphicon-arrow-right'></span></button>";
+    $out .= "<button type='button' class='btn btn-default btn-icon searchtrans' title='Search Transcript'><span class='glyphicon glyphicon-search'></span></button>";
     return $out;
 }
 
@@ -78,7 +87,7 @@ function theme_transcripts_ui_play_tcu($vars)
     $mins = floor($vars['element']['#time'] / 60);
     $secs = $vars['element']['#time'] % 60;
     $time = sprintf("%d:%02d", $mins, $secs);
-    $classes = 'btn btn-default btn-icon play-tcu';
+    $classes = 'btn btn-default btn-sm btn-icon play-tcu';
     $classes .= $vars['element']['#timecoded'] ? ' timed' : ' untimed';
     $out = "<button type='button' class='" .$classes ."' title='Play line'><span class='glyphicon glyphicon-play'></span> ";
     $out .= $time;

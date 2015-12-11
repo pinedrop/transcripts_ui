@@ -72,6 +72,24 @@ UI; this is done by implementing hook_transcripts_ui_transcript().
 
 Your module is then free to position and style the rendered components.
 
+## Scrolling Transcripts
+
+A transcript will attempt to scroll within the container defined by the
+setContainer($container) method in transcripts-scroller.js. By default,
+the container is set to the transcript element itself, that is div.scroller;
+but this default setting can be overriden.
+
+It is necessary to set styles on the container to support scrolling. To use
+the transcript itself as the scrolling container, apply the following CSS.
+
+```
+.scroller {
+    height: 500px;
+    overflow-x: auto;
+    transition: all 100ms ease 0s;
+}
+```
+
 ## Themeing Output
 
 Components and sub-components can be differently themed by 

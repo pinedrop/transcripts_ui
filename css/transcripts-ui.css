@@ -1,0 +1,387 @@
+.tcu-info {
+    float: right;
+    width: 10rem;
+}
+.play-button {
+    float: left;
+    margin: 0 0 0 1rem;
+}
+
+/* SPEAKER NAMES */
+.speaker-name {
+    float: right;
+    width: 100px;
+}
+.same-speaker {
+    display: none;
+}
+
+/* DATA TIERS */
+.speaker-tiers {
+    margin-left: 0;
+    margin-right: 10rem;
+}
+.scroller ul {
+    list-style: none;
+}
+.scroller li.playing .speaker-tiers{
+    box-shadow: 0 0 5px 3px #888;
+}
+.scroller li.playing .speaker-display{
+    color: white !important;
+    text-shadow: 0 0 2px #444;
+}
+
+/*---------------------------*/
+/***** transcript search *****/
+/*---------------------------*/
+.transcript-search-wrapper {
+    background: #888;
+    padding: 0;
+    display: none;
+    height: 9rem;
+    position: relative;
+    margin: 0;
+}
+
+.transcripts-ui-search-form {
+    height: 7.5rem;
+}
+
+.transcripts-ui-search-form > div {
+}
+
+.transcript-search-input {
+    position: relative;
+    float: right;
+    width: 75%;
+}
+
+.transcript-search-wrapper .form-control {
+    color: #777;
+    border: 1px solid #d0d0d0;
+    border-radius: 1.8rem;
+    background-clip: padding-box;
+    font-size: 1.06em;
+    height: 2.5em;
+    margin: 0 2rem 0.3rem 2rem;
+    padding: 0.2rem 4rem 0 2rem;
+    max-width: 88%;
+    position: absolute;
+    right:0;
+    top: 2rem;
+    overflow: auto;
+    vertical-align: middle;
+    box-shadow: 0 2px 5px #eee inset;
+    border-collapse: separate;
+    background: #fff;
+    -webkit-transition-property: all;
+    transition-property: all;
+    -webkit-transition-duration: 400ms;
+    transition-duration: 400ms;
+}
+
+.transcript-search-wrapper .form-control:hover {
+    border: 1px solid #ccc;
+    color: #777;
+}
+
+.transcript-search-wrapper .form-control:focus {
+    border: 1px solid #9097d3;
+    box-shadow: 0 0 4px #949bd8;
+    border-collapse: separate;
+}
+
+.transcript-search-wrapper .glyphicon-remove-circle{
+    position: absolute;
+    cursor: pointer;
+    right: 0.8rem;
+    color: #ccc;
+    font-size: 1em;
+}
+
+.transcript-search-wrapper .glyphicon-remove-circle:hover,
+.transcript-search-wrapper .glyphicon-remove-circle:active{
+    color: #ccc;
+}
+
+.transcript-search-wrapper .input-group-btn {
+    position: absolute;
+    top: 1.1rem;
+    right: 2.1rem;
+    z-index: 10;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+.transcript-search-wrapper .input-group-btn .btn.btn-default {
+    display: block;
+    height: 35px;
+    width: 45px;
+    color: #aaa;
+    border: 1px solid #e0e0e0;
+    border-top-right-radius: 1.7rem !important;
+    border-bottom-right-radius: 1.7rem !important;
+    background-clip: padding-box;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+
+    position: absolute;
+    right: 0;
+    top: 1rem;
+    background-image: -webkit-linear-gradient(top, #fff 0, #e0e0e0 100%);
+    background-image: linear-gradient(to bottom,#fff 0,#e0e0e0 100%);
+
+    background: #ccc;
+    color: #fff;
+    text-shadow: 0 2px 3px #aaa;
+}
+
+.transcript-search-wrapper .input-group-btn .btn.btn-default:hover {
+    background: #eee;
+    color: #aaa;
+    text-shadow:none;
+}
+
+.transcript-search-wrapper .input-group-btn .btn.btn-default:focus {
+    background: transparent !important;
+    border-color: transparent !important;
+    color: #aaa;
+}
+
+.transcript-search-wrapper .input-group-btn .btn.btn-default .glyphicon {
+    font-family: 'Glyphicons Halflings' !important;
+    background: transparent;
+    position:relative;
+    font-size:18px;
+}
+
+.transcript-search-wrapper .input-group-btn .btn.btn-default .glyphicon::before {
+    content: '\e080';
+}
+
+
+.transcript-search-wrapper .input-group-btn .glyphicon.fa-spinner{
+    position: absolute;
+    top: 0.55rem;
+    right: 5.125rem;
+    padding: 0;
+    z-index: 10;
+    width: 2.5rem;
+    height: 2.5rem;
+    -webkit-filter: blur(0);
+    -webkit-animation: fa-spin 1s infinite steps(8);
+    animation: fa-spin 1s infinite steps(8);
+}
+
+.transcript-search-wrapper .input-group-btn .glyphicon.fa-spinner::before {
+    content: '\f110';
+    font-family: 'FontAwesome';
+    font-size: 3rem;
+    color: transparent;
+    position: relative;
+    top: -0.2rem;
+    right: 0.05rem;
+}
+
+.transcript-search-wrapper .searching .input-group-btn .glyphicon.fa-spinner::before{
+    color:#ccc;
+}
+
+/*
+@-moz-document url-prefix() {
+  .transcript-search-wrapper .input-group-btn .btn.btn-default.progress-disabled .icon {
+    will-change: transform;
+  }
+}
+*/
+
+@-webkit-keyframes fa-spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
+@keyframes fa-spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
+
+/*--- reset search button ---*/
+.transcript-search-wrapper .input-group-btn .searchreset {
+    border: none;
+    background: transparent;
+    background-image: none;
+    position: absolute;
+    right: 5rem;
+    top: 1.45rem;
+    z-index: 10;
+    padding: 0;
+    margin: 0;
+    display: none;
+    border-radius: 50%;
+    background-clip: padding-box;
+}
+
+.transcript-search-wrapper .input-group-btn .searchreset:hover,
+.transcript-search-wrapper .input-group-btn .searchreset:active {
+    color: #777;
+}
+
+.transcript-search-wrapper .input-group-btn .searchreset:active,
+.transcript-search-wrapper .input-group-btn .searchreset.active {
+    background: transparent;
+    border: none;
+    background-image: none;
+    box-shadow: none;
+}
+
+.transcript-search-wrapper .input-group-btn .searchreset .glyphicon {
+    cursor: pointer;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background-clip: padding-box;
+    border: none;
+    position: relative;
+    top: 0;
+    left: 0;
+    background: transparent;
+}
+
+.transcript-search-wrapper .input-group-btn .searchreset .glyphicon::before,
+.transcript-search-wrapper .input-group-btn .searchreset .glyphicon::after {
+    background: #aaa;
+    position: absolute;
+    top: 1.3rem;
+    left: 0.5rem;
+    width: 1.7rem;
+    height: 1px;
+    content: '';
+    filter: alpha(opacity=100);
+    opacity:1;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.transcript-search-wrapper .searching .input-group-btn .searchreset .glyphicon::before,
+.transcript-search-wrapper .searching .input-group-btn .searchreset .glyphicon::after{
+    filter: alpha(opacity=0);
+    opacity:0;
+}
+
+.transcript-search-wrapper .input-group-btn .searchreset .glyphicon::after {
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.transcript-search-wrapper .input-group-btn .searchreset:hover .glyphicon,
+.transcript-search-wrapper .input-group-btn .searchreset:active .glyphicon {
+    background: #eee;
+}
+
+.transcript-search-wrapper .input-group-btn .searchreset:hover .glyphicon::before,
+.transcript-search-wrapper .input-group-btn .searchreset:hover .glyphicon::after {
+    background: #555;
+}
+
+.transcript-search-wrapper .input-group-btn .searchreset:focus .glyphicon::before,
+.transcript-search-wrapper .input-group-btn .searchreset:focus .glyphicon::after{
+    filter: alpha(opacity=100);
+    opacity:1;
+}
+
+.transcript-search-message{
+    display:none;
+}
+
+.has-searched.no-results .transcript-search-message{
+    margin: 0;
+    padding-left: 10%;
+    position:relative;
+    top: 6rem;
+    display: block;
+    color:#fff;
+}
+
+.transcript-search-options {
+    margin: 0;
+    padding-left: 10%;
+    position:relative;
+    top: 6rem;
+    display:none;
+}
+
+.has-searched .transcript-search-options{
+    display:block;
+}
+
+.has-searched.no-results .transcript-search-options{
+    display:none;
+}
+
+.transcript-search-options label {
+    font-size: 90%;
+    text-transform: capitalize;
+    display: inline-block;
+    -webkit-transition: all 500ms ease 0s;
+    transition: all 500ms ease 0s;
+    cursor:default;
+    color:#fff;
+}
+
+.transcript-search-options .iradio_minimal-red{
+    margin-right: .5rem;
+    position: relative;
+    top: -0.2rem;
+}
+
+.transcript-navigate-results {
+    width: 25%;
+    padding: 0;
+}
+.transcript-navigate-results > div {
+    text-align: center;
+}
+.transcript-navigate-results .btn .glyphicon{
+    color: #aaa;
+    cursor:pointer;
+}
+.transcript-navigate-results .btn.has-result .glyphicon{
+    color: #fff;
+}
+.transcript-navigate-results .btn.has-result:hover .glyphicon,
+.transcript-navigate-results .btn.has-result:active .glyphicon{
+    color:#777;
+}
+
+.transcript-navigate-results div:last-child {
+    margin-top: 0.5rem;
+    width: 100%;
+    text-align: center;
+    padding-right: 0.3rem;
+    -webkit-transition: all 500ms ease 0s;
+    transition: all 500ms ease 0s;
+    display: block;
+    position: relative;
+    top:0;
+    left:0.5rem;
+    color: #eee;
+}

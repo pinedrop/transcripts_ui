@@ -53,3 +53,11 @@ function hook_transcripts_ui_js_alter(&$scripts)
     $scripts['ui'] = drupal_get_path('module', 'my_module') . '/js/my_ui.js';
     $scripts['scroller'] = drupal_get_path('module', 'my_module') . '/js/my_scroller.js';
 }
+
+function hook_transcripts_ui_tcu_alter(&$tcu)
+{
+}
+
+function hook_transcripts_ui_transcript_alter(&$transcript)
+{
+}

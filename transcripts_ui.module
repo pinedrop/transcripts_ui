@@ -10,6 +10,11 @@ function transcripts_ui_speaker_names()
     return variable_get('transcripts_ui_speaker_names', array());
 }
 
+function transcripts_ui_transcript_views()
+{
+    return array('minimal-view' => t('Minimal'));
+}
+
 function transcripts_ui_init()
 {
     drupal_add_library('system', 'ui.button');
@@ -139,6 +144,65 @@ function transcripts_ui_render($ui)
     return array_merge($vars, transcripts_ui_render_controls($ui));
 }
 
+function transcripts_ui_tcu($sentence, $speaker_turn, $speaker_tiers = array(), $tier_list = array())
+{
+    $sid = $sentence->tcuid;
+    $begin = isset($sentence->start) ? $sentence->start : 0;
+    $end = isset($sentence->end) ? $sentence->end : 0;
+
+    $tcu = array(
+        'content' => array(
+            'tcu_info' => array(
+                'link' => array(
+                    '#prefix' => "<div class='play-button'>",
+                    '#theme' => 'transcripts_ui_play_tcu',
+                    '#linkurl' => '#tcu/' . $sid,
+                    '#timecoded' => $sentence->end == 0 ? FALSE : TRUE,
+                    '#time' => $sentence->start,
+                    '#suffix' => "</div>",
+                ),
+                'speaker_name' => array(
+                    '#theme' => 'transcripts_ui_speaker_name',
+                    '#sid' => $sid,
+                    '#speaker_name' => $speaker_tiers,
+                    '#speaker_turn' => $speaker_turn,
+                ),
+                '#prefix' => "<div class='clearfix tcu-info'>",
+                '#suffix' => "</div>",
+            ),
+            'tcu_tiers' => array(
+                '#tcuid' => $sid,
+                'tier_list' => $tier_list,
+                '#prefix' => "<div id='tiers-{$sid}' class='tiers speaker-tiers'>",
+                '#suffix' => "</div>",
+            ),
+        ),
+        '#prefix' => "<li id='{$sid}' class='clearfix list-group-item transcripts-ui-tcu' data-tcuid='{$sid}' data-begin='{$begin}' data-end='{$end}'>",
+        '#suffix' => "</li>",
+    );
+    drupal_alter('transcripts_ui_tcu', $tcu);
+    return $tcu;
+}
+
+function transcripts_ui_tier($tier, $value, $classes = array())
+{
+    return array(
+        '#theme' => 'transcripts_ui_tcu_tier',
+        '#tier_name' => $tier,
+        '#tier_text' => $value,
+        '#classes' => $classes,
+    );
+}
+
+function transcripts_ui_tier_list($tiers)
+{
+    $tier_list = array();
+    foreach ($tiers as $tier => $value) {
+        $tier_list[] = transcripts_ui_tier($tier, $value);
+    }
+    return $tier_list;
+}
+
 function transcripts_ui_render_controls($ui)
 {
     return array(
@@ -151,9 +215,13 @@ function transcripts_ui_render_controls($ui)
                     'trid' => $ui->trid,
                     'data_tiers' => $ui->tiers,
                     'speaker_names' => $ui->speakernames,
+                    'transcript_views' => $ui->transcriptviews,
                     '#attached' => array(
+                        'css' => array(
+                            drupal_get_path('module', 'transcripts_ui') . '/css/transcripts-options.css',
+                        ),
                         'js' => array(
-                            drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_tier_selector.js',
+                            drupal_get_path('module', 'transcripts_ui') . '/js/transcripts-options.js',
                         ),
                     ),
                 ),
@@ -161,7 +229,7 @@ function transcripts_ui_render_controls($ui)
                     '#theme' => 'transcripts_ui_transcript_navigation',
                     '#attached' => array(
                         'js' => array(
-                            drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_navigation.js',
+                            drupal_get_path('module', 'transcripts_ui') . '/js/transcripts-navigation.js',
                         ),
                     ),
                 ),
@@ -177,7 +245,7 @@ function transcripts_ui_render_controls($ui)
                     '#suffix' => "</div>",
                     '#attached' => array(
                         'js' => array(
-                            drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_search_wrapper.js',
+                            drupal_get_path('module', 'transcripts_ui') . '/js/transcripts-search-wrapper.js',
                         ),
                     ),
                 ),
@@ -185,26 +253,6 @@ function transcripts_ui_render_controls($ui)
             '#suffix' => "</div>",
         ),
     );
-}
-
-//'viewer_selector' => drupal_get_form('transcripts_ui_viewer_selector', $ui->trid, $ui->viewers),
-function transcripts_ui_viewer_selector($form, &$form_state, $trid, $viewer)
-{
-    $form = array();
-
-    $form['viewer_selector'] = array(
-        '#type' => 'select',
-        '#title' => t('Views'),
-        '#options' => $viewer,
-        '#attributes' => array('class' => array('viewer-select')),
-    );
-    $form['#attributes'] = array(
-        'data-transcripts-role' => 'viewer-selector',
-        'data-transcripts-id' => $trid,
-    );
-    $form['#attached']['js'] = array(drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_ui_viewer_selector.js');
-
-    return $form;
 }
 
 function transcripts_ui_search_form($form, &$form_state, $ui)
@@ -217,7 +265,7 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
         'data-transcripts-id' => array($ui->trid),
     );
     $form['#attached'] = array(
-        'js' => array(drupal_get_path('module', 'transcripts_ui') . '/js/transcripts_search.js'),
+        'js' => array(drupal_get_path('module', 'transcripts_ui') . '/js/transcripts-search.js'),
     );
 
     $term = '';
@@ -255,6 +303,7 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
         '#button_type' => 'submit ajax-trigger',
         '#attributes' => array(
             'type' => 'submit',
+            'class' => array('searchbutton'),
         ),
         '#ajax' => array(
             'callback' => 'transcripts_ui_ajax_hits',
@@ -262,8 +311,10 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
             'progress' => array('type' => 'none'),
             'event' => 'click',
         ),
-        '#post_render' => array('transcripts_ui_button_inner'),
         '#inner' => "<span class='glyphicon glyphicon-search'></span>",
+        '#find' => 'btn-primary',
+        '#replace' => 'btn-default',
+        '#post_render' => array('transcripts_ui_button_inner', 'transcripts_ui_find_replace'),
     );
     $form['search']['input']['buttons']['reset'] = array(
         '#type' => 'button',
@@ -271,9 +322,15 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
         '#value' => t('Reset'),
         '#attributes' => array(
             'type' => 'reset',
+            'class' => array('searchreset'),
         ),
-        '#post_render' => array('transcripts_ui_button_inner'),
+        '#find' => 'btn-default',
+        '#replace' => '',
         '#inner' => "<span class='glyphicon glyphicon-reset'></span>",
+        '#post_render' => array('transcripts_ui_button_inner', 'transcripts_ui_find_replace'),
+    );
+    $form['search']['input']['message'] = array(
+        '#markup' => '<div class="transcript-search-message">' .t('No results found for this search'). '</div>',
     );
     $form['search']['input']['options'] = array(
         '#markup' => '<div class="transcript-search-options form-group">'
@@ -303,9 +360,10 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
         '#value' => t('Next'),
         '#attributes' => array(
             'type' => 'button',
+            'class' => array('nextresult'),
         ),
+        '#inner' => "<span class='glyphicon glyphicon-menu-down'></span>",
         '#post_render' => array('transcripts_ui_button_inner'),
-        '#inner' => "<span class='glyphicon glyphicon-next'></span>",
     );
     $form['search']['navigate']['buttons']['previous'] = array(
         '#type' => 'button',
@@ -313,9 +371,10 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
         '#value' => t('Previous'),
         '#attributes' => array(
             'type' => 'button',
+            'class' => array('previousresult'),
         ),
+        '#inner' => "<span class='glyphicon glyphicon-menu-up'></span>",
         '#post_render' => array('transcripts_ui_button_inner'),
-        '#inner' => "<span class='glyphicon glyphicon-previous'></span>",
     );
     $form['search']['navigate']['count'] = array(
         '#prefix' => '<div><span id="transcript-results-count-' . $ui->trid . '" class="transcript-results-count" data-results-count="0">',
@@ -336,10 +395,14 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
 
 function transcripts_ui_button_inner($markup, $element)
 {
-    $find = "<span>" . $element['#value'] . "</span>";
+    $find = $element['#value'];
     $replace = $element['#inner'];
     $markup = str_replace($find, $replace, $markup);
     return $markup;
+}
+
+function transcripts_ui_find_replace($markup, $element) {
+    return str_replace($element['#find'], $element['#replace'], $markup);
 }
 
 function transcripts_ui_ajax_hits($form, &$form_state)
@@ -355,7 +418,7 @@ function transcripts_ui_ajax_hits($form, &$form_state)
 
     $commands = array();
     foreach ($tcus as $tcu) {
-        $commands[] = ajax_command_replace('#tiers-' . $tcu['tcu_tiers']['#tcuid'], drupal_render($tcu['tcu_tiers']));
+        $commands[] = ajax_command_replace('#tiers-' . $tcu['content']['tcu_tiers']['#tcuid'], drupal_render($tcu['content']['tcu_tiers']));
     }
     $commands[] = ajax_command_settings(array('hasSearched' => TRUE, 'hitCount' => $ui->hitCount), TRUE); //need to merge settings
     $commands[] = ajax_command_replace('#transcripts-ui-search-form-' . $ui->trid, drupal_render($ui->render['transcript_search']));

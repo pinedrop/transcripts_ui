@@ -18,6 +18,10 @@
                     var playPause = function (e) {
                         if (!player.paused) { //if playing
                             that.checkNow(player.currentTime);
+                            that.togglePlay('play');
+                        }
+                        else {
+                            that.togglePlay('pause');
                         }
                     };
 
@@ -48,6 +52,13 @@
                     });
                 },
 
+                playPause: function() {
+                    if (player != null) {
+                        if (player.paused) player.play();
+                        else player.pause();
+                    }
+                },
+
                 playFrom: function (seconds) {
                     if (player != null) {
                         player.currentTime = seconds;
@@ -71,26 +82,11 @@
                 playIndex: 0,
                 startPointer: 0,
                 lastNow: 0,
-
-                starts: $('*[data-begin]', $transcript).not('.deleted').map(function (element, index) {
-                    var o = {};
-                    o.$item = $(this);
-                    o.begin = $(this).attr('data-begin');
-                    o.end = $(this).attr('data-end');
-                    return o;
-                }).toArray().sort(function (a, b) {
-                    return a.begin - b.begin;
-                }),
-
-                ends: $('*[data-end]', $transcript).not('.deleted').map(function (element, index) {
-                    var o = {};
-                    o.$item = $(this);
-                    o.begin = $(this).attr('data-begin');
-                    o.end = $(this).attr('data-end');
-                    return o;
-                }).toArray().sort(function (a, b) {
-                    return a.end - b.end;
-                }),
+                playtoggle: null,
+                playicon: null,
+                pauseicon: null,
+                starts: null,
+                ends: null,
 
                 playOne: function ($item, noscroll, begin, end) {
                     var reset = this.resetSweet;
@@ -188,6 +184,21 @@
                     });
                 },
 
+                playButton: function($button) {
+                    this.playtoggle = $('span', $button);
+                    this.playicon = $button.attr('data-play-icon');
+                    this.pauseicon = $button.attr('data-pause-icon');
+                },
+
+                togglePlay: function(mode) {
+                    if (mode == 'play') {
+                        this.playtoggle.removeClass(this.playicon).addClass(this.pauseicon);
+                    }
+                    else { //pause
+                        this.playtoggle.removeClass(this.pauseicon).addClass(this.playicon);
+                    }
+                },
+
                 previous: function () {
                     var n = this.playIndex > 0 ? this.playIndex - 1 : 0;
                     this.resetSweet = false; //will be set back to true after line is played
@@ -202,14 +213,52 @@
                     var n = this.playIndex == this.starts.length - 1 ? this.playIndex : this.playIndex + 1;
                     this.resetSweet = false; //will be set back to true after line is played
                     this.playOne($(this.starts[n].$item));
-                }
+                },
 
+                addOne: function($tcu) {
+                    var that = this;
+                    $('button.play-tcu', $tcu).click(function() {
+                        that.sweetSpot = $tcu.position().top;
+                        that.resetSweet = true;
+                        that.playOne($tcu);
+                    });
+                },
+
+                getStarts: function() {
+                    return $('*[data-begin]', $transcript).map(function (element, index) {
+                        var o = {};
+                        o.$item = $(this);
+                        o.begin = $(this).attr('data-begin');
+                        o.end = $(this).attr('data-end');
+                        return o;
+                    }).toArray().sort(function (a, b) {
+                        return a.begin - b.begin;
+                    });
+                },
+
+                getEnds: function() {
+                    return $('*[data-end]', $transcript).map(function (element, index) {
+                        var o = {};
+                        o.$item = $(this);
+                        o.begin = $(this).attr('data-begin');
+                        o.end = $(this).attr('data-end');
+                        return o;
+                    }).toArray().sort(function (a, b) {
+                        return a.end - b.end;
+                    });
+                },
+
+                resetPlayIndex: function() {
+                    this.starts = this.getStarts();
+                    this.ends = this.getEnds();
+                    for (var i=0; i<this.starts.length; i++) {
+                        this.starts[i].$item.attr('data-starts-index', i);
+                    }
+                }
             };
 
             scroller.setContainer($transcript);
-            for (var i = 0; i < scroller.starts.length; i++) {
-                scroller.starts[i].$item.attr('data-starts-index', i);
-            }
+            scroller.resetPlayIndex();
             $.extend(scroller, html5);
 
             $('button.play-tcu', $transcript).click(function () {
