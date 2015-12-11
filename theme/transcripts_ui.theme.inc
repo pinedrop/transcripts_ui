@@ -11,7 +11,7 @@ function theme_transcripts_ui_transcript_controls($vars) {
 
 function theme_transcripts_ui_transcript_options($vars)
 {
-    $out  = "<select style='display:none;' multiple class='transcript-options' data-header='Select languages'>";
+    $out  = "<select style='display:none;' multiple class='transcript-options' data-header='Transcript options'>";
 
     //language selector
     $out .= "<optgroup label='Text' data-type='languages'>";
