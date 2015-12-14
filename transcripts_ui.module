@@ -12,7 +12,7 @@ function transcripts_ui_speaker_names()
 
 function transcripts_ui_transcript_views()
 {
-    return array('minimal-view' => t('Minimal'));
+    return array('minimal-view' => t('Minimal'), 'reversed-view' => t('Reversed'));
 }
 
 function transcripts_ui_init()
