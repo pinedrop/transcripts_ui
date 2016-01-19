@@ -14,7 +14,7 @@ function theme_transcripts_ui_transcript_options($vars)
     $out  = "<select style='display:none;' multiple class='transcript-options' data-header='Transcript options'>";
 
     //language selector
-    $out .= "<optgroup label='Text' data-type='languages'>";
+    $out .= "<optgroup label='Languages' data-type='languages'>";
     foreach ($vars['element']['data_tiers'] as $key => $val) {
         $out .= "<option value='{$key}'>{$val}</option>";
     }
@@ -28,7 +28,7 @@ function theme_transcripts_ui_transcript_options($vars)
     $out .= "</optgroup>";
 
     //view selector
-    $out .= "<optgroup label='Views' data-type='views'>";
+    $out .= "<optgroup label='Layouts' data-type='views'>";
     foreach ($vars['element']['transcript_views'] as $key => $val) {
         $out .= "<option value='{$key}'>{$val}</option>";
     }
