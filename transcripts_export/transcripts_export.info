@@ -1,0 +1,5 @@
+name = Transcripts Export
+description = Drupal module for exporting transcripts to formats such as InqScribe and SRT
+package = Pinedrop Transcripts
+core = 7.x
+dependencies[] = transcripts_ui

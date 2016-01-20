@@ -1,0 +1,17 @@
+<?php
+
+function transcripts_export_init()
+{
+    drupal_add_js(drupal_get_path('module', 'transcripts_export') . '/FileSaver.min.js', 'file');
+    drupal_add_js(drupal_get_path('module', 'transcripts_export') . '/transcripts-export.js', 'file');
+}
+
+function transcripts_export_transcripts_ui_transcript_alter(&$transcript)
+{
+    $link = array(
+        'download' => array(
+            '#markup' => '<a id="inq" href="#">InqScribe</a> <a id="srt" href="#">SRT</a>',
+        ),
+    );
+    $transcript = $link + $transcript;
+}
