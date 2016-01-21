@@ -13,26 +13,15 @@ function theme_transcripts_ui_transcript_options($vars)
 {
     $out  = "<select style='display:none;' multiple class='transcript-options' data-header='Transcript options'>";
 
-    //language selector
-    $out .= "<optgroup label='Languages' data-type='languages'>";
-    foreach ($vars['element']['data_tiers'] as $key => $val) {
-        $out .= "<option value='{$key}'>{$val}</option>";
-    }
-    $out .= "</optgroup>";
+    foreach ($vars['element']['groups'] as $type => $group) {
+        $label = $group['label'];
 
-    //speaker name selector
-    $out .= "<optgroup label='Speakers' data-type='speakers'>";
-    foreach ($vars['element']['speaker_names'] as $key => $val) {
-        $out .= "<option value='{$key}'>{$val}</option>";
+        $out .= "<optgroup label='{$label}' data-type='{$type}'>";
+        foreach ($group['options'] as $val => $text) {
+            $out .= "<option value='{$val}'>{$text}</option>";
+        }
+        $out .= "</optgroup>";
     }
-    $out .= "</optgroup>";
-
-    //view selector
-    $out .= "<optgroup label='Layouts' data-type='views'>";
-    foreach ($vars['element']['transcript_views'] as $key => $val) {
-        $out .= "<option value='{$key}'>{$val}</option>";
-    }
-    $out .= "</optgroup>";
 
     $out .= "</select>";
     return $out;
