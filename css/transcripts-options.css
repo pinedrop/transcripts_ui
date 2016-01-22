@@ -3,6 +3,6 @@
     padding-bottom: 1rem;
 }
 
-.bootstrap-select.btn-group.show-tick .dropdown-menu li a.select-download .check-mark {
+.bootstrap-select.btn-group.show-tick .dropdown-menu li a.opt-download .check-mark {
     display: none;
 }

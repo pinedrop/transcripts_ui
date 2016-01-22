@@ -222,23 +222,23 @@ function transcripts_ui_render_controls($ui)
                         'languages' => array(
                             'label' => t('Languages'),
                             'options' => $ui->tiers,
-                            'class' => array('select-language'),
+                            'class' => array('opt-language'),
                         ),
                         'speakers' => array(
                             'label' => t('Speakers'),
                             'options' => $ui->speakernames,
-                            'class' => array('select-speaker')
+                            'class' => array('opt-speaker')
                         ),
                         'views' => array(
                             'label' => t('Layouts'),
                             'options' => $ui->transcriptviews,
-                            'class' => array('select-layout'),
+                            'class' => array('opt-layout'),
                         ),
                         'downloads' => array(
                             'label' => t('Downloads'),
                             'icon' => 'glyphicon-download-alt',
                             'options' => transcripts_ui_transcript_downloads(),
-                            'class' => array('select-download'),
+                            'class' => array('opt-download'),
                         )
                     ),
                     '#attached' => array(
