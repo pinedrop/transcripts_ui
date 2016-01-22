@@ -18,7 +18,14 @@ function theme_transcripts_ui_transcript_options($vars)
 
         $out .= "<optgroup label='{$label}' data-type='{$type}'>";
         foreach ($group['options'] as $val => $text) {
-            $out .= "<option value='{$val}'>{$text}</option>";
+            $out .= "<option value='" .$val. "'";
+            if ($group['class']) {
+                $out .= " class='" .implode(' ', $group['class']). "'";
+            }
+            if ($group['icon']) {
+                $out .= " data-icon='" .$group['icon']. "'";
+            }
+            $out .= ">" .$text. "</option>";
         }
         $out .= "</optgroup>";
     }
