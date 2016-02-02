@@ -15,6 +15,11 @@ function transcripts_ui_transcript_views()
     return array('minimal-view' => t('Minimal'), 'reversed-view' => t('Reversed'));
 }
 
+function transcripts_ui_transcript_downloads()
+{
+    return array('srt' => t('SRT'), 'inq' => t('InqScribe'));
+}
+
 function transcripts_ui_init()
 {
     drupal_add_library('system', 'ui.button');
@@ -213,14 +218,35 @@ function transcripts_ui_render_controls($ui)
                 'transcript_options' => array(
                     '#theme' => 'transcripts_ui_transcript_options',
                     'trid' => $ui->trid,
-                    'data_tiers' => $ui->tiers,
-                    'speaker_names' => $ui->speakernames,
-                    'transcript_views' => $ui->transcriptviews,
+                    'groups' => array(
+                        'languages' => array(
+                            'label' => t('Languages'),
+                            'options' => $ui->tiers,
+                            'class' => array('opt-language'),
+                        ),
+                        'speakers' => array(
+                            'label' => t('Speakers'),
+                            'options' => $ui->speakernames,
+                            'class' => array('opt-speaker')
+                        ),
+                        'views' => array(
+                            'label' => t('Layouts'),
+                            'options' => $ui->transcriptviews,
+                            'class' => array('opt-layout'),
+                        ),
+                        'downloads' => array(
+                            'label' => t('Downloads'),
+                            'icon' => 'glyphicon-download-alt',
+                            'options' => transcripts_ui_transcript_downloads(),
+                            'class' => array('opt-download'),
+                        )
+                    ),
                     '#attached' => array(
                         'css' => array(
                             drupal_get_path('module', 'transcripts_ui') . '/css/transcripts-options.css',
                         ),
                         'js' => array(
+                            drupal_get_path('module', 'transcripts_ui') . '/js/FileSaver.min.js',
                             drupal_get_path('module', 'transcripts_ui') . '/js/transcripts-options.js',
                         ),
                     ),
@@ -395,7 +421,7 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
 
 function transcripts_ui_button_inner($markup, $element)
 {
-    $find = $element['#value'];
+    $find = "<span>" . $element['#value'] . "</span>";
     $replace = $element['#inner'];
     $markup = str_replace($find, $replace, $markup);
     return $markup;

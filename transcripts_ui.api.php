@@ -60,4 +60,14 @@ function hook_transcripts_ui_tcu_alter(&$tcu)
 
 function hook_transcripts_ui_transcript_alter(&$transcript)
 {
+    $modal = array(
+        'modal' => array(
+            '#markup' => theme('transcripts_editor_tcu_delete_modal',
+                array(
+                    'trid' => $transcript['#trid'],
+                )
+            ),
+        ),
+    );
+    $transcript = $modal + $transcript;
 }
