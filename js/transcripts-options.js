@@ -54,9 +54,20 @@
                     var $transcript = $('[data-transcripts-role=transcript][data-transcripts-id=' + trid + ']');
 
                     var $transcriptOptions = $('select.transcript-options', this);
-                    $transcriptOptions.find('optgroup[data-type=languages] option').attr('selected', true);
+                    var $languages = $transcriptOptions.find('optgroup[data-type=languages] option');
+                    var $hidden = $languages.filter(function() {
+                        return Drupal.settings.transcripts_ui.hidden_tiers.indexOf($(this).attr('value')) != -1;
+                    }).each(
+                        function() {
+                            var $language = $(this);
+                            $language.attr('selected', false);
+                            $transcript.find('*[data-tier=' + $language.val() + ']').hide();
+                        }
+                    );
+                    $languages.not($hidden).attr('selected', true);
                     $transcriptOptions.find('optgroup[data-type=speakers] option').attr('selected', true);
                     $transcriptOptions.find('optgroup[data-type=views] option').attr('selected', false);
+
                     $transcriptOptions.change(function (e) {
                         //language selection
                         $transcript.find('.tier').hide();
