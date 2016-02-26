@@ -15,12 +15,26 @@ function transcripts_ui_admin()
         'ts_content_sjn' => 'Sindarin',
     );
     $form['transcripts_ui_tier_settings']['transcripts_ui_tiers'] = array(
-        '#title' => t('Tiers'),
+        '#title' => t('All tiers'),
         '#type' => 'textarea',
         '#rows' => 10,
         '#default_value' => list_allowed_values_string(variable_get('transcripts_ui_tiers', $default_tiers)),
-        '#description' => t('Enter a list of tiers, one per line, each in the form TIER_ID|TIER_NAME.'),
+        '#description' => t('Enter a list of all language tiers, one per line, each in the form TIER_ID|TIER_NAME.'),
         '#required' => TRUE,
+    );
+    $default_hidden = array(
+        'ts_content_tlh' => 'Klingon',
+    );
+    $description = t('Enter a list of tiers that are hidden by default, one per line, each in the form TIER_ID|TIER_NAME. '
+        . 'In order for these tiers to not be positioned at the bottom of the list of languages, make sure that they are also '
+        . 'included in the list of all tiers above.');
+    $form['transcripts_ui_tier_settings']['transcripts_ui_hidden_tiers'] = array(
+        '#title' => t('Hidden tiers'),
+        '#type' => 'textarea',
+        '#rows' => 10,
+        '#default_value' => list_allowed_values_string(variable_get('transcripts_ui_hidden_tiers', $default_hidden)),
+        '#description' => $description,
+        '#required' => FALSE,
     );
     $default_speaker_names = array(
         '@script' => 'Script',
@@ -43,7 +57,9 @@ function transcripts_ui_admin()
 function transcripts_ui_admin_submit($form, &$form_state)
 {
     $tiers = list_extract_allowed_values($form_state['values']['transcripts_ui_tiers'], 'list_text', FALSE);
+    $hidden_tiers = list_extract_allowed_values($form_state['values']['transcripts_ui_hidden_tiers'], 'list_text', FALSE);
     $speaker_names = list_extract_allowed_values($form_state['values']['transcripts_ui_speaker_names'], 'list_text', FALSE);
     $form_state['values']['transcripts_ui_tiers'] = $tiers;
+    $form_state['values']['transcripts_ui_hidden_tiers'] = $hidden_tiers;
     $form_state['values']['transcripts_ui_speaker_names'] = $speaker_names;
 }

@@ -2,7 +2,7 @@
 
 function transcripts_ui_tiers()
 {
-    return variable_get('transcripts_ui_tiers', array());
+    return variable_get('transcripts_ui_tiers', array()) + variable_get('transcripts_ui_hidden_tiers', array());
 }
 
 function transcripts_ui_speaker_names()
@@ -248,6 +248,14 @@ function transcripts_ui_render_controls($ui)
                         'js' => array(
                             drupal_get_path('module', 'transcripts_ui') . '/js/FileSaver.min.js',
                             drupal_get_path('module', 'transcripts_ui') . '/js/transcripts-options.js',
+                            array(
+                                'type' => 'setting',
+                                'data' => array(
+                                    'transcripts_ui' => array(
+                                        'hidden_tiers' => array_keys(variable_get('transcripts_ui_hidden_tiers', array()))
+                                    ),
+                                ),
+                            ),
                         ),
                     ),
                 ),
