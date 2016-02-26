@@ -19,7 +19,7 @@ class TranscriptUI
         $this->shorttrid = $trid;
         $this->trid = 'trid-' . $trid;
         $this->options = $options;
-        $this->tiers = transcripts_ui_tiers();
+        $this->tiers = isset($options['tiers']) ? $options['tiers'] : transcripts_ui_tiers();
         $this->speakernames = transcripts_ui_speaker_names();
         $this->transcriptviews = transcripts_ui_transcript_views();
         $this->module = $module;
