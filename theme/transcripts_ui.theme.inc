@@ -62,7 +62,9 @@ function theme_transcripts_ui_speaker_name($vars)
     $classes = implode(' ', $vars['classes']);
     $out  = "<div class='speaker-name {$vars['speaker_turn']}'>";
     if (is_array($vars['speaker_name'])) {
-        foreach ($vars['speaker_name'] as $key => $val) {
+        foreach ($vars['speaker_name'] as $speaker_display => $speaker_name) {
+            $key = check_plain($speaker_display);
+            $val = check_plain($speaker_name);
             $out .= "<span data-speaker-display='$key' class='$classes'>$val</span> ";
         }
     }
@@ -71,10 +73,12 @@ function theme_transcripts_ui_speaker_name($vars)
 }
 
 function theme_transcripts_ui_tcu_tier($vars)
-{
+{;
     $vars['classes'][] = 'tier';
     $classes = implode(' ', $vars['classes']);
-    $out = "<div data-tier='{$vars['tier_name']}' class='$classes'>{$vars['tier_text']}</div>";
+    $tier_name = check_plain($vars['tier_name']);
+    $tier_text = check_plain($vars['tier_text']);
+    $out = "<div data-tier='{$tier_name}' class='$classes'>{$tier_text}</div>";
     return $out;
 }
 

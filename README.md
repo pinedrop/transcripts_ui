@@ -120,6 +120,8 @@ is one module that makes use of transcripts_ui.
 
 Pinedrop's work on Transcripts UI has been sponsored by:
 
+[24 August 2015]
+=======
 * (Primarily) [SHANTI](http://shanti.virginia.edu/) at the University of Virginia
 * (Also) The [Digital Scholarship Unit (DSU)](https://www.utsc.utoronto.ca/digitalscholarship/)
 at the UTSC Library..
