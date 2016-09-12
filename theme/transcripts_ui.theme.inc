@@ -77,7 +77,7 @@ function theme_transcripts_ui_tcu_tier($vars)
     $vars['classes'][] = 'tier';
     $classes = implode(' ', $vars['classes']);
     $tier_name = check_plain($vars['tier_name']);
-    $tier_text = check_plain($vars['tier_text']);
+    $tier_text = filter_xss($vars['tier_text'], array('mark')); // let through <mark> for highlighting hits
     $out = "<div data-tier='{$tier_name}' class='$classes'>{$tier_text}</div>";
     return $out;
 }
