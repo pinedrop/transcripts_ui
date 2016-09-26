@@ -323,6 +323,9 @@ function transcripts_ui_search_form($form, &$form_state, $ui)
         '#default_value' => $term,
         '#attributes' => array('placeholder' => t('Search this transcript')),
     );
+    $form['search']['input']['magnify'] = array(
+        '#markup' => "<span class='glyphicon glyphicon-search'></span>",
+    );
     $form['search']['input']['buttons'] = array(
         '#prefix' => "<span class='input-group-btn'>",
         '#suffix' => "</span>",
