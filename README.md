@@ -34,7 +34,7 @@ the Bootstrap classes if you are using another theme.
 
 ## Creating a UI
 
-* To create a UI, pass your module's name along with a unique transcript 
+* To create a UI, pass your module's name along with a unique transcript
 identifier and some options to transcripts_ui_ui().
 * To render a UI, pass it to transcripts_ui_render().
 
@@ -92,12 +92,12 @@ the transcript itself as the scrolling container, apply the following CSS.
 
 ## Themeing Output
 
-Components and sub-components can be differently themed by 
+Components and sub-components can be differently themed by
 (a) overriding theme functions, or (b) altering render arrays.
 Render arrays can be altered in many ways, including adding or replacing
-css and js files. For more on the 
+css and js files. For more on the
 [Scary Render Array](http://cocoate.com/ddbook/scary-render-array), see
-[Render Arrays in Drupal](https://www.drupal.org/node/930760). 
+[Render Arrays in Drupal](https://www.drupal.org/node/930760).
 
 ## Transcript Search
 
@@ -114,14 +114,17 @@ is one module that makes use of transcripts_ui.
 
 ## License
 
-[GPL, version 2](http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+Like Drupal 7, Transcripts UI is licensed under the
+[GNU General Public License, version 2 or later](http://www.gnu.org/licenses/old-licenses/gpl-2.0.html).
 
 ## Acknowledgement
 
 Pinedrop's work on Transcripts UI has been sponsored by:
 
-[24 August 2015]
 =======
 * (Primarily) [SHANTI](http://shanti.virginia.edu/) at the University of Virginia
 * (Also) The [Digital Scholarship Unit (DSU)](https://www.utsc.utoronto.ca/digitalscholarship/)
 at the UTSC Library..
+
+
+[4 December, 2016]
